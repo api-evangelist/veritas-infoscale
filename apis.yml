@@ -1,0 +1,98 @@
+name: Veritas InfoScale APIs
+description: APIs for Veritas InfoScale, an enterprise storage and availability management solution that provides high availability, disaster recovery, and storage management capabilities across physical, virtual, and cloud environments.
+image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
+url: https://www.veritas.com/product/availability/infoscale
+created: '2025-03-14'
+modified: '2025-03-14'
+specificationVersion: '0.18'
+tags:
+- storage management
+- high availability
+- disaster recovery
+- clustering
+- virtualization
+- data management
+apis:
+- name: Veritas InfoScale REST API
+  description: REST API for managing InfoScale clusters, storage resources, and high availability configurations
+  image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
+  humanURL: https://www.veritas.com/support/en_US/doc/infoscale
+  baseURL: https://<infoscale-server>:14149/api/v1
+  tags:
+  - clustering
+  - storage
+  - availability
+  properties:
+  - type: Documentation
+    url: https://sort.veritas.com/documents/infoscale
+  - type: OpenAPI
+    url: https://<infoscale-server>:14149/api/v1/swagger.json
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/infoscale/8.0/rest-api-guide
+  contact:
+  - FN: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+- name: Veritas InfoScale Operations Manager API
+  description: API for centralized monitoring and management of InfoScale environments
+  image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
+  humanURL: https://www.veritas.com/support/en_US/doc/infoscale-operations-manager
+  baseURL: https://<isom-server>:8443/api
+  tags:
+  - monitoring
+  - operations
+  - management
+  properties:
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/infoscale-operations-manager/api-reference
+  - type: API Reference
+    url: https://sort.veritas.com/documents/isom
+- name: Veritas Cluster Server (VCS) API
+  description: API for managing VCS clusters, service groups, and resources within InfoScale
+  image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
+  humanURL: https://www.veritas.com/support/en_US/doc/cluster-server
+  baseURL: https://<vcs-server>:14149/vcs/api
+  tags:
+  - clustering
+  - high availability
+  - failover
+  properties:
+  - type: Documentation
+    url: https://sort.veritas.com/documents/vcs/api-guide
+  - type: Command Line Reference
+    url: https://www.veritas.com/support/en_US/doc/cluster-server/cli-reference
+- name: Veritas Volume Manager (VxVM) API
+  description: API for storage volume management, including volume creation, resizing, and snapshot operations
+  image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
+  humanURL: https://www.veritas.com/support/en_US/doc/volume-manager
+  baseURL: https://<server>:14149/vxvm/api
+  tags:
+  - storage
+  - volumes
+  - snapshots
+  properties:
+  - type: Documentation
+    url: https://sort.veritas.com/documents/vxvm
+  - type: Administrator's Guide
+    url: https://www.veritas.com/support/en_US/doc/volume-manager/admin-guide
+maintainers:
+- FN: Veritas Technologies LLC
+  email: support@veritas.com
+  url: https://www.veritas.com
+common:
+- type: Portal
+  url: https://my.veritas.com
+- type: Support
+  url: https://www.veritas.com/support
+- type: Knowledge Base
+  url: https://www.veritas.com/support/knowledge-base
+- type: Downloads
+  url: https://www.veritas.com/support/downloads
+- type: Forums
+  url: https://www.veritas.com/community
+- type: Training
+  url: https://www.veritas.com/support/training
+- type: Documentation
+  url: https://sort.veritas.com
+- type: License Management
+  url: https://my.veritas.com/licensing
