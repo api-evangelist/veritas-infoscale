@@ -3,7 +3,7 @@ description: APIs for Veritas InfoScale, an enterprise storage and availability 
 image: https://www.veritas.com/content/dam/Veritas/images/logos/veritas-logo.svg
 url: https://www.veritas.com/product/availability/infoscale
 created: '2025-03-14'
-modified: '2025-03-14'
+modified: '2026-03-16'
 specificationVersion: '0.18'
 tags:
 - storage management
@@ -76,9 +76,8 @@ apis:
   - type: Administrator's Guide
     url: https://www.veritas.com/support/en_US/doc/volume-manager/admin-guide
 maintainers:
-- FN: Veritas Technologies LLC
-  email: support@veritas.com
-  url: https://www.veritas.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
 - type: Portal
   url: https://my.veritas.com
