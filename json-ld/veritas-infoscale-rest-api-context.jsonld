@@ -1,0 +1,173 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "veritas": "https://www.veritas.com/support/en_US/doc/infoscale/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Cluster": "veritas:Cluster",
+    "ServiceGroup": "veritas:ServiceGroup",
+    "Resource": "veritas:Resource",
+    "System": "veritas:System",
+    "DiskGroup": "veritas:DiskGroup",
+    "Volume": "veritas:Volume",
+    "Disk": "veritas:Disk",
+    "Snapshot": "veritas:Snapshot",
+    "Alert": "veritas:Alert",
+    "Job": "veritas:Job",
+
+    "clusterId": {
+      "@id": "dcterms:identifier",
+      "@type": "xsd:string"
+    },
+    "clusterName": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "state": {
+      "@id": "veritas:state",
+      "@type": "xsd:string"
+    },
+    "nodeCount": {
+      "@id": "veritas:nodeCount",
+      "@type": "xsd:integer"
+    },
+    "clusterVersion": {
+      "@id": "schema:softwareVersion",
+      "@type": "xsd:string"
+    },
+    "fencingMode": {
+      "@id": "veritas:fencingMode",
+      "@type": "xsd:string"
+    },
+    "uptime": {
+      "@id": "veritas:uptime",
+      "@type": "xsd:string"
+    },
+    "lastModified": {
+      "@id": "schema:dateModified",
+      "@type": "xsd:dateTime"
+    },
+    "systemList": {
+      "@id": "veritas:systemList",
+      "@container": "@list"
+    },
+    "currentSystem": {
+      "@id": "veritas:currentSystem",
+      "@type": "xsd:string"
+    },
+    "autoStart": {
+      "@id": "veritas:autoStart",
+      "@type": "xsd:boolean"
+    },
+    "parallel": {
+      "@id": "veritas:parallel",
+      "@type": "xsd:boolean"
+    },
+    "resourceCount": {
+      "@id": "veritas:resourceCount",
+      "@type": "xsd:integer"
+    },
+    "groupType": {
+      "@id": "veritas:groupType",
+      "@type": "xsd:string"
+    },
+    "critical": {
+      "@id": "veritas:critical",
+      "@type": "xsd:boolean"
+    },
+    "totalSize": {
+      "@id": "veritas:totalSize",
+      "@type": "xsd:string"
+    },
+    "freeSize": {
+      "@id": "veritas:freeSize",
+      "@type": "xsd:string"
+    },
+    "diskCount": {
+      "@id": "veritas:diskCount",
+      "@type": "xsd:integer"
+    },
+    "volumeCount": {
+      "@id": "veritas:volumeCount",
+      "@type": "xsd:integer"
+    },
+    "layout": {
+      "@id": "veritas:layout",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "veritas:size",
+      "@type": "xsd:string"
+    },
+    "plexCount": {
+      "@id": "veritas:plexCount",
+      "@type": "xsd:integer"
+    },
+    "readPolicy": {
+      "@id": "veritas:readPolicy",
+      "@type": "xsd:string"
+    },
+    "usageType": {
+      "@id": "veritas:usageType",
+      "@type": "xsd:string"
+    },
+    "diskGroup": {
+      "@id": "veritas:diskGroup",
+      "@type": "xsd:string"
+    },
+    "frozen": {
+      "@id": "veritas:frozen",
+      "@type": "xsd:boolean"
+    },
+    "cpuUsage": {
+      "@id": "veritas:cpuUsage",
+      "@type": "xsd:double"
+    },
+    "memoryUsage": {
+      "@id": "veritas:memoryUsage",
+      "@type": "xsd:double"
+    },
+    "platform": {
+      "@id": "schema:operatingSystem",
+      "@type": "xsd:string"
+    },
+    "architecture": {
+      "@id": "veritas:architecture",
+      "@type": "xsd:string"
+    },
+    "severity": {
+      "@id": "veritas:severity",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "source": {
+      "@id": "veritas:source",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:dateTime"
+    },
+    "acknowledged": {
+      "@id": "veritas:acknowledged",
+      "@type": "xsd:boolean"
+    },
+    "devicePath": {
+      "@id": "veritas:devicePath",
+      "@type": "xsd:string"
+    },
+    "mediaType": {
+      "@id": "veritas:mediaType",
+      "@type": "xsd:string"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "node01",
+  "state": "RUNNING",
+  "frozen": false,
+  "cpuUsage": 42.5,
+  "memoryUsage": 68.3,
+  "serviceGroupCount": 3,
+  "platform": "Linux",
+  "architecture": "x86_64"
+}

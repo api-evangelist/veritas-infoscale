@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-structure/rest-api-disk-group-structure.json",
+  "name": "DiskGroup",
+  "description": "Disk group schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Disk group name"
+    },
+    "state": {
+      "type": "enum",
+      "description": "Disk group state"
+    },
+    "totalSize": {
+      "type": "string",
+      "description": "Total disk group size"
+    },
+    "freeSize": {
+      "type": "string",
+      "description": "Free space in disk group"
+    },
+    "diskCount": {
+      "type": "int32",
+      "description": "Number of disks in the group"
+    },
+    "volumeCount": {
+      "type": "int32",
+      "description": "Number of volumes in the group"
+    },
+    "layout": {
+      "type": "enum",
+      "description": "Default layout type"
+    },
+    "version": {
+      "type": "string",
+      "description": "Disk group version"
+    }
+  }
+}

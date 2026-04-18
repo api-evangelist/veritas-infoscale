@@ -1,0 +1,10 @@
+{
+  "clusterId": "cluster-prod-01",
+  "clusterName": "Production Oracle Cluster",
+  "state": "RUNNING",
+  "nodeCount": 4,
+  "clusterVersion": "8.0.0.0",
+  "fencingMode": "scsi3",
+  "uptime": "45d 12h 30m",
+  "lastModified": "2026-04-18T09:30:00Z"
+}

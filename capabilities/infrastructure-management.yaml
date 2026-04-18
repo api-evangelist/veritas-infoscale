@@ -1,0 +1,280 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Veritas InfoScale Infrastructure Management"
+  description: "Unified infrastructure management workflow combining the Veritas InfoScale REST API for managing clusters, service groups, storage volumes, disk groups, and alerts. Used by infrastructure engineers, storage administrators, and site reliability engineers."
+  tags:
+    - Veritas InfoScale
+    - Clustering
+    - High Availability
+    - Storage Management
+    - Disaster Recovery
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      INFOSCALE_API_TOKEN: INFOSCALE_API_TOKEN
+
+capability:
+  consumes:
+    - import: infoscale-rest
+      location: ./shared/infoscale-rest-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: infrastructure-management-api
+      description: "Unified REST API for Veritas InfoScale infrastructure management workflows."
+      resources:
+        - path: /v1/clusters
+          name: clusters
+          description: "Cluster lifecycle management"
+          operations:
+            - method: GET
+              name: list-clusters
+              description: "List all clusters"
+              call: "infoscale-rest.list-clusters"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/clusters/{clusterId}
+          name: cluster-detail
+          description: "Single cluster operations"
+          operations:
+            - method: GET
+              name: get-cluster
+              description: "Get cluster details"
+              call: "infoscale-rest.get-cluster"
+              with:
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/clusters/{clusterId}/servicegroups
+          name: service-groups
+          description: "Service group management"
+          operations:
+            - method: GET
+              name: list-service-groups
+              description: "List service groups in a cluster"
+              call: "infoscale-rest.list-service-groups"
+              with:
+                clusterId: "rest.clusterId"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/diskgroups
+          name: disk-groups
+          description: "Disk group management"
+          operations:
+            - method: GET
+              name: list-disk-groups
+              description: "List all disk groups"
+              call: "infoscale-rest.list-disk-groups"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/diskgroups/{diskGroupName}/volumes
+          name: volumes
+          description: "Volume management"
+          operations:
+            - method: GET
+              name: list-volumes
+              description: "List volumes in a disk group"
+              call: "infoscale-rest.list-volumes"
+              with:
+                diskGroupName: "rest.diskGroupName"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/alerts
+          name: alerts
+          description: "Alert management"
+          operations:
+            - method: GET
+              name: list-alerts
+              description: "List all active alerts"
+              call: "infoscale-rest.list-alerts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: infrastructure-management-mcp
+      transport: http
+      description: "MCP server for AI-assisted Veritas InfoScale infrastructure management."
+      tools:
+        - name: list-clusters
+          description: "List all InfoScale clusters"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "infoscale-rest.list-clusters"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-cluster
+          description: "Get details of a specific cluster"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "infoscale-rest.get-cluster"
+          with:
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-service-groups
+          description: "List all service groups in a cluster"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "infoscale-rest.list-service-groups"
+          with:
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-service-group
+          description: "Get service group details"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "infoscale-rest.get-service-group"
+          with:
+            clusterId: "tools.clusterId"
+            serviceGroupName: "tools.serviceGroupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: online-service-group
+          description: "Bring a service group online on a system"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.online-service-group"
+          with:
+            clusterId: "tools.clusterId"
+            serviceGroupName: "tools.serviceGroupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: offline-service-group
+          description: "Take a service group offline"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.offline-service-group"
+          with:
+            clusterId: "tools.clusterId"
+            serviceGroupName: "tools.serviceGroupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: switch-service-group
+          description: "Switch a service group to another system"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.switch-service-group"
+          with:
+            clusterId: "tools.clusterId"
+            serviceGroupName: "tools.serviceGroupName"
+            targetSystem: "tools.targetSystem"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-systems
+          description: "List all cluster nodes"
+          hints:
+            readOnly: true
+          call: "infoscale-rest.list-systems"
+          with:
+            clusterId: "tools.clusterId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-disk-groups
+          description: "List all VxVM disk groups"
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "infoscale-rest.list-disk-groups"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-disk-group
+          description: "Get disk group details"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "infoscale-rest.get-disk-group"
+          with:
+            diskGroupName: "tools.diskGroupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-volumes
+          description: "List volumes in a disk group"
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "infoscale-rest.list-volumes"
+          with:
+            diskGroupName: "tools.diskGroupName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-volume
+          description: "Create a new storage volume"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.create-volume"
+          with:
+            diskGroupName: "tools.diskGroupName"
+            name: "tools.name"
+            size: "tools.size"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: resize-volume
+          description: "Resize a storage volume"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.resize-volume"
+          with:
+            diskGroupName: "tools.diskGroupName"
+            volumeName: "tools.volumeName"
+            newSize: "tools.newSize"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-snapshot
+          description: "Create a volume snapshot"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.create-snapshot"
+          with:
+            diskGroupName: "tools.diskGroupName"
+            volumeName: "tools.volumeName"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-alerts
+          description: "List all active cluster alerts"
+          hints:
+            readOnly: true
+          call: "infoscale-rest.list-alerts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: acknowledge-alert
+          description: "Acknowledge a cluster alert"
+          hints:
+            readOnly: false
+          call: "infoscale-rest.acknowledge-alert"
+          with:
+            alertId: "tools.alertId"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,10 @@
+{
+  "name": "oradg",
+  "state": "enabled",
+  "totalSize": "500.00g",
+  "freeSize": "200.00g",
+  "diskCount": 4,
+  "volumeCount": 3,
+  "layout": "mirror",
+  "version": "200"
+}

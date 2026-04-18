@@ -1,0 +1,10 @@
+{
+  "name": "oravol01",
+  "diskGroup": "oradg",
+  "state": "ACTIVE",
+  "size": "100.00g",
+  "layout": "mirror",
+  "plexCount": 2,
+  "readPolicy": "round-robin",
+  "usageType": "fsgen"
+}

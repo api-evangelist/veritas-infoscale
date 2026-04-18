@@ -1,0 +1,11 @@
+{
+  "name": "oracle-sg",
+  "state": "ONLINE",
+  "systemList": ["node01", "node02"],
+  "currentSystem": "node01",
+  "autoStart": true,
+  "parallel": false,
+  "resourceCount": 5,
+  "groupType": "Failover",
+  "critical": true
+}

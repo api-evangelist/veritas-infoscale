@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-schema/rest-api-system-schema.json",
+  "title": "System",
+  "description": "Cluster system node schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "System hostname"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["RUNNING", "FAULTED", "EXITED", "UNKNOWN"],
+      "description": "System state in the cluster"
+    },
+    "frozen": {
+      "type": "boolean",
+      "description": "Whether the system is frozen"
+    },
+    "cpuUsage": {
+      "type": "number",
+      "format": "double",
+      "description": "Current CPU usage percentage"
+    },
+    "memoryUsage": {
+      "type": "number",
+      "format": "double",
+      "description": "Current memory usage percentage"
+    },
+    "serviceGroupCount": {
+      "type": "integer",
+      "description": "Number of service groups on this system"
+    },
+    "platform": {
+      "type": "string",
+      "description": "Operating system platform"
+    },
+    "architecture": {
+      "type": "string",
+      "description": "Hardware architecture"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-schema/rest-api-service-group-schema.json",
+  "title": "ServiceGroup",
+  "description": "Service group schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Service group name"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["ONLINE", "OFFLINE", "FAULTED", "PARTIAL", "STARTING", "STOPPING"],
+      "description": "Current service group state"
+    },
+    "systemList": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of systems where this group can run"
+    },
+    "currentSystem": {
+      "type": "string",
+      "description": "System where the group is currently online"
+    },
+    "autoStart": {
+      "type": "boolean",
+      "description": "Whether the group starts automatically"
+    },
+    "parallel": {
+      "type": "boolean",
+      "description": "Whether the group can run on multiple systems"
+    },
+    "resourceCount": {
+      "type": "integer",
+      "description": "Number of resources in this group"
+    },
+    "groupType": {
+      "type": "string",
+      "description": "Type classification of the service group"
+    },
+    "critical": {
+      "type": "boolean",
+      "description": "Whether this is a critical service group"
+    }
+  }
+}

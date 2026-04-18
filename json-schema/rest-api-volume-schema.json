@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-schema/rest-api-volume-schema.json",
+  "title": "Volume",
+  "description": "Volume schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Volume name"
+    },
+    "diskGroup": {
+      "type": "string",
+      "description": "Parent disk group"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["ACTIVE", "DISABLED", "DETACHED"],
+      "description": "Volume state"
+    },
+    "size": {
+      "type": "string",
+      "description": "Volume size"
+    },
+    "layout": {
+      "type": "string",
+      "enum": ["concat", "stripe", "mirror", "raid5"],
+      "description": "Volume layout type"
+    },
+    "plexCount": {
+      "type": "integer",
+      "description": "Number of plexes"
+    },
+    "readPolicy": {
+      "type": "string",
+      "description": "Read policy for the volume"
+    },
+    "usageType": {
+      "type": "string",
+      "description": "Volume usage type"
+    }
+  }
+}

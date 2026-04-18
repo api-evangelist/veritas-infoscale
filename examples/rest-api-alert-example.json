@@ -1,0 +1,9 @@
+{
+  "alertId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "severity": "warning",
+  "message": "Service group oracle-sg has faulted on node01",
+  "source": "VCS",
+  "timestamp": "2026-04-18T08:15:00Z",
+  "acknowledged": false,
+  "clusterId": "cluster-prod-01"
+}

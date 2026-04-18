@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-schema/rest-api-cluster-schema.json",
+  "title": "Cluster",
+  "description": "Cluster schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "clusterId": {
+      "type": "string",
+      "description": "Unique cluster identifier"
+    },
+    "clusterName": {
+      "type": "string",
+      "description": "Name of the cluster"
+    },
+    "state": {
+      "type": "string",
+      "enum": ["RUNNING", "FAULTED", "PARTIAL", "OFFLINE"],
+      "description": "Current cluster state"
+    },
+    "nodeCount": {
+      "type": "integer",
+      "description": "Number of nodes in the cluster"
+    },
+    "clusterVersion": {
+      "type": "string",
+      "description": "InfoScale cluster version"
+    },
+    "fencingMode": {
+      "type": "string",
+      "enum": ["scsi3", "customized", "disabled"],
+      "description": "I/O fencing mode"
+    },
+    "uptime": {
+      "type": "string",
+      "description": "Cluster uptime duration"
+    },
+    "lastModified": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last configuration change timestamp"
+    }
+  }
+}

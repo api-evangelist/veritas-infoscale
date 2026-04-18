@@ -1,0 +1,391 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Veritas InfoScale"
+  description: "Unified taxonomy mapping operational API dimensions and capability workflows for Veritas InfoScale, covering cluster management, service group orchestration, storage volume management, and infrastructure monitoring."
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+operational:
+  apis:
+    - name: Veritas InfoScale REST API
+      namespace: infoscale-rest
+      version: "8.0"
+      baseUrl: https://{infoscale-server}:14149/api/v1
+      status: active
+
+  resources:
+    - name: Clusters
+      api: infoscale-rest
+      description: Cluster discovery and status management
+      actions:
+        - list
+        - get
+    - name: Service Groups
+      api: infoscale-rest
+      description: VCS service group lifecycle management
+      actions:
+        - list
+        - get
+        - create
+        - delete
+        - online
+        - offline
+        - switch
+    - name: Resources
+      api: infoscale-rest
+      description: Cluster resources within service groups
+      actions:
+        - list
+        - get
+        - create
+        - delete
+    - name: Systems
+      api: infoscale-rest
+      description: Cluster node management
+      actions:
+        - list
+        - get
+    - name: Disk Groups
+      api: infoscale-rest
+      description: VxVM disk group management
+      actions:
+        - list
+        - get
+        - create
+        - delete
+    - name: Volumes
+      api: infoscale-rest
+      description: Storage volume management
+      actions:
+        - list
+        - get
+        - create
+        - delete
+        - resize
+        - snapshot
+    - name: Disks
+      api: infoscale-rest
+      description: Physical disk inventory
+      actions:
+        - list
+        - get
+    - name: Alerts
+      api: infoscale-rest
+      description: Cluster alert management
+      actions:
+        - list
+        - get
+        - acknowledge
+
+  actions:
+    - name: list
+      method: GET
+      pattern: read
+      description: Retrieve a collection of resources
+    - name: get
+      method: GET
+      pattern: read
+      description: Retrieve a single resource by identifier
+    - name: create
+      method: POST
+      pattern: write
+      description: Create a new resource
+    - name: delete
+      method: DELETE
+      pattern: destructive
+      description: Delete a resource
+    - name: online
+      method: POST
+      pattern: write
+      description: Bring a service group online
+    - name: offline
+      method: POST
+      pattern: write
+      description: Take a service group offline
+    - name: switch
+      method: POST
+      pattern: write
+      description: Switch a service group between systems
+    - name: resize
+      method: POST
+      pattern: write
+      description: Resize a volume
+    - name: snapshot
+      method: POST
+      pattern: write
+      description: Create a point-in-time snapshot
+    - name: acknowledge
+      method: POST
+      pattern: write
+      description: Acknowledge an alert
+
+  schemas:
+    core:
+      - name: Cluster
+        description: InfoScale cluster with nodes and fencing
+        properties:
+          - clusterId
+          - clusterName
+          - state
+          - nodeCount
+          - clusterVersion
+          - fencingMode
+      - name: ServiceGroup
+        description: VCS service group for high availability
+        properties:
+          - name
+          - state
+          - systemList
+          - currentSystem
+          - autoStart
+          - parallel
+          - critical
+      - name: Resource
+        description: Cluster resource within a service group
+        properties:
+          - name
+          - type
+          - state
+          - serviceGroup
+          - enabled
+          - critical
+      - name: System
+        description: Cluster node
+        properties:
+          - name
+          - state
+          - frozen
+          - cpuUsage
+          - memoryUsage
+          - platform
+    storage:
+      - name: DiskGroup
+        description: VxVM disk group
+        properties:
+          - name
+          - state
+          - totalSize
+          - freeSize
+          - diskCount
+          - volumeCount
+          - layout
+      - name: Volume
+        description: Storage volume
+        properties:
+          - name
+          - diskGroup
+          - state
+          - size
+          - layout
+          - plexCount
+      - name: Disk
+        description: Physical disk
+        properties:
+          - name
+          - devicePath
+          - size
+          - state
+          - diskGroup
+          - mediaType
+      - name: Snapshot
+        description: Volume snapshot
+        properties:
+          - name
+          - sourceVolume
+          - diskGroup
+          - size
+          - createdAt
+    monitoring:
+      - name: Alert
+        description: Cluster alert
+        properties:
+          - alertId
+          - severity
+          - message
+          - source
+          - timestamp
+          - acknowledged
+
+  parameters:
+    identifiers:
+      - name: clusterId
+        type: string
+        description: Cluster identifier
+      - name: serviceGroupName
+        type: string
+        description: Service group name
+      - name: resourceName
+        type: string
+        description: Resource name
+      - name: systemName
+        type: string
+        description: System hostname
+      - name: diskGroupName
+        type: string
+        description: Disk group name
+      - name: volumeName
+        type: string
+        description: Volume name
+      - name: alertId
+        type: uuid
+        description: Alert identifier
+
+  enums:
+    clusterStates:
+      - value: RUNNING
+        label: Running
+      - value: FAULTED
+        label: Faulted
+      - value: PARTIAL
+        label: Partial
+      - value: OFFLINE
+        label: Offline
+    serviceGroupStates:
+      - value: ONLINE
+        label: Online
+      - value: OFFLINE
+        label: Offline
+      - value: FAULTED
+        label: Faulted
+      - value: PARTIAL
+        label: Partial
+    volumeLayouts:
+      - value: concat
+        label: Concatenated
+      - value: stripe
+        label: Striped
+      - value: mirror
+        label: Mirrored
+      - value: raid5
+        label: RAID-5
+    alertSeverities:
+      - value: critical
+        label: Critical
+      - value: warning
+        label: Warning
+      - value: info
+        label: Informational
+
+  authentication:
+    schemes:
+      - type: bearer
+        format: JWT
+        description: Bearer token authentication for InfoScale REST API
+
+capability:
+  workflows:
+    - name: Infrastructure Management
+      file: capabilities/infrastructure-management.yaml
+      description: Unified infrastructure management workflow for managing clusters, service groups, storage volumes, and alerts.
+      apis:
+        - infoscale-rest
+      toolCount: 16
+      personas:
+        - Infrastructure Engineer
+        - Storage Administrator
+      domains:
+        - Cluster Management
+        - Storage Management
+        - Monitoring
+
+  personas:
+    - id: infrastructure-engineer
+      name: Infrastructure Engineer
+      description: Manages cluster configurations, service groups, and high availability operations.
+      workflows:
+        - Infrastructure Management
+    - id: storage-administrator
+      name: Storage Administrator
+      description: Manages disk groups, volumes, snapshots, and storage capacity.
+      workflows:
+        - Infrastructure Management
+    - id: sre
+      name: Site Reliability Engineer
+      description: Monitors cluster health, alerts, and performs failover operations.
+      workflows:
+        - Infrastructure Management
+
+  domains:
+    - name: Cluster Management
+      description: Cluster lifecycle, service groups, and node management
+      resources:
+        - Clusters
+        - Service Groups
+        - Resources
+        - Systems
+    - name: Storage Management
+      description: Disk groups, volumes, and snapshot operations
+      resources:
+        - Disk Groups
+        - Volumes
+        - Disks
+    - name: Monitoring
+      description: Alert management and health monitoring
+      resources:
+        - Alerts
+
+  namespaces:
+    consumed:
+      - infoscale-rest
+    rest:
+      - infrastructure-management-api (8080)
+    mcp:
+      - infrastructure-management-mcp (9090)
+
+  binds:
+    - INFOSCALE_API_TOKEN
+
+crossReference:
+  - resource: Clusters
+    operations:
+      - listClusters
+      - getCluster
+    workflows:
+      - Infrastructure Management
+    personas:
+      - Infrastructure Engineer
+      - SRE
+  - resource: Service Groups
+    operations:
+      - listServiceGroups
+      - getServiceGroup
+      - createServiceGroup
+      - onlineServiceGroup
+      - offlineServiceGroup
+      - switchServiceGroup
+    workflows:
+      - Infrastructure Management
+    personas:
+      - Infrastructure Engineer
+      - SRE
+  - resource: Disk Groups
+    operations:
+      - listDiskGroups
+      - getDiskGroup
+      - createDiskGroup
+    workflows:
+      - Infrastructure Management
+    personas:
+      - Storage Administrator
+  - resource: Volumes
+    operations:
+      - listVolumes
+      - getVolume
+      - createVolume
+      - resizeVolume
+      - createVolumeSnapshot
+    workflows:
+      - Infrastructure Management
+    personas:
+      - Storage Administrator
+  - resource: Alerts
+    operations:
+      - listAlerts
+      - getAlert
+      - acknowledgeAlert
+    workflows:
+      - Infrastructure Management
+    personas:
+      - SRE
+      - Infrastructure Engineer

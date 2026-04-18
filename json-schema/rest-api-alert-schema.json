@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/json-schema/rest-api-alert-schema.json",
+  "title": "Alert",
+  "description": "Cluster alert schema from Veritas InfoScale REST API",
+  "type": "object",
+  "properties": {
+    "alertId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Alert unique identifier"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["critical", "warning", "info"],
+      "description": "Alert severity"
+    },
+    "message": {
+      "type": "string",
+      "description": "Alert message"
+    },
+    "source": {
+      "type": "string",
+      "description": "Alert source component"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Alert timestamp"
+    },
+    "acknowledged": {
+      "type": "boolean",
+      "description": "Whether the alert has been acknowledged"
+    },
+    "clusterId": {
+      "type": "string",
+      "description": "Related cluster identifier"
+    }
+  }
+}
