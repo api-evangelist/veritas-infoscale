@@ -1,0 +1,288 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veritas InfoScale REST API — Service Groups
+  description: 'Veritas InfoScale REST API — Service Groups. 7 operations. Lead operation: Veritas InfoScale List Service
+    Groups. Self-contained Naftiko capability covering one Veritas Infoscale business surface.'
+  tags:
+  - Veritas Infoscale
+  - Service Groups
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERITAS_INFOSCALE_API_KEY: VERITAS_INFOSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-service-groups
+    baseUri: https://{infoscale-server}:14149/api/v1
+    description: Veritas InfoScale REST API — Service Groups business capability. Self-contained, no shared references.
+    resources:
+    - name: clusters-clusterId-servicegroups
+      path: /clusters/{clusterId}/servicegroups
+      operations:
+      - name: listservicegroups
+        method: GET
+        description: Veritas InfoScale List Service Groups
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createservicegroup
+        method: POST
+        description: Veritas InfoScale Create Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: clusters-clusterId-servicegroups-serviceGroupName
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}
+      operations:
+      - name: getservicegroup
+        method: GET
+        description: Veritas InfoScale Get Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteservicegroup
+        method: DELETE
+        description: Veritas InfoScale Delete Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: clusters-clusterId-servicegroups-serviceGroupName-offline
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}/offline
+      operations:
+      - name: offlineservicegroup
+        method: POST
+        description: Veritas InfoScale Offline Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: clusters-clusterId-servicegroups-serviceGroupName-online
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}/online
+      operations:
+      - name: onlineservicegroup
+        method: POST
+        description: Veritas InfoScale Online Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: clusters-clusterId-servicegroups-serviceGroupName-switch
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}/switch
+      operations:
+      - name: switchservicegroup
+        method: POST
+        description: Veritas InfoScale Switch Service Group
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.VERITAS_INFOSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-service-groups-rest
+    port: 8080
+    description: REST adapter for Veritas InfoScale REST API — Service Groups. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/clusters/{clusterid}/servicegroups
+      name: clusters-clusterid-servicegroups
+      description: REST surface for clusters-clusterId-servicegroups.
+      operations:
+      - method: GET
+        name: listservicegroups
+        description: Veritas InfoScale List Service Groups
+        call: rest-service-groups.listservicegroups
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createservicegroup
+        description: Veritas InfoScale Create Service Group
+        call: rest-service-groups.createservicegroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}
+      name: clusters-clusterid-servicegroups-servicegroupname
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName.
+      operations:
+      - method: GET
+        name: getservicegroup
+        description: Veritas InfoScale Get Service Group
+        call: rest-service-groups.getservicegroup
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteservicegroup
+        description: Veritas InfoScale Delete Service Group
+        call: rest-service-groups.deleteservicegroup
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}/offline
+      name: clusters-clusterid-servicegroups-servicegroupname-offline
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName-offline.
+      operations:
+      - method: POST
+        name: offlineservicegroup
+        description: Veritas InfoScale Offline Service Group
+        call: rest-service-groups.offlineservicegroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}/online
+      name: clusters-clusterid-servicegroups-servicegroupname-online
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName-online.
+      operations:
+      - method: POST
+        name: onlineservicegroup
+        description: Veritas InfoScale Online Service Group
+        call: rest-service-groups.onlineservicegroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}/switch
+      name: clusters-clusterid-servicegroups-servicegroupname-switch
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName-switch.
+      operations:
+      - method: POST
+        name: switchservicegroup
+        description: Veritas InfoScale Switch Service Group
+        call: rest-service-groups.switchservicegroup
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-service-groups-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veritas InfoScale REST API — Service Groups. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: veritas-infoscale-list-service-groups
+      description: Veritas InfoScale List Service Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-service-groups.listservicegroups
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-create-service-group
+      description: Veritas InfoScale Create Service Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-service-groups.createservicegroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-get-service-group
+      description: Veritas InfoScale Get Service Group
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-service-groups.getservicegroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-delete-service-group
+      description: Veritas InfoScale Delete Service Group
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-service-groups.deleteservicegroup
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-offline-service-group
+      description: Veritas InfoScale Offline Service Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-service-groups.offlineservicegroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-online-service-group
+      description: Veritas InfoScale Online Service Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-service-groups.onlineservicegroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-switch-service-group
+      description: Veritas InfoScale Switch Service Group
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-service-groups.switchservicegroup
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,162 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veritas InfoScale REST API — Resources
+  description: 'Veritas InfoScale REST API — Resources. 4 operations. Lead operation: Veritas InfoScale List Resources. Self-contained
+    Naftiko capability covering one Veritas Infoscale business surface.'
+  tags:
+  - Veritas Infoscale
+  - Resources
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERITAS_INFOSCALE_API_KEY: VERITAS_INFOSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-resources
+    baseUri: https://{infoscale-server}:14149/api/v1
+    description: Veritas InfoScale REST API — Resources business capability. Self-contained, no shared references.
+    resources:
+    - name: clusters-clusterId-servicegroups-serviceGroupName-resources
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources
+      operations:
+      - name: listresources
+        method: GET
+        description: Veritas InfoScale List Resources
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createresource
+        method: POST
+        description: Veritas InfoScale Create Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: clusters-clusterId-servicegroups-serviceGroupName-resources-resourceName
+      path: /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources/{resourceName}
+      operations:
+      - name: getresource
+        method: GET
+        description: Veritas InfoScale Get Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deleteresource
+        method: DELETE
+        description: Veritas InfoScale Delete Resource
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VERITAS_INFOSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-resources-rest
+    port: 8080
+    description: REST adapter for Veritas InfoScale REST API — Resources. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}/resources
+      name: clusters-clusterid-servicegroups-servicegroupname-resources
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName-resources.
+      operations:
+      - method: GET
+        name: listresources
+        description: Veritas InfoScale List Resources
+        call: rest-resources.listresources
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createresource
+        description: Veritas InfoScale Create Resource
+        call: rest-resources.createresource
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/clusters/{clusterid}/servicegroups/{servicegroupname}/resources/{resourcename}
+      name: clusters-clusterid-servicegroups-servicegroupname-resources-resourcename
+      description: REST surface for clusters-clusterId-servicegroups-serviceGroupName-resources-resourceName.
+      operations:
+      - method: GET
+        name: getresource
+        description: Veritas InfoScale Get Resource
+        call: rest-resources.getresource
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteresource
+        description: Veritas InfoScale Delete Resource
+        call: rest-resources.deleteresource
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-resources-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veritas InfoScale REST API — Resources. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: veritas-infoscale-list-resources
+      description: Veritas InfoScale List Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-resources.listresources
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-create-resource
+      description: Veritas InfoScale Create Resource
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-resources.createresource
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-get-resource
+      description: Veritas InfoScale Get Resource
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-resources.getresource
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-delete-resource
+      description: Veritas InfoScale Delete Resource
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-resources.deleteresource
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,149 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veritas InfoScale REST API — Alerts
+  description: 'Veritas InfoScale REST API — Alerts. 3 operations. Lead operation: Veritas InfoScale List Alerts. Self-contained
+    Naftiko capability covering one Veritas Infoscale business surface.'
+  tags:
+  - Veritas Infoscale
+  - Alerts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERITAS_INFOSCALE_API_KEY: VERITAS_INFOSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-alerts
+    baseUri: https://{infoscale-server}:14149/api/v1
+    description: Veritas InfoScale REST API — Alerts business capability. Self-contained, no shared references.
+    resources:
+    - name: alerts
+      path: /alerts
+      operations:
+      - name: listalerts
+        method: GET
+        description: Veritas InfoScale List Alerts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: severity
+          in: query
+          type: string
+          description: Filter alerts by severity level
+        - name: acknowledged
+          in: query
+          type: boolean
+          description: Filter by acknowledgement status
+    - name: alerts-alertId
+      path: /alerts/{alertId}
+      operations:
+      - name: getalert
+        method: GET
+        description: Veritas InfoScale Get Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: alerts-alertId-acknowledge
+      path: /alerts/{alertId}/acknowledge
+      operations:
+      - name: acknowledgealert
+        method: POST
+        description: Veritas InfoScale Acknowledge Alert
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.VERITAS_INFOSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-alerts-rest
+    port: 8080
+    description: REST adapter for Veritas InfoScale REST API — Alerts. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/alerts
+      name: alerts
+      description: REST surface for alerts.
+      operations:
+      - method: GET
+        name: listalerts
+        description: Veritas InfoScale List Alerts
+        call: rest-alerts.listalerts
+        with:
+          severity: rest.severity
+          acknowledged: rest.acknowledged
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/alerts/{alertid}
+      name: alerts-alertid
+      description: REST surface for alerts-alertId.
+      operations:
+      - method: GET
+        name: getalert
+        description: Veritas InfoScale Get Alert
+        call: rest-alerts.getalert
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/alerts/{alertid}/acknowledge
+      name: alerts-alertid-acknowledge
+      description: REST surface for alerts-alertId-acknowledge.
+      operations:
+      - method: POST
+        name: acknowledgealert
+        description: Veritas InfoScale Acknowledge Alert
+        call: rest-alerts.acknowledgealert
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-alerts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veritas InfoScale REST API — Alerts. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: veritas-infoscale-list-alerts
+      description: Veritas InfoScale List Alerts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-alerts.listalerts
+      with:
+        severity: tools.severity
+        acknowledged: tools.acknowledged
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-get-alert
+      description: Veritas InfoScale Get Alert
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-alerts.getalert
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-acknowledge-alert
+      description: Veritas InfoScale Acknowledge Alert
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-alerts.acknowledgealert
+      outputParameters:
+      - type: object
+        mapping: $.

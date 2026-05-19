@@ -1,0 +1,246 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Veritas InfoScale REST API — Volumes
+  description: 'Veritas InfoScale REST API — Volumes. 6 operations. Lead operation: Veritas InfoScale List Volumes. Self-contained
+    Naftiko capability covering one Veritas Infoscale business surface.'
+  tags:
+  - Veritas Infoscale
+  - Volumes
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VERITAS_INFOSCALE_API_KEY: VERITAS_INFOSCALE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: rest-volumes
+    baseUri: https://{infoscale-server}:14149/api/v1
+    description: Veritas InfoScale REST API — Volumes business capability. Self-contained, no shared references.
+    resources:
+    - name: diskgroups-diskGroupName-volumes
+      path: /diskgroups/{diskGroupName}/volumes
+      operations:
+      - name: listvolumes
+        method: GET
+        description: Veritas InfoScale List Volumes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createvolume
+        method: POST
+        description: Veritas InfoScale Create Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: diskgroups-diskGroupName-volumes-volumeName
+      path: /diskgroups/{diskGroupName}/volumes/{volumeName}
+      operations:
+      - name: getvolume
+        method: GET
+        description: Veritas InfoScale Get Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: deletevolume
+        method: DELETE
+        description: Veritas InfoScale Delete Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: diskgroups-diskGroupName-volumes-volumeName-resize
+      path: /diskgroups/{diskGroupName}/volumes/{volumeName}/resize
+      operations:
+      - name: resizevolume
+        method: POST
+        description: Veritas InfoScale Resize Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: diskgroups-diskGroupName-volumes-volumeName-snapshot
+      path: /diskgroups/{diskGroupName}/volumes/{volumeName}/snapshot
+      operations:
+      - name: createvolumesnapshot
+        method: POST
+        description: Veritas InfoScale Create Volume Snapshot
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    authentication:
+      type: bearer
+      token: '{{env.VERITAS_INFOSCALE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: rest-volumes-rest
+    port: 8080
+    description: REST adapter for Veritas InfoScale REST API — Volumes. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/diskgroups/{diskgroupname}/volumes
+      name: diskgroups-diskgroupname-volumes
+      description: REST surface for diskgroups-diskGroupName-volumes.
+      operations:
+      - method: GET
+        name: listvolumes
+        description: Veritas InfoScale List Volumes
+        call: rest-volumes.listvolumes
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createvolume
+        description: Veritas InfoScale Create Volume
+        call: rest-volumes.createvolume
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/diskgroups/{diskgroupname}/volumes/{volumename}
+      name: diskgroups-diskgroupname-volumes-volumename
+      description: REST surface for diskgroups-diskGroupName-volumes-volumeName.
+      operations:
+      - method: GET
+        name: getvolume
+        description: Veritas InfoScale Get Volume
+        call: rest-volumes.getvolume
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletevolume
+        description: Veritas InfoScale Delete Volume
+        call: rest-volumes.deletevolume
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/diskgroups/{diskgroupname}/volumes/{volumename}/resize
+      name: diskgroups-diskgroupname-volumes-volumename-resize
+      description: REST surface for diskgroups-diskGroupName-volumes-volumeName-resize.
+      operations:
+      - method: POST
+        name: resizevolume
+        description: Veritas InfoScale Resize Volume
+        call: rest-volumes.resizevolume
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/diskgroups/{diskgroupname}/volumes/{volumename}/snapshot
+      name: diskgroups-diskgroupname-volumes-volumename-snapshot
+      description: REST surface for diskgroups-diskGroupName-volumes-volumeName-snapshot.
+      operations:
+      - method: POST
+        name: createvolumesnapshot
+        description: Veritas InfoScale Create Volume Snapshot
+        call: rest-volumes.createvolumesnapshot
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: rest-volumes-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Veritas InfoScale REST API — Volumes. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: veritas-infoscale-list-volumes
+      description: Veritas InfoScale List Volumes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-volumes.listvolumes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-create-volume
+      description: Veritas InfoScale Create Volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-volumes.createvolume
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-get-volume
+      description: Veritas InfoScale Get Volume
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: rest-volumes.getvolume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-delete-volume
+      description: Veritas InfoScale Delete Volume
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: rest-volumes.deletevolume
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-resize-volume
+      description: Veritas InfoScale Resize Volume
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-volumes.resizevolume
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: veritas-infoscale-create-volume-snapshot
+      description: Veritas InfoScale Create Volume Snapshot
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: rest-volumes.createvolumesnapshot
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
