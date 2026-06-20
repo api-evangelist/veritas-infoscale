@@ -3,7 +3,7 @@ name: Veritas InfoScale
 description: APIs for Veritas InfoScale, an enterprise storage and availability management solution that provides high availability,
   disaster recovery, and storage management capabilities across physical, virtual, and cloud environments.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/apis.yml
 created: '2025-03-14'
 modified: '2026-05-19'
@@ -21,7 +21,7 @@ apis:
   description: REST API for managing InfoScale clusters, storage resources, and high availability configurations. Supports
     storage configuration and management operations including disk groups, volumes, and file systems, as well as cluster configuration
     and management operations including service groups, resources, and heartbeats.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
   baseURL: https://{infoscale-server}:14149/api/v1
   tags:
@@ -114,7 +114,7 @@ apis:
   description: REST API for centralized monitoring and management of InfoScale environments. Provides meta, query, update,
     and operational endpoints for managing clusters, service groups, hosts, storage, and extended attributes across the entire
     InfoScale infrastructure.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.veritas.com/support/en_US/doc/120572053-156079406-0/viom_tot_v96894970-156079406
   baseURL: https://{isom-server}:14161/vom/api
   tags:
@@ -130,7 +130,7 @@ apis:
   name: Veritas Cluster Server API
   description: API for managing VCS clusters, service groups, and resources within InfoScale. Provides operations for cluster
     node management, service group failover and failback, resource dependency configuration, and heartbeat monitoring.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
   baseURL: https://{vcs-server}:14149/vcs/api
   tags:
@@ -147,7 +147,7 @@ apis:
   description: API for storage volume management, including volume creation, resizing, mirroring, and snapshot operations.
     Manages disk groups, plexes, subdisks, and provides advanced storage features like thin provisioning, data migration,
     and volume replication.
-  image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
   baseURL: https://{server}:14149/vxvm/api
   tags:
