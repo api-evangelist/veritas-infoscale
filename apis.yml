@@ -67,43 +67,43 @@ apis:
     title: Volume Structure
   - type: JSONLD
     url: json-ld/veritas-infoscale-rest-api-context.jsonld
-  - type: Example
+  - type: Examples
     url: examples/rest-api-cluster-example.json
     title: Cluster Example
-  - type: Example
+  - type: Examples
     url: examples/rest-api-service-group-example.json
     title: Service Group Example
-  - type: Example
+  - type: Examples
     url: examples/rest-api-disk-group-example.json
     title: Disk Group Example
-  - type: Example
+  - type: Examples
     url: examples/rest-api-volume-example.json
     title: Volume Example
-  - type: Example
+  - type: Examples
     url: examples/rest-api-system-example.json
     title: System Example
-  - type: Example
+  - type: Examples
     url: examples/rest-api-alert-example.json
     title: Alert Example
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-alerts.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-clusters.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-disk-groups.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-disks.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-fencing.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-jobs.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-resources.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-service-groups.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-systems.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/rest-volumes.yaml
   contact:
   - FN: Veritas Support
