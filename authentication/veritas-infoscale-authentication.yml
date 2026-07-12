@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/veritas-infoscale-rest-api.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: Bearer token authentication for InfoScale REST API
+  sources:
+  - openapi/veritas-infoscale-rest-api.yaml
