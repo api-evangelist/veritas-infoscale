@@ -1,7 +1,21 @@
+# veritas-infoscale — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - path-params-casing: camel @ 100% (n=43)
+#   - operationid-casing: camel @ 100% (n=32)
+#   - schema-names-casing: pascal @ 100% (n=29)
+#   - schema-properties-casing: snake @ 57% (n=105)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: Error
+#   - merge: kept 39 existing, added 2 measured, upgraded 0
+#   - added: schema-names-casing, error-schema-defined
+extends:
+  - spectral:oas
 rules:
-
-  # ── INFO / METADATA ──────────────────────────────────────────────────
-
   info-title-required:
     description: Info object must have a title
     severity: error
@@ -9,7 +23,6 @@ rules:
     then:
       field: title
       function: truthy
-
   info-title-prefix:
     description: Title should start with "Veritas InfoScale"
     severity: warn
@@ -17,8 +30,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Veritas InfoScale"
-
+        match: ^Veritas InfoScale
   info-description-required:
     description: Info object must have a description
     severity: error
@@ -26,7 +38,6 @@ rules:
     then:
       field: description
       function: truthy
-
   info-description-min-length:
     description: Info description should be at least 50 characters
     severity: warn
@@ -35,7 +46,6 @@ rules:
       function: length
       functionOptions:
         min: 50
-
   info-version-required:
     description: Info object must have a version
     severity: error
@@ -43,7 +53,6 @@ rules:
     then:
       field: version
       function: truthy
-
   info-contact-required:
     description: Info object should have contact information
     severity: warn
@@ -51,9 +60,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # ── OPENAPI VERSION ──────────────────────────────────────────────────
-
   openapi-version:
     description: OpenAPI version should be 3.0.x
     severity: error
@@ -61,10 +67,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^3\\.0\\."
-
-  # ── SERVERS ──────────────────────────────────────────────────────────
-
+        match: ^3\.0\.
   servers-defined:
     description: At least one server must be defined
     severity: error
@@ -72,7 +75,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: Server URLs must use HTTPS
     severity: error
@@ -80,8 +82,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
-
+        match: ^https://
   servers-description:
     description: Each server should have a description
     severity: warn
@@ -89,41 +90,33 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ── PATHS — NAMING CONVENTIONS ──────────────────────────────────────
-
   paths-no-trailing-slash:
     description: Paths must not end with a trailing slash
     severity: error
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        notMatch: "\\/$"
-
+        notMatch: \/$
   paths-no-query-strings:
     description: Paths must not contain query strings
     severity: error
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        notMatch: "\\?"
-
+        notMatch: \?
   paths-lowercase:
     description: Path segments should use lowercase
     severity: warn
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        match: "^[a-z0-9/{}_-]+$"
-
-  # ── OPERATIONS ──────────────────────────────────────────────────────
-
+        match: ^[a-z0-9/{}_-]+$
   operation-summary-required:
     description: Every operation must have a summary
     severity: error
@@ -131,7 +124,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-summary-prefix:
     description: Operation summaries should start with "Veritas InfoScale"
     severity: warn
@@ -139,8 +131,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^Veritas InfoScale"
-
+        match: ^Veritas InfoScale
   operation-description-required:
     description: Every operation must have a description
     severity: error
@@ -148,7 +139,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-operationid-required:
     description: Every operation must have an operationId
     severity: error
@@ -156,7 +146,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-operationid-camel-case:
     description: Operation IDs should use camelCase
     severity: warn
@@ -164,8 +153,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-tags-required:
     description: Every operation must have at least one tag
     severity: error
@@ -173,9 +161,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # ── TAGS ─────────────────────────────────────────────────────────────
-
   tags-defined:
     description: Global tags array should be defined
     severity: warn
@@ -183,7 +168,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   tag-description:
     description: Each global tag should have a description
     severity: info
@@ -191,9 +175,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # ── PARAMETERS ──────────────────────────────────────────────────────
-
   parameter-description-required:
     description: Every parameter must have a description
     severity: error
@@ -201,7 +182,6 @@ rules:
     then:
       field: description
       function: truthy
-
   parameter-schema-required:
     description: Every parameter must have a schema with a type
     severity: error
@@ -209,7 +189,6 @@ rules:
     then:
       field: schema
       function: truthy
-
   parameter-path-required:
     description: Path parameters must be required
     severity: error
@@ -217,9 +196,6 @@ rules:
     then:
       field: required
       function: truthy
-
-  # ── REQUEST BODIES ──────────────────────────────────────────────────
-
   request-body-json:
     description: Request bodies should use application/json content type
     severity: warn
@@ -227,9 +203,6 @@ rules:
     then:
       field: application/json
       function: truthy
-
-  # ── RESPONSES ────────────────────────────────────────────────────────
-
   response-success-required:
     description: Every operation must define a success response (2xx)
     severity: error
@@ -239,10 +212,12 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-description-required:
     description: Every response must have a description
     severity: error
@@ -250,7 +225,6 @@ rules:
     then:
       field: description
       function: truthy
-
   response-401-defined:
     description: Operations should define a 401 Unauthorized response
     severity: info
@@ -258,9 +232,6 @@ rules:
     then:
       field: '401'
       function: truthy
-
-  # ── SCHEMAS — PROPERTY NAMING ────────────────────────────────────────
-
   schema-type-defined:
     description: All schemas must define a type
     severity: error
@@ -268,19 +239,15 @@ rules:
     then:
       field: type
       function: truthy
-
   schema-properties-camel-case:
     description: Schema properties should use camelCase (Veritas convention)
     severity: info
     given: $.components.schemas[*].properties
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
-  # ── SECURITY ─────────────────────────────────────────────────────────
-
+        match: ^[a-z][a-zA-Z0-9]*$
   security-defined:
     description: Global security must be defined
     severity: error
@@ -288,7 +255,6 @@ rules:
     then:
       field: security
       function: truthy
-
   security-schemes-defined:
     description: Security schemes must be defined in components
     severity: error
@@ -296,7 +262,6 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
   security-bearer-scheme:
     description: Bearer token security scheme should be defined for InfoScale APIs
     severity: warn
@@ -304,9 +269,6 @@ rules:
     then:
       field: bearerAuth
       function: truthy
-
-  # ── HTTP METHOD CONVENTIONS ──────────────────────────────────────────
-
   get-no-request-body:
     description: GET operations must not have a request body
     severity: error
@@ -314,7 +276,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   delete-no-request-body:
     description: DELETE operations must not have a request body
     severity: error
@@ -322,7 +283,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
   post-request-body:
     description: POST operations should have a request body
     severity: info
@@ -330,16 +290,12 @@ rules:
     then:
       field: requestBody
       function: truthy
-
-  # ── GENERAL QUALITY ──────────────────────────────────────────────────
-
   no-empty-descriptions:
     description: Descriptions must not be empty strings
     severity: error
     given: $..description
     then:
       function: truthy
-
   schema-description:
     description: Top-level schemas should have descriptions
     severity: info
@@ -347,11 +303,26 @@ rules:
     then:
       field: description
       function: truthy
-
   microcks-operation-extension:
     description: Operations should have x-microcks-operation for mock compatibility
     severity: info
     given: $.paths[*][get,post,put,patch,delete]
     then:
       field: x-microcks-operation
+      function: truthy
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  error-schema-defined:
+    description: A shared error schema (Error) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: Error
       function: truthy

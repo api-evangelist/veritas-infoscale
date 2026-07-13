@@ -2,11 +2,10 @@
   "repo": "veritas-infoscale",
   "feeds": [
     {
-      "source": "https://vox.veritas.com",
-      "saved": 0,
-      "error": "DNS ENOTFOUND vox.veritas.com"
+      "source": "https://www.veritas.com/support/training",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-06-27T13:20:15Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "post_count": 0
 }
