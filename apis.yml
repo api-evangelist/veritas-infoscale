@@ -163,6 +163,8 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: AgenticAccess
+  url: agentic-access/veritas-infoscale-agentic-access.yml
 - type: VulnerabilityDisclosure
   url: security/veritas-infoscale-vulnerability-disclosure.yml
 - type: DomainSecurity
