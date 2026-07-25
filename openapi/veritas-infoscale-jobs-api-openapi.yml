@@ -1,0 +1,123 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Jobs API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Jobs
+  description: Monitor and manage asynchronous job operations
+paths:
+  /jobs/{jobId}:
+    get:
+      operationId: getJob
+      summary: Veritas InfoScale Get Job
+      description: Retrieve the status of an asynchronous job.
+      tags:
+      - Jobs
+      parameters:
+      - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    Job:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Job identifier
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Job status
+          enum:
+          - queued
+          - running
+          - completed
+          - failed
+          example: running
+        operation:
+          type: string
+          description: Operation being performed
+          example: ServiceGroup Online
+        percentComplete:
+          type: integer
+          description: Job completion percentage
+          example: 50
+        startedAt:
+          type: string
+          format: date-time
+          description: Job start time
+        completedAt:
+          type: string
+          format: date-time
+          description: Job completion time
+        message:
+          type: string
+          description: Job status message
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: The unique identifier of the job
+      schema:
+        type: string
+        format: uuid
+      example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

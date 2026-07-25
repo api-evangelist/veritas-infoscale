@@ -1,0 +1,332 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Volumes API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Volumes
+  description: Manage storage volumes
+paths:
+  /diskgroups/{diskGroupName}/volumes:
+    get:
+      operationId: listVolumes
+      summary: Veritas InfoScale List Volumes
+      description: Retrieve all volumes in a disk group.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '200':
+          description: List of volumes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createVolume
+      summary: Veritas InfoScale Create Volume
+      description: Create a new volume in a disk group.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeCreate'
+      responses:
+        '201':
+          description: Volume created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}:
+    get:
+      operationId: getVolume
+      summary: Veritas InfoScale Get Volume
+      description: Retrieve details of a specific volume.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      - $ref: '#/components/parameters/volumeName'
+      responses:
+        '200':
+          description: Volume details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteVolume
+      summary: Veritas InfoScale Delete Volume
+      description: Delete a volume from a disk group.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      - $ref: '#/components/parameters/volumeName'
+      responses:
+        '204':
+          description: Volume deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}/resize:
+    post:
+      operationId: resizeVolume
+      summary: Veritas InfoScale Resize Volume
+      description: Resize a volume within a disk group.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      - $ref: '#/components/parameters/volumeName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeResize'
+      responses:
+        '200':
+          description: Volume resized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}/snapshot:
+    post:
+      operationId: createVolumeSnapshot
+      summary: Veritas InfoScale Create Volume Snapshot
+      description: Create a snapshot of a volume.
+      tags:
+      - Volumes
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      - $ref: '#/components/parameters/volumeName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotCreate'
+      responses:
+        '201':
+          description: Snapshot created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VolumeResize:
+      type: object
+      required:
+      - newSize
+      properties:
+        newSize:
+          type: string
+          description: New volume size
+          example: 200g
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    SnapshotCreate:
+      type: object
+      properties:
+        snapshotName:
+          type: string
+          description: Name for the snapshot
+          example: oravol01-snap-20260418
+    Snapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Snapshot name
+          example: oravol01-snap-20260418
+        sourceVolume:
+          type: string
+          description: Source volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Disk group containing the snapshot
+          example: oradg
+        size:
+          type: string
+          description: Snapshot size
+          example: 100.00g
+        createdAt:
+          type: string
+          format: date-time
+          description: Snapshot creation time
+          example: '2026-04-18T10:00:00Z'
+        state:
+          type: string
+          description: Snapshot state
+          enum:
+          - ACTIVE
+          - DETACHED
+          example: ACTIVE
+    Volume:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Parent disk group
+          example: oradg
+        state:
+          type: string
+          description: Volume state
+          enum:
+          - ACTIVE
+          - DISABLED
+          - DETACHED
+          example: ACTIVE
+        size:
+          type: string
+          description: Volume size
+          example: 100.00g
+        layout:
+          type: string
+          description: Volume layout type
+          enum:
+          - concat
+          - stripe
+          - mirror
+          - raid5
+          example: mirror
+        plexCount:
+          type: integer
+          description: Number of plexes
+          example: 2
+        readPolicy:
+          type: string
+          description: Read policy for the volume
+          example: round-robin
+        usageType:
+          type: string
+          description: Volume usage type
+          example: fsgen
+    VolumeCreate:
+      type: object
+      required:
+      - name
+      - size
+      properties:
+        name:
+          type: string
+          description: Volume name
+          example: newvol
+        size:
+          type: string
+          description: Volume size
+          example: 50g
+        layout:
+          type: string
+          description: Layout type
+          default: mirror
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
+    volumeName:
+      name: volumeName
+      in: path
+      required: true
+      description: The name of the volume
+      schema:
+        type: string
+      example: oravol01
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

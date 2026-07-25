@@ -1,0 +1,358 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Service Groups API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Service Groups
+  description: Manage VCS service groups and their lifecycle
+paths:
+  /clusters/{clusterId}/servicegroups:
+    get:
+      operationId: listServiceGroups
+      summary: Veritas InfoScale List Service Groups
+      description: Retrieve all service groups in a cluster.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of service groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroupCollection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createServiceGroup
+      summary: Veritas InfoScale Create Service Group
+      description: Create a new service group in a cluster.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupCreate'
+      responses:
+        '201':
+          description: Service group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}:
+    get:
+      operationId: getServiceGroup
+      summary: Veritas InfoScale Get Service Group
+      description: Retrieve details of a specific service group.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '200':
+          description: Service group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteServiceGroup
+      summary: Veritas InfoScale Delete Service Group
+      description: Delete a service group from the cluster.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '204':
+          description: Service group deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/online:
+    post:
+      operationId: onlineServiceGroup
+      summary: Veritas InfoScale Online Service Group
+      description: Bring a service group online on a specified system.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupAction'
+      responses:
+        '200':
+          description: Service group brought online
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+        '409':
+          description: Service group already online or in transition
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/offline:
+    post:
+      operationId: offlineServiceGroup
+      summary: Veritas InfoScale Offline Service Group
+      description: Take a service group offline on a specified system.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupAction'
+      responses:
+        '200':
+          description: Service group taken offline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/switch:
+    post:
+      operationId: switchServiceGroup
+      summary: Veritas InfoScale Switch Service Group
+      description: Switch a service group from one system to another.
+      tags:
+      - Service Groups
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupSwitch'
+      responses:
+        '200':
+          description: Service group switch initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
+    ServiceGroupCreate:
+      type: object
+      required:
+      - name
+      - systemList
+      properties:
+        name:
+          type: string
+          description: Service group name
+          example: app-sg
+        systemList:
+          type: array
+          items:
+            type: string
+          description: Systems for the group
+        autoStart:
+          type: boolean
+          description: Auto-start on cluster start
+          default: true
+        parallel:
+          type: boolean
+          description: Allow parallel execution
+          default: false
+    ServiceGroupSwitch:
+      type: object
+      required:
+      - targetSystem
+      properties:
+        targetSystem:
+          type: string
+          description: System to switch the group to
+          example: node02
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    ServiceGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Service group name
+          example: oracle-sg
+        state:
+          type: string
+          description: Current service group state
+          enum:
+          - ONLINE
+          - OFFLINE
+          - FAULTED
+          - PARTIAL
+          - STARTING
+          - STOPPING
+          example: ONLINE
+        systemList:
+          type: array
+          description: List of systems where this group can run
+          items:
+            type: string
+          example:
+          - node01
+          - node02
+        currentSystem:
+          type: string
+          description: System where the group is currently online
+          example: node01
+        autoStart:
+          type: boolean
+          description: Whether the group starts automatically
+          example: true
+        parallel:
+          type: boolean
+          description: Whether the group can run on multiple systems
+          example: false
+        resourceCount:
+          type: integer
+          description: Number of resources in this group
+          example: 5
+        groupType:
+          type: string
+          description: Type classification of the service group
+          example: Failover
+        critical:
+          type: boolean
+          description: Whether this is a critical service group
+          example: true
+    ServiceGroupAction:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Target system for the action
+          example: node01
+    ServiceGroupCollection:
+      type: object
+      properties:
+        serviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceGroup'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    BadRequest:
+      description: Bad request - invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+    serviceGroupName:
+      name: serviceGroupName
+      in: path
+      required: true
+      description: The name of the service group
+      schema:
+        type: string
+      example: oracle-sg
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

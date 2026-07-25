@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Fencing API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Fencing
+  description: Manage I/O fencing configuration
+paths:
+  /clusters/{clusterId}/fencing:
+    get:
+      operationId: getFencingConfiguration
+      summary: Veritas InfoScale Get Fencing Configuration
+      description: Retrieve the I/O fencing configuration for a cluster.
+      tags:
+      - Fencing
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Fencing configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FencingConfig'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+  schemas:
+    FencingConfig:
+      type: object
+      properties:
+        mode:
+          type: string
+          description: Fencing mode
+          enum:
+          - scsi3
+          - customized
+          - disabled
+          example: scsi3
+        coordinatorDisks:
+          type: array
+          description: Coordinator disks for SCSI-3 fencing
+          items:
+            type: string
+          example:
+          - /dev/vx/rdmp/disk_c1
+          - /dev/vx/rdmp/disk_c2
+          - /dev/vx/rdmp/disk_c3
+        preferredFencingPolicy:
+          type: string
+          description: Preferred fencing policy
+          example: System
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

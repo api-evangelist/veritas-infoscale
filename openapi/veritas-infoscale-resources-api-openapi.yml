@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Resources API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Resources
+  description: Manage cluster resources within service groups
+paths:
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources:
+    get:
+      operationId: listResources
+      summary: Veritas InfoScale List Resources
+      description: Retrieve all resources in a service group.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '200':
+          description: List of resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createResource
+      summary: Veritas InfoScale Create Resource
+      description: Create a new resource in a service group.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceCreate'
+      responses:
+        '201':
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources/{resourceName}:
+    get:
+      operationId: getResource
+      summary: Veritas InfoScale Get Resource
+      description: Retrieve details of a specific resource.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      - $ref: '#/components/parameters/resourceName'
+      responses:
+        '200':
+          description: Resource details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteResource
+      summary: Veritas InfoScale Delete Resource
+      description: Delete a resource from a service group.
+      tags:
+      - Resources
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/serviceGroupName'
+      - $ref: '#/components/parameters/resourceName'
+      responses:
+        '204':
+          description: Resource deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ResourceCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: new-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        attributes:
+          type: object
+          description: Resource attributes
+          additionalProperties: true
+    ResourceCollection:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    Resource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: ora-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        state:
+          type: string
+          description: Current resource state
+          enum:
+          - ONLINE
+          - OFFLINE
+          - FAULTED
+          - UNKNOWN
+          example: ONLINE
+        serviceGroup:
+          type: string
+          description: Parent service group
+          example: oracle-sg
+        system:
+          type: string
+          description: System where resource is running
+          example: node01
+        enabled:
+          type: boolean
+          description: Whether the resource is enabled
+          example: true
+        critical:
+          type: boolean
+          description: Whether the resource is critical to the group
+          example: true
+        attributes:
+          type: object
+          description: Resource-type-specific attributes
+          additionalProperties: true
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+    serviceGroupName:
+      name: serviceGroupName
+      in: path
+      required: true
+      description: The name of the service group
+      schema:
+        type: string
+      example: oracle-sg
+    resourceName:
+      name: resourceName
+      in: path
+      required: true
+      description: The name of the resource
+      schema:
+        type: string
+      example: ora-ip-res
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

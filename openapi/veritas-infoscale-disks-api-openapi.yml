@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Disks API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Disks
+  description: Manage physical disks and disk pools
+paths:
+  /disks:
+    get:
+      operationId: listDisks
+      summary: Veritas InfoScale List Disks
+      description: Retrieve all physical disks visible to VxVM.
+      tags:
+      - Disks
+      responses:
+        '200':
+          description: List of disks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /disks/{diskName}:
+    get:
+      operationId: getDisk
+      summary: Veritas InfoScale Get Disk
+      description: Retrieve details of a specific physical disk.
+      tags:
+      - Disks
+      parameters:
+      - $ref: '#/components/parameters/diskName'
+      responses:
+        '200':
+          description: Disk details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disk'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    Disk:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Disk name
+          example: disk_0
+        devicePath:
+          type: string
+          description: Device path
+          example: /dev/sda
+        size:
+          type: string
+          description: Disk size
+          example: 500.00g
+        state:
+          type: string
+          description: Disk state
+          enum:
+          - online
+          - offline
+          - error
+          example: online
+        diskGroup:
+          type: string
+          description: Disk group membership
+          example: oradg
+        mediaType:
+          type: string
+          description: Media type
+          enum:
+          - HDD
+          - SSD
+          - NVMe
+          example: SSD
+  parameters:
+    diskName:
+      name: diskName
+      in: path
+      required: true
+      description: The name of the physical disk
+      schema:
+        type: string
+      example: disk_0
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

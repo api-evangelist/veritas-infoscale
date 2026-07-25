@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Clusters API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Clusters
+  description: Cluster discovery and status operations
+paths:
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: Veritas InfoScale List Clusters
+      description: Retrieve all clusters managed by this InfoScale instance.
+      tags:
+      - Clusters
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}:
+    get:
+      operationId: getCluster
+      summary: Veritas InfoScale Get Cluster
+      description: Retrieve details of a specific cluster by its identifier.
+      tags:
+      - Clusters
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    ClusterCollection:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cluster'
+    Cluster:
+      type: object
+      properties:
+        clusterId:
+          type: string
+          description: Unique cluster identifier
+          example: cluster-prod-01
+        clusterName:
+          type: string
+          description: Name of the cluster
+          example: Production Oracle Cluster
+        state:
+          type: string
+          description: Current cluster state
+          enum:
+          - RUNNING
+          - FAULTED
+          - PARTIAL
+          - OFFLINE
+          example: RUNNING
+        nodeCount:
+          type: integer
+          description: Number of nodes in the cluster
+          example: 4
+        clusterVersion:
+          type: string
+          description: InfoScale cluster version
+          example: 8.0.0.0
+        fencingMode:
+          type: string
+          description: I/O fencing mode
+          enum:
+          - scsi3
+          - customized
+          - disabled
+          example: scsi3
+        uptime:
+          type: string
+          description: Cluster uptime duration
+          example: 45d 12h 30m
+        lastModified:
+          type: string
+          format: date-time
+          description: Last configuration change timestamp
+          example: '2026-04-18T09:30:00Z'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

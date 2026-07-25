@@ -1,0 +1,163 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Systems API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Systems
+  description: Manage cluster nodes and system status
+paths:
+  /clusters/{clusterId}/systems:
+    get:
+      operationId: listSystems
+      summary: Veritas InfoScale List Systems
+      description: Retrieve all systems (nodes) in a cluster.
+      tags:
+      - Systems
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of systems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/systems/{systemName}:
+    get:
+      operationId: getSystem
+      summary: Veritas InfoScale Get System
+      description: Retrieve details of a specific cluster system node.
+      tags:
+      - Systems
+      parameters:
+      - $ref: '#/components/parameters/clusterId'
+      - $ref: '#/components/parameters/systemName'
+      responses:
+        '200':
+          description: System details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    systemName:
+      name: systemName
+      in: path
+      required: true
+      description: The hostname of the cluster node
+      schema:
+        type: string
+      example: node01
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    System:
+      type: object
+      properties:
+        name:
+          type: string
+          description: System hostname
+          example: node01
+        state:
+          type: string
+          description: System state in the cluster
+          enum:
+          - RUNNING
+          - FAULTED
+          - EXITED
+          - UNKNOWN
+          example: RUNNING
+        frozen:
+          type: boolean
+          description: Whether the system is frozen
+          example: false
+        cpuUsage:
+          type: number
+          format: double
+          description: Current CPU usage percentage
+          example: 42.5
+        memoryUsage:
+          type: number
+          format: double
+          description: Current memory usage percentage
+          example: 68.3
+        serviceGroupCount:
+          type: integer
+          description: Number of service groups on this system
+          example: 3
+        platform:
+          type: string
+          description: Operating system platform
+          example: Linux
+        architecture:
+          type: string
+          description: Hardware architecture
+          example: x86_64
+    SystemCollection:
+      type: object
+      properties:
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/System'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Alerts
+  description: Retrieve and manage cluster alerts
+paths:
+  /alerts:
+    get:
+      operationId: listAlerts
+      summary: Veritas InfoScale List Alerts
+      description: Retrieve all active cluster alerts.
+      tags:
+      - Alerts
+      parameters:
+      - name: severity
+        in: query
+        description: Filter alerts by severity level
+        schema:
+          type: string
+          enum:
+          - critical
+          - warning
+          - info
+      - name: acknowledged
+        in: query
+        description: Filter by acknowledgement status
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /alerts/{alertId}:
+    get:
+      operationId: getAlert
+      summary: Veritas InfoScale Get Alert
+      description: Retrieve details of a specific alert.
+      tags:
+      - Alerts
+      parameters:
+      - $ref: '#/components/parameters/alertId'
+      responses:
+        '200':
+          description: Alert details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /alerts/{alertId}/acknowledge:
+    post:
+      operationId: acknowledgeAlert
+      summary: Veritas InfoScale Acknowledge Alert
+      description: Acknowledge a cluster alert.
+      tags:
+      - Alerts
+      parameters:
+      - $ref: '#/components/parameters/alertId'
+      responses:
+        '200':
+          description: Alert acknowledged
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    AlertCollection:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    Alert:
+      type: object
+      properties:
+        alertId:
+          type: string
+          format: uuid
+          description: Alert unique identifier
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        severity:
+          type: string
+          description: Alert severity
+          enum:
+          - critical
+          - warning
+          - info
+          example: warning
+        message:
+          type: string
+          description: Alert message
+          example: Service group oracle-sg has faulted on node01
+        source:
+          type: string
+          description: Alert source component
+          example: VCS
+        timestamp:
+          type: string
+          format: date-time
+          description: Alert timestamp
+          example: '2026-04-18T08:15:00Z'
+        acknowledged:
+          type: boolean
+          description: Whether the alert has been acknowledged
+          example: false
+        clusterId:
+          type: string
+          description: Related cluster identifier
+          example: cluster-prod-01
+  parameters:
+    alertId:
+      name: alertId
+      in: path
+      required: true
+      description: The unique identifier of the alert
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API

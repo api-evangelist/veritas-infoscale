@@ -1,0 +1,208 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST Alerts Disk Groups API
+  description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://{infoscale-server}:14149/api/v1
+  description: InfoScale REST API endpoint
+  variables:
+    infoscale-server:
+      default: localhost
+      description: InfoScale server hostname or IP
+security:
+- bearerAuth: []
+tags:
+- name: Disk Groups
+  description: Manage Veritas Volume Manager disk groups
+paths:
+  /diskgroups:
+    get:
+      operationId: listDiskGroups
+      summary: Veritas InfoScale List Disk Groups
+      description: Retrieve all VxVM disk groups.
+      tags:
+      - Disk Groups
+      responses:
+        '200':
+          description: List of disk groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroupCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDiskGroup
+      summary: Veritas InfoScale Create Disk Group
+      description: Create a new VxVM disk group.
+      tags:
+      - Disk Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiskGroupCreate'
+      responses:
+        '201':
+          description: Disk group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroup'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}:
+    get:
+      operationId: getDiskGroup
+      summary: Veritas InfoScale Get Disk Group
+      description: Retrieve details of a specific disk group.
+      tags:
+      - Disk Groups
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '200':
+          description: Disk group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroup'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDiskGroup
+      summary: Veritas InfoScale Delete Disk Group
+      description: Delete a disk group.
+      tags:
+      - Disk Groups
+      parameters:
+      - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '204':
+          description: Disk group deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    DiskGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Disk group name
+          example: oradg
+        state:
+          type: string
+          description: Disk group state
+          enum:
+          - enabled
+          - disabled
+          - deported
+          example: enabled
+        totalSize:
+          type: string
+          description: Total disk group size
+          example: 500.00g
+        freeSize:
+          type: string
+          description: Free space in disk group
+          example: 200.00g
+        diskCount:
+          type: integer
+          description: Number of disks in the group
+          example: 4
+        volumeCount:
+          type: integer
+          description: Number of volumes in the group
+          example: 3
+        layout:
+          type: string
+          description: Default layout type
+          enum:
+          - concat
+          - stripe
+          - mirror
+          - raid5
+          example: mirror
+        version:
+          type: string
+          description: Disk group version
+          example: '200'
+    DiskGroupCollection:
+      type: object
+      properties:
+        diskGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiskGroup'
+    DiskGroupCreate:
+      type: object
+      required:
+      - name
+      - disks
+      properties:
+        name:
+          type: string
+          description: Disk group name
+          example: newdg
+        disks:
+          type: array
+          items:
+            type: string
+          description: Disks to include
+          example:
+          - disk_0
+          - disk_1
+  parameters:
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API
