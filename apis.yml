@@ -3,7 +3,20 @@ name: Veritas InfoScale
 description: APIs for Veritas InfoScale, an enterprise storage and availability management solution that provides high availability,
   disaster recovery, and storage management capabilities across physical, virtual, and cloud environments.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/veritas-infoscale.png
 url: https://raw.githubusercontent.com/api-evangelist/veritas-infoscale/refs/heads/main/apis.yml
 created: '2025-03-14'
 modified: '2026-05-19'
@@ -16,75 +29,111 @@ tags:
 - Storage Management
 - Virtualization
 apis:
-- aid: veritas-infoscale:rest-api
-  name: Veritas InfoScale REST API
-  description: REST API for managing InfoScale clusters, storage resources, and high availability configurations. Supports
-    storage configuration and management operations including disk groups, volumes, and file systems, as well as cluster configuration
-    and management operations including service groups, resources, and heartbeats.
+- aid: veritas-infoscale:operations-manager-api
+  name: Veritas InfoScale Operations Manager API
+  description: >-
+    REST API for centralized monitoring and management of InfoScale environments. Provides meta, query,
+    update, and operational endpoints for managing clusters, service groups, hosts, storage, and extended
+    attributes across the entire InfoScale infrastructure.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: >-
+    https://www.veritas.com/support/en_US/doc/120572053-156079406-0/viom_tot_v96894970-156079406
+  baseURL: https://{isom-server}:14161/vom/api
+  tags:
+  - Management
+  - Monitoring
+  - Operations
+  properties:
+  - type: Documentation
+    url: >-
+      https://www.veritas.com/support/en_US/doc/120572053-156079406-0/viom_tot_v96894970-156079406
+  - type: APIReference
+    url: >-
+      https://sort.veritas.com/public/documents/vom/7.3/windowsandunix/productguides/html/viom_user/ch38.htm
+- aid: veritas-infoscale:vcs-api
+  name: Veritas Cluster Server API
+  description: >-
+    API for managing VCS clusters, service groups, and resources within InfoScale. Provides operations
+    for cluster node management, service group failover and failback, resource dependency configuration,
+    and heartbeat monitoring.
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
-  baseURL: https://{infoscale-server}:14149/api/v1
+  baseURL: https://{vcs-server}:14149/vcs/api
   tags:
-  - Availability
   - Clustering
-  - Storage
+  - Failover
+  - High Availability
   properties:
   - type: Documentation
     url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: CLI
+    url: https://www.veritas.com/support/en_US/doc/cluster-server/cli-reference
+- aid: veritas-infoscale:vxvm-api
+  name: Veritas Volume Manager API
+  description: >-
+    API for storage volume management, including volume creation, resizing, mirroring, and snapshot operations.
+    Manages disk groups, plexes, subdisks, and provides advanced storage features like thin provisioning,
+    data migration, and volume replication.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{server}:14149/vxvm/api
+  tags:
+  - Snapshots
+  - Storage
+  - Volumes
+  properties:
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: GettingStarted
+    url: https://www.veritas.com/support/en_US/doc/volume-manager/admin-guide
+- aid: veritas-infoscale:veritas-infoscale-alerts-api
+  name: Veritas InfoScale Alerts API
+  description: Retrieve and manage cluster alerts
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Alerts
+  properties:
   - type: OpenAPI
-    url: openapi/veritas-infoscale-rest-api.yaml
+    url: openapi/veritas-infoscale-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
   - type: Authentication
     url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
   - type: JSONSchema
     url: json-schema/rest-api-cluster-schema.json
-    title: Cluster Schema
   - type: JSONSchema
     url: json-schema/rest-api-service-group-schema.json
-    title: Service Group Schema
   - type: JSONSchema
     url: json-schema/rest-api-disk-group-schema.json
-    title: Disk Group Schema
   - type: JSONSchema
     url: json-schema/rest-api-volume-schema.json
-    title: Volume Schema
   - type: JSONSchema
     url: json-schema/rest-api-system-schema.json
-    title: System Schema
   - type: JSONSchema
     url: json-schema/rest-api-alert-schema.json
-    title: Alert Schema
   - type: JSONStructure
     url: json-structure/rest-api-cluster-structure.json
-    title: Cluster Structure
   - type: JSONStructure
     url: json-structure/rest-api-service-group-structure.json
-    title: Service Group Structure
   - type: JSONStructure
     url: json-structure/rest-api-disk-group-structure.json
-    title: Disk Group Structure
   - type: JSONStructure
     url: json-structure/rest-api-volume-structure.json
-    title: Volume Structure
   - type: JSONLD
     url: json-ld/veritas-infoscale-rest-api-context.jsonld
   - type: Examples
     url: examples/rest-api-cluster-example.json
-    title: Cluster Example
   - type: Examples
     url: examples/rest-api-service-group-example.json
-    title: Service Group Example
   - type: Examples
     url: examples/rest-api-disk-group-example.json
-    title: Disk Group Example
   - type: Examples
     url: examples/rest-api-volume-example.json
-    title: Volume Example
   - type: Examples
     url: examples/rest-api-system-example.json
-    title: System Example
   - type: Examples
     url: examples/rest-api-alert-example.json
-    title: Alert Example
   - type: X-NaftikoCapability
     url: capabilities/rest-alerts.yaml
   - type: X-NaftikoCapability
@@ -105,64 +154,624 @@ apis:
     url: capabilities/rest-systems.yaml
   - type: X-NaftikoCapability
     url: capabilities/rest-volumes.yaml
-  contact:
-  - FN: Veritas Support
-    email: support@veritas.com
-    url: https://www.veritas.com/support
-- aid: veritas-infoscale:operations-manager-api
-  name: Veritas InfoScale Operations Manager API
-  description: REST API for centralized monitoring and management of InfoScale environments. Provides meta, query, update,
-    and operational endpoints for managing clusters, service groups, hosts, storage, and extended attributes across the entire
-    InfoScale infrastructure.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.veritas.com/support/en_US/doc/120572053-156079406-0/viom_tot_v96894970-156079406
-  baseURL: https://{isom-server}:14161/vom/api
-  tags:
-  - Management
-  - Monitoring
-  - Operations
-  properties:
-  - type: Documentation
-    url: https://www.veritas.com/support/en_US/doc/120572053-156079406-0/viom_tot_v96894970-156079406
-  - type: APIReference
-    url: https://sort.veritas.com/public/documents/vom/7.3/windowsandunix/productguides/html/viom_user/ch38.htm
-- aid: veritas-infoscale:vcs-api
-  name: Veritas Cluster Server API
-  description: API for managing VCS clusters, service groups, and resources within InfoScale. Provides operations for cluster
-    node management, service group failover and failback, resource dependency configuration, and heartbeat monitoring.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: veritas-infoscale:veritas-infoscale-clusters-api
+  name: Veritas InfoScale Clusters API
+  description: Cluster discovery and status operations
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
-  baseURL: https://{vcs-server}:14149/vcs/api
+  baseURL: https://{infoscale-server}:14149/api/v1
   tags:
-  - Clustering
-  - Failover
-  - High Availability
+  - Clusters
   properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-clusters-api-openapi.yml
   - type: Documentation
     url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
-  - type: CLI
-    url: https://www.veritas.com/support/en_US/doc/cluster-server/cli-reference
-- aid: veritas-infoscale:vxvm-api
-  name: Veritas Volume Manager API
-  description: API for storage volume management, including volume creation, resizing, mirroring, and snapshot operations.
-    Manages disk groups, plexes, subdisks, and provides advanced storage features like thin provisioning, data migration,
-    and volume replication.
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-disk-groups-api
+  name: Veritas InfoScale Disk Groups API
+  description: Manage Veritas Volume Manager disk groups
   humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
-  baseURL: https://{server}:14149/vxvm/api
+  baseURL: https://{infoscale-server}:14149/api/v1
   tags:
-  - Snapshots
-  - Storage
+  - Disk Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-disk-groups-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-disks-api
+  name: Veritas InfoScale Disks API
+  description: Manage physical disks and disk pools
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Disks
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-disks-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-fencing-api
+  name: Veritas InfoScale Fencing API
+  description: Manage I/O fencing configuration
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Fencing
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-fencing-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-jobs-api
+  name: Veritas InfoScale Jobs API
+  description: Monitor and manage asynchronous job operations
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-resources-api
+  name: Veritas InfoScale Resources API
+  description: Manage cluster resources within service groups
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-service-groups-api
+  name: Veritas InfoScale Service Groups API
+  description: Manage VCS service groups and their lifecycle
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Service Groups
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-service-groups-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-systems-api
+  name: Veritas InfoScale Systems API
+  description: Manage cluster nodes and system status
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
+  - Systems
+  properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-systems-api-openapi.yml
+  - type: Documentation
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
+- aid: veritas-infoscale:veritas-infoscale-volumes-api
+  name: Veritas InfoScale Volumes API
+  description: Manage storage volumes
+  humanURL: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
+  baseURL: https://{infoscale-server}:14149/api/v1
+  tags:
   - Volumes
   properties:
+  - type: OpenAPI
+    url: openapi/veritas-infoscale-volumes-api-openapi.yml
   - type: Documentation
     url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151832379-166315478
-  - type: GettingStarted
-    url: https://www.veritas.com/support/en_US/doc/volume-manager/admin-guide
+  - type: Authentication
+    url: https://www.veritas.com/support/en_US/doc/79638609-166315478-0/v151837041-166315478
+  - type: JSONSchema
+    url: json-schema/rest-api-cluster-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-service-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-disk-group-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-volume-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-system-schema.json
+  - type: JSONSchema
+    url: json-schema/rest-api-alert-schema.json
+  - type: JSONStructure
+    url: json-structure/rest-api-cluster-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-service-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-disk-group-structure.json
+  - type: JSONStructure
+    url: json-structure/rest-api-volume-structure.json
+  - type: JSONLD
+    url: json-ld/veritas-infoscale-rest-api-context.jsonld
+  - type: Examples
+    url: examples/rest-api-cluster-example.json
+  - type: Examples
+    url: examples/rest-api-service-group-example.json
+  - type: Examples
+    url: examples/rest-api-disk-group-example.json
+  - type: Examples
+    url: examples/rest-api-volume-example.json
+  - type: Examples
+    url: examples/rest-api-system-example.json
+  - type: Examples
+    url: examples/rest-api-alert-example.json
+  - type: X-NaftikoCapability
+    url: capabilities/rest-alerts.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-clusters.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disk-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-disks.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-fencing.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-jobs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-resources.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-service-groups.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-systems.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/rest-volumes.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/veritas-infoscale/overview
 - type: AgenticAccess
   url: agentic-access/veritas-infoscale-agentic-access.yml
 - type: VulnerabilityDisclosure
