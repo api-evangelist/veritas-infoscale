@@ -1,0 +1,32 @@
+{
+  "provider": "veritas-infoscale",
+  "sources": [
+    "veritas-infoscale-alerts-api-openapi.yml",
+    "veritas-infoscale-clusters-api-openapi.yml",
+    "veritas-infoscale-disk-groups-api-openapi.yml",
+    "veritas-infoscale-disks-api-openapi.yml",
+    "veritas-infoscale-fencing-api-openapi.yml",
+    "veritas-infoscale-jobs-api-openapi.yml",
+    "veritas-infoscale-resources-api-openapi.yml",
+    "veritas-infoscale-service-groups-api-openapi.yml",
+    "veritas-infoscale-systems-api-openapi.yml",
+    "veritas-infoscale-volumes-api-openapi.yml"
+  ],
+  "outputs": [
+    "veritas-infoscale-alerts-api-openapi.yml",
+    "veritas-infoscale-clusters-api-openapi.yml",
+    "veritas-infoscale-disk-groups-api-openapi.yml",
+    "veritas-infoscale-disks-api-openapi.yml",
+    "veritas-infoscale-fencing-api-openapi.yml",
+    "veritas-infoscale-jobs-api-openapi.yml",
+    "veritas-infoscale-resources-api-openapi.yml",
+    "veritas-infoscale-service-groups-api-openapi.yml",
+    "veritas-infoscale-systems-api-openapi.yml",
+    "veritas-infoscale-volumes-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

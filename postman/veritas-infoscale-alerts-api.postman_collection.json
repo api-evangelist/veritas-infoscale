@@ -1,0 +1,370 @@
+{
+  "info": {
+    "_postman_id": "746d93ea-054b-4718-8558-d99ceeef6314",
+    "name": "Veritas InfoScale REST Alerts API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:02.000Z",
+    "updatedAt": "2026-07-28T03:27:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-746d93ea-054b-4718-8558-d99ceeef6314"
+  },
+  "item": [
+    {
+      "name": "alerts",
+      "item": [
+        {
+          "name": "{alertId}",
+          "item": [
+            {
+              "name": "acknowledge",
+              "item": [
+                {
+                  "name": "Veritas InfoScale Acknowledge Alert",
+                  "id": "7b7a58e3-f33b-41b2-be5b-d351aa5b6ca8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/alerts/:alertId/acknowledge",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alerts",
+                        ":alertId",
+                        "acknowledge"
+                      ],
+                      "variable": [
+                        {
+                          "id": "8b4c97dc-abfb-45a8-a90a-ff978d7c8242",
+                          "key": "alertId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier of the alert"
+                        }
+                      ]
+                    },
+                    "description": "Acknowledge a cluster alert."
+                  },
+                  "response": [
+                    {
+                      "id": "041c8a15-0a6b-43bb-b98c-24da3cd3fff2",
+                      "name": "Alert acknowledged",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/alerts/:alertId/acknowledge",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "alerts",
+                            ":alertId",
+                            "acknowledge"
+                          ],
+                          "variable": [
+                            {
+                              "key": "alertId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:27:02.000Z",
+                      "updatedAt": "2026-07-28T03:27:02.000Z",
+                      "uid": "35240-041c8a15-0a6b-43bb-b98c-24da3cd3fff2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:02.000Z",
+                  "updatedAt": "2026-07-28T03:27:02.000Z",
+                  "uid": "35240-7b7a58e3-f33b-41b2-be5b-d351aa5b6ca8"
+                }
+              ],
+              "id": "0a31db3e-2ca2-4591-9b18-a978ad66c424",
+              "createdAt": "2026-07-28T03:27:02.000Z",
+              "updatedAt": "2026-07-28T03:27:02.000Z",
+              "uid": "35240-0a31db3e-2ca2-4591-9b18-a978ad66c424"
+            },
+            {
+              "name": "Veritas InfoScale Get Alert",
+              "id": "4ee6583e-b786-49d0-9a3d-d7c0ef9806c7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts/:alertId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "ee90957f-035e-461f-b1fb-a4ff30a6a31a",
+                      "key": "alertId",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the alert"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific alert."
+              },
+              "response": [
+                {
+                  "id": "6608f33d-6339-44ee-9732-65247ba9bcf3",
+                  "name": "Alert details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alerts/:alertId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alerts",
+                        ":alertId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "alertId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"alertId\": \"<uuid>\",\n  \"severity\": \"info\",\n  \"message\": \"<string>\",\n  \"source\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"acknowledged\": \"<boolean>\",\n  \"clusterId\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:27:02.000Z",
+                  "updatedAt": "2026-07-28T03:27:02.000Z",
+                  "uid": "35240-6608f33d-6339-44ee-9732-65247ba9bcf3"
+                },
+                {
+                  "id": "89e6c80e-400e-4874-b64d-12cc18d3ff85",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/alerts/:alertId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "alerts",
+                        ":alertId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "alertId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:27:02.000Z",
+                  "updatedAt": "2026-07-28T03:27:02.000Z",
+                  "uid": "35240-89e6c80e-400e-4874-b64d-12cc18d3ff85"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:02.000Z",
+              "updatedAt": "2026-07-28T03:27:02.000Z",
+              "uid": "35240-4ee6583e-b786-49d0-9a3d-d7c0ef9806c7"
+            }
+          ],
+          "id": "8ad38397-a7fc-4788-a4bd-0f79cbfb8160",
+          "createdAt": "2026-07-28T03:27:02.000Z",
+          "updatedAt": "2026-07-28T03:27:02.000Z",
+          "uid": "35240-8ad38397-a7fc-4788-a4bd-0f79cbfb8160"
+        },
+        {
+          "name": "Veritas InfoScale List Alerts",
+          "id": "b5380665-e730-471d-b623-c56204f43789",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/alerts?severity=info&acknowledged=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "alerts"
+              ],
+              "query": [
+                {
+                  "description": "Filter alerts by severity level",
+                  "key": "severity",
+                  "value": "info"
+                },
+                {
+                  "description": "Filter by acknowledgement status",
+                  "key": "acknowledged",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieve all active cluster alerts."
+          },
+          "response": [
+            {
+              "id": "d803f4ac-1285-4fca-bd44-989ec3c33b1e",
+              "name": "List of alerts",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/alerts?severity=info&acknowledged=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "alerts"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter alerts by severity level",
+                      "key": "severity",
+                      "value": "info"
+                    },
+                    {
+                      "description": "Filter by acknowledgement status",
+                      "key": "acknowledged",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"alerts\": [\n    {\n      \"alertId\": \"<uuid>\",\n      \"severity\": \"info\",\n      \"message\": \"<string>\",\n      \"source\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"acknowledged\": \"<boolean>\",\n      \"clusterId\": \"<string>\"\n    },\n    {\n      \"alertId\": \"<uuid>\",\n      \"severity\": \"critical\",\n      \"message\": \"<string>\",\n      \"source\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"acknowledged\": \"<boolean>\",\n      \"clusterId\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:27:02.000Z",
+              "updatedAt": "2026-07-28T03:27:02.000Z",
+              "uid": "35240-d803f4ac-1285-4fca-bd44-989ec3c33b1e"
+            }
+          ],
+          "createdAt": "2026-07-28T03:27:02.000Z",
+          "updatedAt": "2026-07-28T03:27:02.000Z",
+          "uid": "35240-b5380665-e730-471d-b623-c56204f43789"
+        }
+      ],
+      "id": "a45d0e67-e9a8-4595-bbd7-173a0a62408d",
+      "createdAt": "2026-07-28T03:27:02.000Z",
+      "updatedAt": "2026-07-28T03:27:02.000Z",
+      "uid": "35240-a45d0e67-e9a8-4595-bbd7-173a0a62408d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

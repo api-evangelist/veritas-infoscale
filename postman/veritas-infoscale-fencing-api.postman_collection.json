@@ -1,0 +1,151 @@
+{
+  "info": {
+    "_postman_id": "0ed1ab83-612d-44d2-999a-01dcb1d08028",
+    "name": "Veritas InfoScale REST Alerts Fencing API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:20.000Z",
+    "updatedAt": "2026-07-28T03:27:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0ed1ab83-612d-44d2-999a-01dcb1d08028"
+  },
+  "item": [
+    {
+      "name": "clusters",
+      "item": [
+        {
+          "name": "{clusterId}",
+          "item": [
+            {
+              "name": "fencing",
+              "item": [
+                {
+                  "name": "Veritas InfoScale Get Fencing Configuration",
+                  "id": "3fb7d1d1-1761-4e41-a33a-c4b2a00be607",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId/fencing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId",
+                        "fencing"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cd0d6eab-80f8-4bdc-9335-cf4e576adbe1",
+                          "key": "clusterId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the cluster"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the I/O fencing configuration for a cluster."
+                  },
+                  "response": [
+                    {
+                      "id": "4e393886-1e07-4142-9012-091b50c4d53c",
+                      "name": "Fencing configuration",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/fencing",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "fencing"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"mode\": \"scsi3\",\n  \"coordinatorDisks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"preferredFencingPolicy\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:27:21.000Z",
+                      "updatedAt": "2026-07-28T03:27:21.000Z",
+                      "uid": "35240-4e393886-1e07-4142-9012-091b50c4d53c"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:21.000Z",
+                  "updatedAt": "2026-07-28T03:27:21.000Z",
+                  "uid": "35240-3fb7d1d1-1761-4e41-a33a-c4b2a00be607"
+                }
+              ],
+              "id": "5b07cc8a-451c-407b-b4e2-04e9f9b62968",
+              "createdAt": "2026-07-28T03:27:21.000Z",
+              "updatedAt": "2026-07-28T03:27:21.000Z",
+              "uid": "35240-5b07cc8a-451c-407b-b4e2-04e9f9b62968"
+            }
+          ],
+          "id": "8d37291b-26f8-4a7b-9edc-e4e1406e03f7",
+          "createdAt": "2026-07-28T03:27:21.000Z",
+          "updatedAt": "2026-07-28T03:27:21.000Z",
+          "uid": "35240-8d37291b-26f8-4a7b-9edc-e4e1406e03f7"
+        }
+      ],
+      "id": "1461b1c6-6eed-4347-8007-d4838b43e316",
+      "createdAt": "2026-07-28T03:27:21.000Z",
+      "updatedAt": "2026-07-28T03:27:21.000Z",
+      "uid": "35240-1461b1c6-6eed-4347-8007-d4838b43e316"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

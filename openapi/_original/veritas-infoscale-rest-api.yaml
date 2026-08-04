@@ -1,0 +1,1451 @@
+openapi: 3.0.3
+info:
+  title: Veritas InfoScale REST API
+  description: >-
+    REST API for managing InfoScale clusters, storage resources, service groups,
+    and high availability configurations. Provides operations for cluster
+    monitoring, storage volume management, service group administration, fencing
+    configuration, and disaster recovery operations.
+  version: '8.0'
+  contact:
+    name: Veritas Support
+    email: support@veritas.com
+    url: https://www.veritas.com/support
+  license:
+    name: Veritas API License
+    url: https://www.veritas.com/about/legal
+  x-generated-from: documentation
+  x-last-validated: '2026-04-18'
+servers:
+  - url: https://{infoscale-server}:14149/api/v1
+    description: InfoScale REST API endpoint
+    variables:
+      infoscale-server:
+        default: localhost
+        description: InfoScale server hostname or IP
+security:
+  - bearerAuth: []
+tags:
+  - name: Clusters
+    description: Cluster discovery and status operations
+  - name: Service Groups
+    description: Manage VCS service groups and their lifecycle
+  - name: Resources
+    description: Manage cluster resources within service groups
+  - name: Systems
+    description: Manage cluster nodes and system status
+  - name: Disk Groups
+    description: Manage Veritas Volume Manager disk groups
+  - name: Volumes
+    description: Manage storage volumes
+  - name: Disks
+    description: Manage physical disks and disk pools
+  - name: Fencing
+    description: Manage I/O fencing configuration
+  - name: Alerts
+    description: Retrieve and manage cluster alerts
+  - name: Jobs
+    description: Monitor and manage asynchronous job operations
+paths:
+  /clusters:
+    get:
+      operationId: listClusters
+      summary: Veritas InfoScale List Clusters
+      description: Retrieve all clusters managed by this InfoScale instance.
+      tags:
+        - Clusters
+      responses:
+        '200':
+          description: List of clusters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterCollection'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}:
+    get:
+      operationId: getCluster
+      summary: Veritas InfoScale Get Cluster
+      description: Retrieve details of a specific cluster by its identifier.
+      tags:
+        - Clusters
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Cluster details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cluster'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups:
+    get:
+      operationId: listServiceGroups
+      summary: Veritas InfoScale List Service Groups
+      description: Retrieve all service groups in a cluster.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of service groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroupCollection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createServiceGroup
+      summary: Veritas InfoScale Create Service Group
+      description: Create a new service group in a cluster.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupCreate'
+      responses:
+        '201':
+          description: Service group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}:
+    get:
+      operationId: getServiceGroup
+      summary: Veritas InfoScale Get Service Group
+      description: Retrieve details of a specific service group.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '200':
+          description: Service group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServiceGroup'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteServiceGroup
+      summary: Veritas InfoScale Delete Service Group
+      description: Delete a service group from the cluster.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '204':
+          description: Service group deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/online:
+    post:
+      operationId: onlineServiceGroup
+      summary: Veritas InfoScale Online Service Group
+      description: Bring a service group online on a specified system.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupAction'
+      responses:
+        '200':
+          description: Service group brought online
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+        '409':
+          description: Service group already online or in transition
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/offline:
+    post:
+      operationId: offlineServiceGroup
+      summary: Veritas InfoScale Offline Service Group
+      description: Take a service group offline on a specified system.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupAction'
+      responses:
+        '200':
+          description: Service group taken offline
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/switch:
+    post:
+      operationId: switchServiceGroup
+      summary: Veritas InfoScale Switch Service Group
+      description: Switch a service group from one system to another.
+      tags:
+        - Service Groups
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceGroupSwitch'
+      responses:
+        '200':
+          description: Service group switch initiated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources:
+    get:
+      operationId: listResources
+      summary: Veritas InfoScale List Resources
+      description: Retrieve all resources in a service group.
+      tags:
+        - Resources
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      responses:
+        '200':
+          description: List of resources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createResource
+      summary: Veritas InfoScale Create Resource
+      description: Create a new resource in a service group.
+      tags:
+        - Resources
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResourceCreate'
+      responses:
+        '201':
+          description: Resource created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/servicegroups/{serviceGroupName}/resources/{resourceName}:
+    get:
+      operationId: getResource
+      summary: Veritas InfoScale Get Resource
+      description: Retrieve details of a specific resource.
+      tags:
+        - Resources
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+        - $ref: '#/components/parameters/resourceName'
+      responses:
+        '200':
+          description: Resource details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteResource
+      summary: Veritas InfoScale Delete Resource
+      description: Delete a resource from a service group.
+      tags:
+        - Resources
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/serviceGroupName'
+        - $ref: '#/components/parameters/resourceName'
+      responses:
+        '204':
+          description: Resource deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/systems:
+    get:
+      operationId: listSystems
+      summary: Veritas InfoScale List Systems
+      description: Retrieve all systems (nodes) in a cluster.
+      tags:
+        - Systems
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: List of systems
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/systems/{systemName}:
+    get:
+      operationId: getSystem
+      summary: Veritas InfoScale Get System
+      description: Retrieve details of a specific cluster system node.
+      tags:
+        - Systems
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+        - $ref: '#/components/parameters/systemName'
+      responses:
+        '200':
+          description: System details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/System'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /clusters/{clusterId}/fencing:
+    get:
+      operationId: getFencingConfiguration
+      summary: Veritas InfoScale Get Fencing Configuration
+      description: Retrieve the I/O fencing configuration for a cluster.
+      tags:
+        - Fencing
+      parameters:
+        - $ref: '#/components/parameters/clusterId'
+      responses:
+        '200':
+          description: Fencing configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FencingConfig'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups:
+    get:
+      operationId: listDiskGroups
+      summary: Veritas InfoScale List Disk Groups
+      description: Retrieve all VxVM disk groups.
+      tags:
+        - Disk Groups
+      responses:
+        '200':
+          description: List of disk groups
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroupCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createDiskGroup
+      summary: Veritas InfoScale Create Disk Group
+      description: Create a new VxVM disk group.
+      tags:
+        - Disk Groups
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiskGroupCreate'
+      responses:
+        '201':
+          description: Disk group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroup'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}:
+    get:
+      operationId: getDiskGroup
+      summary: Veritas InfoScale Get Disk Group
+      description: Retrieve details of a specific disk group.
+      tags:
+        - Disk Groups
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '200':
+          description: Disk group details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskGroup'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteDiskGroup
+      summary: Veritas InfoScale Delete Disk Group
+      description: Delete a disk group.
+      tags:
+        - Disk Groups
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '204':
+          description: Disk group deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes:
+    get:
+      operationId: listVolumes
+      summary: Veritas InfoScale List Volumes
+      description: Retrieve all volumes in a disk group.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+      responses:
+        '200':
+          description: List of volumes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createVolume
+      summary: Veritas InfoScale Create Volume
+      description: Create a new volume in a disk group.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeCreate'
+      responses:
+        '201':
+          description: Volume created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}:
+    get:
+      operationId: getVolume
+      summary: Veritas InfoScale Get Volume
+      description: Retrieve details of a specific volume.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+        - $ref: '#/components/parameters/volumeName'
+      responses:
+        '200':
+          description: Volume details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Volume'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteVolume
+      summary: Veritas InfoScale Delete Volume
+      description: Delete a volume from a disk group.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+        - $ref: '#/components/parameters/volumeName'
+      responses:
+        '204':
+          description: Volume deleted
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}/resize:
+    post:
+      operationId: resizeVolume
+      summary: Veritas InfoScale Resize Volume
+      description: Resize a volume within a disk group.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+        - $ref: '#/components/parameters/volumeName'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeResize'
+      responses:
+        '200':
+          description: Volume resized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobReference'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /diskgroups/{diskGroupName}/volumes/{volumeName}/snapshot:
+    post:
+      operationId: createVolumeSnapshot
+      summary: Veritas InfoScale Create Volume Snapshot
+      description: Create a snapshot of a volume.
+      tags:
+        - Volumes
+      parameters:
+        - $ref: '#/components/parameters/diskGroupName'
+        - $ref: '#/components/parameters/volumeName'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SnapshotCreate'
+      responses:
+        '201':
+          description: Snapshot created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Snapshot'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /disks:
+    get:
+      operationId: listDisks
+      summary: Veritas InfoScale List Disks
+      description: Retrieve all physical disks visible to VxVM.
+      tags:
+        - Disks
+      responses:
+        '200':
+          description: List of disks
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DiskCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /disks/{diskName}:
+    get:
+      operationId: getDisk
+      summary: Veritas InfoScale Get Disk
+      description: Retrieve details of a specific physical disk.
+      tags:
+        - Disks
+      parameters:
+        - $ref: '#/components/parameters/diskName'
+      responses:
+        '200':
+          description: Disk details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Disk'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /alerts:
+    get:
+      operationId: listAlerts
+      summary: Veritas InfoScale List Alerts
+      description: Retrieve all active cluster alerts.
+      tags:
+        - Alerts
+      parameters:
+        - name: severity
+          in: query
+          description: Filter alerts by severity level
+          schema:
+            type: string
+            enum:
+              - critical
+              - warning
+              - info
+        - name: acknowledged
+          in: query
+          description: Filter by acknowledgement status
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of alerts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AlertCollection'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /alerts/{alertId}:
+    get:
+      operationId: getAlert
+      summary: Veritas InfoScale Get Alert
+      description: Retrieve details of a specific alert.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/alertId'
+      responses:
+        '200':
+          description: Alert details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Alert'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /alerts/{alertId}/acknowledge:
+    post:
+      operationId: acknowledgeAlert
+      summary: Veritas InfoScale Acknowledge Alert
+      description: Acknowledge a cluster alert.
+      tags:
+        - Alerts
+      parameters:
+        - $ref: '#/components/parameters/alertId'
+      responses:
+        '200':
+          description: Alert acknowledged
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /jobs/{jobId}:
+    get:
+      operationId: getJob
+      summary: Veritas InfoScale Get Job
+      description: Retrieve the status of an asynchronous job.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/jobId'
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '404':
+          $ref: '#/components/responses/NotFound'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token authentication for InfoScale REST API
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+    serviceGroupName:
+      name: serviceGroupName
+      in: path
+      required: true
+      description: The name of the service group
+      schema:
+        type: string
+      example: oracle-sg
+    resourceName:
+      name: resourceName
+      in: path
+      required: true
+      description: The name of the resource
+      schema:
+        type: string
+      example: ora-ip-res
+    systemName:
+      name: systemName
+      in: path
+      required: true
+      description: The hostname of the cluster node
+      schema:
+        type: string
+      example: node01
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
+    volumeName:
+      name: volumeName
+      in: path
+      required: true
+      description: The name of the volume
+      schema:
+        type: string
+      example: oravol01
+    diskName:
+      name: diskName
+      in: path
+      required: true
+      description: The name of the physical disk
+      schema:
+        type: string
+      example: disk_0
+    alertId:
+      name: alertId
+      in: path
+      required: true
+      description: The unique identifier of the alert
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: The unique identifier of the job
+      schema:
+        type: string
+        format: uuid
+      example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    Cluster:
+      type: object
+      properties:
+        clusterId:
+          type: string
+          description: Unique cluster identifier
+          example: cluster-prod-01
+        clusterName:
+          type: string
+          description: Name of the cluster
+          example: Production Oracle Cluster
+        state:
+          type: string
+          description: Current cluster state
+          enum:
+            - RUNNING
+            - FAULTED
+            - PARTIAL
+            - OFFLINE
+          example: RUNNING
+        nodeCount:
+          type: integer
+          description: Number of nodes in the cluster
+          example: 4
+        clusterVersion:
+          type: string
+          description: InfoScale cluster version
+          example: 8.0.0.0
+        fencingMode:
+          type: string
+          description: I/O fencing mode
+          enum:
+            - scsi3
+            - customized
+            - disabled
+          example: scsi3
+        uptime:
+          type: string
+          description: Cluster uptime duration
+          example: 45d 12h 30m
+        lastModified:
+          type: string
+          format: date-time
+          description: Last configuration change timestamp
+          example: '2026-04-18T09:30:00Z'
+    ClusterCollection:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cluster'
+    ServiceGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Service group name
+          example: oracle-sg
+        state:
+          type: string
+          description: Current service group state
+          enum:
+            - ONLINE
+            - OFFLINE
+            - FAULTED
+            - PARTIAL
+            - STARTING
+            - STOPPING
+          example: ONLINE
+        systemList:
+          type: array
+          description: List of systems where this group can run
+          items:
+            type: string
+          example:
+            - node01
+            - node02
+        currentSystem:
+          type: string
+          description: System where the group is currently online
+          example: node01
+        autoStart:
+          type: boolean
+          description: Whether the group starts automatically
+          example: true
+        parallel:
+          type: boolean
+          description: Whether the group can run on multiple systems
+          example: false
+        resourceCount:
+          type: integer
+          description: Number of resources in this group
+          example: 5
+        groupType:
+          type: string
+          description: Type classification of the service group
+          example: Failover
+        critical:
+          type: boolean
+          description: Whether this is a critical service group
+          example: true
+    ServiceGroupCreate:
+      type: object
+      required:
+        - name
+        - systemList
+      properties:
+        name:
+          type: string
+          description: Service group name
+          example: app-sg
+        systemList:
+          type: array
+          items:
+            type: string
+          description: Systems for the group
+        autoStart:
+          type: boolean
+          description: Auto-start on cluster start
+          default: true
+        parallel:
+          type: boolean
+          description: Allow parallel execution
+          default: false
+    ServiceGroupAction:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Target system for the action
+          example: node01
+    ServiceGroupSwitch:
+      type: object
+      required:
+        - targetSystem
+      properties:
+        targetSystem:
+          type: string
+          description: System to switch the group to
+          example: node02
+    ServiceGroupCollection:
+      type: object
+      properties:
+        serviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceGroup'
+    Resource:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: ora-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        state:
+          type: string
+          description: Current resource state
+          enum:
+            - ONLINE
+            - OFFLINE
+            - FAULTED
+            - UNKNOWN
+          example: ONLINE
+        serviceGroup:
+          type: string
+          description: Parent service group
+          example: oracle-sg
+        system:
+          type: string
+          description: System where resource is running
+          example: node01
+        enabled:
+          type: boolean
+          description: Whether the resource is enabled
+          example: true
+        critical:
+          type: boolean
+          description: Whether the resource is critical to the group
+          example: true
+        attributes:
+          type: object
+          description: Resource-type-specific attributes
+          additionalProperties: true
+    ResourceCreate:
+      type: object
+      required:
+        - name
+        - type
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: new-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        attributes:
+          type: object
+          description: Resource attributes
+          additionalProperties: true
+    ResourceCollection:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+    System:
+      type: object
+      properties:
+        name:
+          type: string
+          description: System hostname
+          example: node01
+        state:
+          type: string
+          description: System state in the cluster
+          enum:
+            - RUNNING
+            - FAULTED
+            - EXITED
+            - UNKNOWN
+          example: RUNNING
+        frozen:
+          type: boolean
+          description: Whether the system is frozen
+          example: false
+        cpuUsage:
+          type: number
+          format: double
+          description: Current CPU usage percentage
+          example: 42.5
+        memoryUsage:
+          type: number
+          format: double
+          description: Current memory usage percentage
+          example: 68.3
+        serviceGroupCount:
+          type: integer
+          description: Number of service groups on this system
+          example: 3
+        platform:
+          type: string
+          description: Operating system platform
+          example: Linux
+        architecture:
+          type: string
+          description: Hardware architecture
+          example: x86_64
+    SystemCollection:
+      type: object
+      properties:
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/System'
+    DiskGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Disk group name
+          example: oradg
+        state:
+          type: string
+          description: Disk group state
+          enum:
+            - enabled
+            - disabled
+            - deported
+          example: enabled
+        totalSize:
+          type: string
+          description: Total disk group size
+          example: 500.00g
+        freeSize:
+          type: string
+          description: Free space in disk group
+          example: 200.00g
+        diskCount:
+          type: integer
+          description: Number of disks in the group
+          example: 4
+        volumeCount:
+          type: integer
+          description: Number of volumes in the group
+          example: 3
+        layout:
+          type: string
+          description: Default layout type
+          enum:
+            - concat
+            - stripe
+            - mirror
+            - raid5
+          example: mirror
+        version:
+          type: string
+          description: Disk group version
+          example: '200'
+    DiskGroupCreate:
+      type: object
+      required:
+        - name
+        - disks
+      properties:
+        name:
+          type: string
+          description: Disk group name
+          example: newdg
+        disks:
+          type: array
+          items:
+            type: string
+          description: Disks to include
+          example:
+            - disk_0
+            - disk_1
+    DiskGroupCollection:
+      type: object
+      properties:
+        diskGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiskGroup'
+    Volume:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Parent disk group
+          example: oradg
+        state:
+          type: string
+          description: Volume state
+          enum:
+            - ACTIVE
+            - DISABLED
+            - DETACHED
+          example: ACTIVE
+        size:
+          type: string
+          description: Volume size
+          example: 100.00g
+        layout:
+          type: string
+          description: Volume layout type
+          enum:
+            - concat
+            - stripe
+            - mirror
+            - raid5
+          example: mirror
+        plexCount:
+          type: integer
+          description: Number of plexes
+          example: 2
+        readPolicy:
+          type: string
+          description: Read policy for the volume
+          example: round-robin
+        usageType:
+          type: string
+          description: Volume usage type
+          example: fsgen
+    VolumeCreate:
+      type: object
+      required:
+        - name
+        - size
+      properties:
+        name:
+          type: string
+          description: Volume name
+          example: newvol
+        size:
+          type: string
+          description: Volume size
+          example: 50g
+        layout:
+          type: string
+          description: Layout type
+          default: mirror
+    VolumeResize:
+      type: object
+      required:
+        - newSize
+      properties:
+        newSize:
+          type: string
+          description: New volume size
+          example: 200g
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
+    Snapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Snapshot name
+          example: oravol01-snap-20260418
+        sourceVolume:
+          type: string
+          description: Source volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Disk group containing the snapshot
+          example: oradg
+        size:
+          type: string
+          description: Snapshot size
+          example: 100.00g
+        createdAt:
+          type: string
+          format: date-time
+          description: Snapshot creation time
+          example: '2026-04-18T10:00:00Z'
+        state:
+          type: string
+          description: Snapshot state
+          enum:
+            - ACTIVE
+            - DETACHED
+          example: ACTIVE
+    SnapshotCreate:
+      type: object
+      properties:
+        snapshotName:
+          type: string
+          description: Name for the snapshot
+          example: oravol01-snap-20260418
+    Disk:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Disk name
+          example: disk_0
+        devicePath:
+          type: string
+          description: Device path
+          example: /dev/sda
+        size:
+          type: string
+          description: Disk size
+          example: 500.00g
+        state:
+          type: string
+          description: Disk state
+          enum:
+            - online
+            - offline
+            - error
+          example: online
+        diskGroup:
+          type: string
+          description: Disk group membership
+          example: oradg
+        mediaType:
+          type: string
+          description: Media type
+          enum:
+            - HDD
+            - SSD
+            - NVMe
+          example: SSD
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
+    FencingConfig:
+      type: object
+      properties:
+        mode:
+          type: string
+          description: Fencing mode
+          enum:
+            - scsi3
+            - customized
+            - disabled
+          example: scsi3
+        coordinatorDisks:
+          type: array
+          description: Coordinator disks for SCSI-3 fencing
+          items:
+            type: string
+          example:
+            - /dev/vx/rdmp/disk_c1
+            - /dev/vx/rdmp/disk_c2
+            - /dev/vx/rdmp/disk_c3
+        preferredFencingPolicy:
+          type: string
+          description: Preferred fencing policy
+          example: System
+    Alert:
+      type: object
+      properties:
+        alertId:
+          type: string
+          format: uuid
+          description: Alert unique identifier
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        severity:
+          type: string
+          description: Alert severity
+          enum:
+            - critical
+            - warning
+            - info
+          example: warning
+        message:
+          type: string
+          description: Alert message
+          example: Service group oracle-sg has faulted on node01
+        source:
+          type: string
+          description: Alert source component
+          example: VCS
+        timestamp:
+          type: string
+          format: date-time
+          description: Alert timestamp
+          example: '2026-04-18T08:15:00Z'
+        acknowledged:
+          type: boolean
+          description: Whether the alert has been acknowledged
+          example: false
+        clusterId:
+          type: string
+          description: Related cluster identifier
+          example: cluster-prod-01
+    AlertCollection:
+      type: object
+      properties:
+        alerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Alert'
+    Job:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Job identifier
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Job status
+          enum:
+            - queued
+            - running
+            - completed
+            - failed
+          example: running
+        operation:
+          type: string
+          description: Operation being performed
+          example: ServiceGroup Online
+        percentComplete:
+          type: integer
+          description: Job completion percentage
+          example: 50
+        startedAt:
+          type: string
+          format: date-time
+          description: Job start time
+        completedAt:
+          type: string
+          format: date-time
+          description: Job completion time
+        message:
+          type: string
+          description: Job status message
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued

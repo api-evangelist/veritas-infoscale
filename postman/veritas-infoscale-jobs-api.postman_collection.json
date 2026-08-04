@@ -1,0 +1,188 @@
+{
+  "info": {
+    "_postman_id": "e83f8fe4-6644-44b2-bef0-d9df069971f3",
+    "name": "Veritas InfoScale REST Alerts Jobs API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:21.000Z",
+    "updatedAt": "2026-07-28T03:27:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e83f8fe4-6644-44b2-bef0-d9df069971f3"
+  },
+  "item": [
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{jobId}",
+          "item": [
+            {
+              "name": "Veritas InfoScale Get Job",
+              "id": "3f902bc3-da9e-413f-a2a7-38738b76a8f8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/jobs/:jobId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "37c43657-0da5-426a-9dea-97fcf9154d29",
+                      "key": "jobId",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the job"
+                    }
+                  ]
+                },
+                "description": "Retrieve the status of an asynchronous job."
+              },
+              "response": [
+                {
+                  "id": "427bef42-7639-4b27-93d9-4e467f9836d4",
+                  "name": "Job status",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<uuid>\",\n  \"status\": \"running\",\n  \"operation\": \"<string>\",\n  \"percentComplete\": \"<integer>\",\n  \"startedAt\": \"<dateTime>\",\n  \"completedAt\": \"<dateTime>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:27:22.000Z",
+                  "updatedAt": "2026-07-28T03:27:22.000Z",
+                  "uid": "35240-427bef42-7639-4b27-93d9-4e467f9836d4"
+                },
+                {
+                  "id": "d328ccea-1c93-4bfe-947b-a890feabdd30",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:27:22.000Z",
+                  "updatedAt": "2026-07-28T03:27:22.000Z",
+                  "uid": "35240-d328ccea-1c93-4bfe-947b-a890feabdd30"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:22.000Z",
+              "updatedAt": "2026-07-28T03:27:22.000Z",
+              "uid": "35240-3f902bc3-da9e-413f-a2a7-38738b76a8f8"
+            }
+          ],
+          "id": "2bf64d90-9223-4ebe-b3b7-99d64070765d",
+          "createdAt": "2026-07-28T03:27:22.000Z",
+          "updatedAt": "2026-07-28T03:27:22.000Z",
+          "uid": "35240-2bf64d90-9223-4ebe-b3b7-99d64070765d"
+        }
+      ],
+      "id": "ff215590-f047-4435-91b4-3e3671c3177d",
+      "createdAt": "2026-07-28T03:27:22.000Z",
+      "updatedAt": "2026-07-28T03:27:22.000Z",
+      "uid": "35240-ff215590-f047-4435-91b4-3e3671c3177d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

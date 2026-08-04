@@ -1,0 +1,261 @@
+{
+  "info": {
+    "_postman_id": "df678feb-3e9b-4b21-99e2-44e00fbb2523",
+    "name": "Veritas InfoScale REST Alerts Disks API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:05.000Z",
+    "updatedAt": "2026-07-28T03:27:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-df678feb-3e9b-4b21-99e2-44e00fbb2523"
+  },
+  "item": [
+    {
+      "name": "disks",
+      "item": [
+        {
+          "name": "{diskName}",
+          "item": [
+            {
+              "name": "Veritas InfoScale Get Disk",
+              "id": "eb4c4a36-28ff-4f66-9ead-a62748f54e5b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/disks/:diskName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disks",
+                    ":diskName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "51fbcb5e-4d49-4f54-9a96-6ac7197464b8",
+                      "key": "diskName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the physical disk"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific physical disk."
+              },
+              "response": [
+                {
+                  "id": "5ce816a2-3b11-46ef-b354-f56524031f6c",
+                  "name": "Disk details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/disks/:diskName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "disks",
+                        ":diskName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "diskName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"devicePath\": \"<string>\",\n  \"size\": \"<string>\",\n  \"state\": \"error\",\n  \"diskGroup\": \"<string>\",\n  \"mediaType\": \"HDD\"\n}",
+                  "createdAt": "2026-07-28T03:27:05.000Z",
+                  "updatedAt": "2026-07-28T03:27:05.000Z",
+                  "uid": "35240-5ce816a2-3b11-46ef-b354-f56524031f6c"
+                },
+                {
+                  "id": "725cb0b2-2dc9-4318-89c7-8b884473e154",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/disks/:diskName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "disks",
+                        ":diskName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "diskName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:27:05.000Z",
+                  "updatedAt": "2026-07-28T03:27:05.000Z",
+                  "uid": "35240-725cb0b2-2dc9-4318-89c7-8b884473e154"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:05.000Z",
+              "updatedAt": "2026-07-28T03:27:05.000Z",
+              "uid": "35240-eb4c4a36-28ff-4f66-9ead-a62748f54e5b"
+            }
+          ],
+          "id": "4e857ff7-62cd-4b24-b7c8-4bfcab21b73d",
+          "createdAt": "2026-07-28T03:27:05.000Z",
+          "updatedAt": "2026-07-28T03:27:05.000Z",
+          "uid": "35240-4e857ff7-62cd-4b24-b7c8-4bfcab21b73d"
+        },
+        {
+          "name": "Veritas InfoScale List Disks",
+          "id": "92d90490-ed1c-4f96-b26f-f9696a9f2b91",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/disks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "disks"
+              ]
+            },
+            "description": "Retrieve all physical disks visible to VxVM."
+          },
+          "response": [
+            {
+              "id": "c6826291-79bb-4f7e-81ab-8fd3d53c7834",
+              "name": "List of disks",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/disks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "disks"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"disks\": [\n    {\n      \"name\": \"<string>\",\n      \"devicePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"state\": \"error\",\n      \"diskGroup\": \"<string>\",\n      \"mediaType\": \"NVMe\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"devicePath\": \"<string>\",\n      \"size\": \"<string>\",\n      \"state\": \"error\",\n      \"diskGroup\": \"<string>\",\n      \"mediaType\": \"HDD\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:27:05.000Z",
+              "updatedAt": "2026-07-28T03:27:05.000Z",
+              "uid": "35240-c6826291-79bb-4f7e-81ab-8fd3d53c7834"
+            }
+          ],
+          "createdAt": "2026-07-28T03:27:05.000Z",
+          "updatedAt": "2026-07-28T03:27:05.000Z",
+          "uid": "35240-92d90490-ed1c-4f96-b26f-f9696a9f2b91"
+        }
+      ],
+      "id": "c613e9ab-f863-4702-b31c-6de565e2b00d",
+      "createdAt": "2026-07-28T03:27:05.000Z",
+      "updatedAt": "2026-07-28T03:27:05.000Z",
+      "uid": "35240-c613e9ab-f863-4702-b31c-6de565e2b00d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

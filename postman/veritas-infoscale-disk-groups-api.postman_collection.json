@@ -1,0 +1,436 @@
+{
+  "info": {
+    "_postman_id": "ee3f7b1a-dd54-4ac5-a5a1-b1c4f0f01842",
+    "name": "Veritas InfoScale REST Alerts Disk Groups API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:04.000Z",
+    "updatedAt": "2026-07-28T03:27:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ee3f7b1a-dd54-4ac5-a5a1-b1c4f0f01842"
+  },
+  "item": [
+    {
+      "name": "diskgroups",
+      "item": [
+        {
+          "name": "{diskGroupName}",
+          "item": [
+            {
+              "name": "Veritas InfoScale Get Disk Group",
+              "id": "febbfe22-7be9-461d-88cf-ea66396c54dd",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/diskgroups/:diskGroupName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "41c66049-bc47-4a9d-a403-43e809b5be39",
+                      "key": "diskGroupName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the VxVM disk group"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific disk group."
+              },
+              "response": [
+                {
+                  "id": "1fd7c1d7-a5b8-4126-a5af-0674f6299235",
+                  "name": "Disk group details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/diskgroups/:diskGroupName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "diskgroups",
+                        ":diskGroupName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "diskGroupName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"deported\",\n  \"totalSize\": \"<string>\",\n  \"freeSize\": \"<string>\",\n  \"diskCount\": \"<integer>\",\n  \"volumeCount\": \"<integer>\",\n  \"layout\": \"concat\",\n  \"version\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:27:04.000Z",
+                  "updatedAt": "2026-07-28T03:27:04.000Z",
+                  "uid": "35240-1fd7c1d7-a5b8-4126-a5af-0674f6299235"
+                },
+                {
+                  "id": "a12f80c1-7876-4130-b333-0667206ef7cf",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/diskgroups/:diskGroupName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "diskgroups",
+                        ":diskGroupName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "diskGroupName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:27:04.000Z",
+                  "updatedAt": "2026-07-28T03:27:04.000Z",
+                  "uid": "35240-a12f80c1-7876-4130-b333-0667206ef7cf"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:04.000Z",
+              "updatedAt": "2026-07-28T03:27:04.000Z",
+              "uid": "35240-febbfe22-7be9-461d-88cf-ea66396c54dd"
+            },
+            {
+              "name": "Veritas InfoScale Delete Disk Group",
+              "id": "22634df0-a64a-4bb2-9a8d-cc94b9341d4c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/diskgroups/:diskGroupName",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName"
+                  ],
+                  "variable": [
+                    {
+                      "id": "7536cb94-2837-439d-b437-41f9ea1348a8",
+                      "key": "diskGroupName",
+                      "value": "<string>",
+                      "description": "(Required) The name of the VxVM disk group"
+                    }
+                  ]
+                },
+                "description": "Delete a disk group."
+              },
+              "response": [
+                {
+                  "id": "ecc49025-0c3c-4ed1-887c-addbc0ed00dd",
+                  "name": "Disk group deleted",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/diskgroups/:diskGroupName",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "diskgroups",
+                        ":diskGroupName"
+                      ],
+                      "variable": [
+                        {
+                          "key": "diskGroupName"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:27:04.000Z",
+                  "updatedAt": "2026-07-28T03:27:04.000Z",
+                  "uid": "35240-ecc49025-0c3c-4ed1-887c-addbc0ed00dd"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:04.000Z",
+              "updatedAt": "2026-07-28T03:27:04.000Z",
+              "uid": "35240-22634df0-a64a-4bb2-9a8d-cc94b9341d4c"
+            }
+          ],
+          "id": "afdd7a4c-8fa8-4429-9535-9128cef9c715",
+          "createdAt": "2026-07-28T03:27:04.000Z",
+          "updatedAt": "2026-07-28T03:27:04.000Z",
+          "uid": "35240-afdd7a4c-8fa8-4429-9535-9128cef9c715"
+        },
+        {
+          "name": "Veritas InfoScale List Disk Groups",
+          "id": "888c3ef9-e766-488d-86d0-4f0d60250760",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/diskgroups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "diskgroups"
+              ]
+            },
+            "description": "Retrieve all VxVM disk groups."
+          },
+          "response": [
+            {
+              "id": "353bc308-f19e-49b2-acbb-444ed3be95e6",
+              "name": "List of disk groups",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/diskgroups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "diskgroups"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"diskGroups\": [\n    {\n      \"name\": \"<string>\",\n      \"state\": \"enabled\",\n      \"totalSize\": \"<string>\",\n      \"freeSize\": \"<string>\",\n      \"diskCount\": \"<integer>\",\n      \"volumeCount\": \"<integer>\",\n      \"layout\": \"mirror\",\n      \"version\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"state\": \"enabled\",\n      \"totalSize\": \"<string>\",\n      \"freeSize\": \"<string>\",\n      \"diskCount\": \"<integer>\",\n      \"volumeCount\": \"<integer>\",\n      \"layout\": \"stripe\",\n      \"version\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:27:04.000Z",
+              "updatedAt": "2026-07-28T03:27:04.000Z",
+              "uid": "35240-353bc308-f19e-49b2-acbb-444ed3be95e6"
+            }
+          ],
+          "createdAt": "2026-07-28T03:27:04.000Z",
+          "updatedAt": "2026-07-28T03:27:04.000Z",
+          "uid": "35240-888c3ef9-e766-488d-86d0-4f0d60250760"
+        },
+        {
+          "name": "Veritas InfoScale Create Disk Group",
+          "id": "c448b847-89fd-41a7-950b-4f843d6ccc7c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/diskgroups",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "diskgroups"
+              ]
+            },
+            "description": "Create a new VxVM disk group."
+          },
+          "response": [
+            {
+              "id": "2e1cc6ff-e2a3-4b27-9516-ef1712dd2252",
+              "name": "Disk group created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"disks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/diskgroups",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "diskgroups"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"deported\",\n  \"totalSize\": \"<string>\",\n  \"freeSize\": \"<string>\",\n  \"diskCount\": \"<integer>\",\n  \"volumeCount\": \"<integer>\",\n  \"layout\": \"concat\",\n  \"version\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T03:27:04.000Z",
+              "updatedAt": "2026-07-28T03:27:04.000Z",
+              "uid": "35240-2e1cc6ff-e2a3-4b27-9516-ef1712dd2252"
+            }
+          ],
+          "createdAt": "2026-07-28T03:27:04.000Z",
+          "updatedAt": "2026-07-28T03:27:04.000Z",
+          "uid": "35240-c448b847-89fd-41a7-950b-4f843d6ccc7c"
+        }
+      ],
+      "id": "096bb82d-c1c0-40c1-9f5f-f2a24aa92ae1",
+      "createdAt": "2026-07-28T03:27:04.000Z",
+      "updatedAt": "2026-07-28T03:27:04.000Z",
+      "uid": "35240-096bb82d-c1c0-40c1-9f5f-f2a24aa92ae1"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "info": {
+    "_postman_id": "fc23db7c-eb82-4617-842e-bbb8f858d3dd",
+    "name": "Veritas InfoScale REST Alerts Volumes API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:25.000Z",
+    "updatedAt": "2026-07-28T03:27:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-fc23db7c-eb82-4617-842e-bbb8f858d3dd"
+  },
+  "item": [
+    {
+      "name": "diskgroups",
+      "item": [
+        {
+          "name": "{diskGroupName}",
+          "item": [
+            {
+              "name": "volumes",
+              "item": [
+                {
+                  "name": "{volumeName}",
+                  "item": [
+                    {
+                      "name": "resize",
+                      "item": [
+                        {
+                          "name": "Veritas InfoScale Resize Volume",
+                          "id": "b5136fa8-6fcd-4b1f-bd21-8f1fd229c314",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"newSize\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName/resize",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "diskgroups",
+                                ":diskGroupName",
+                                "volumes",
+                                ":volumeName",
+                                "resize"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "78b0658c-2c58-4e08-ad1e-9bee1b21f025",
+                                  "key": "diskGroupName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the VxVM disk group"
+                                },
+                                {
+                                  "id": "71f5c0f7-534d-401e-8084-ff0e0794221d",
+                                  "key": "volumeName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the volume"
+                                }
+                              ]
+                            },
+                            "description": "Resize a volume within a disk group."
+                          },
+                          "response": [
+                            {
+                              "id": "d97bfc9d-ee74-431e-b271-8384ed6f0296",
+                              "name": "Volume resized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"newSize\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName/resize",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "diskgroups",
+                                    ":diskGroupName",
+                                    "volumes",
+                                    ":volumeName",
+                                    "resize"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "diskGroupName"
+                                    },
+                                    {
+                                      "key": "volumeName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jobId\": \"<uuid>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:27:26.000Z",
+                              "updatedAt": "2026-07-28T03:27:26.000Z",
+                              "uid": "35240-d97bfc9d-ee74-431e-b271-8384ed6f0296"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:27:26.000Z",
+                          "updatedAt": "2026-07-28T03:27:26.000Z",
+                          "uid": "35240-b5136fa8-6fcd-4b1f-bd21-8f1fd229c314"
+                        }
+                      ],
+                      "id": "5d7046d3-77c5-4fef-a9bf-146e4625894e",
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-5d7046d3-77c5-4fef-a9bf-146e4625894e"
+                    },
+                    {
+                      "name": "snapshot",
+                      "item": [
+                        {
+                          "name": "Veritas InfoScale Create Volume Snapshot",
+                          "id": "42fd7880-f97a-400b-a874-d68ce9de039d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"snapshotName\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName/snapshot",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "diskgroups",
+                                ":diskGroupName",
+                                "volumes",
+                                ":volumeName",
+                                "snapshot"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "e3c7faf4-2474-40ed-988a-bb66f4f07481",
+                                  "key": "diskGroupName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the VxVM disk group"
+                                },
+                                {
+                                  "id": "a6ee2fa7-80bb-422b-b353-2e7dbd3cb337",
+                                  "key": "volumeName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the volume"
+                                }
+                              ]
+                            },
+                            "description": "Create a snapshot of a volume."
+                          },
+                          "response": [
+                            {
+                              "id": "128ca08a-f83b-4695-bb9c-ffa273d1e47d",
+                              "name": "Snapshot created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"snapshotName\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName/snapshot",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "diskgroups",
+                                    ":diskGroupName",
+                                    "volumes",
+                                    ":volumeName",
+                                    "snapshot"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "diskGroupName"
+                                    },
+                                    {
+                                      "key": "volumeName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"name\": \"<string>\",\n  \"sourceVolume\": \"<string>\",\n  \"diskGroup\": \"<string>\",\n  \"size\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"state\": \"DETACHED\"\n}",
+                              "createdAt": "2026-07-28T03:27:26.000Z",
+                              "updatedAt": "2026-07-28T03:27:26.000Z",
+                              "uid": "35240-128ca08a-f83b-4695-bb9c-ffa273d1e47d"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:27:26.000Z",
+                          "updatedAt": "2026-07-28T03:27:26.000Z",
+                          "uid": "35240-42fd7880-f97a-400b-a874-d68ce9de039d"
+                        }
+                      ],
+                      "id": "29256e00-3615-40bc-abaa-53807a450524",
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-29256e00-3615-40bc-abaa-53807a450524"
+                    },
+                    {
+                      "name": "Veritas InfoScale Get Volume",
+                      "id": "108cad44-f589-4770-9b57-3a5442501aab",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "diskgroups",
+                            ":diskGroupName",
+                            "volumes",
+                            ":volumeName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "f22deb66-9c9e-4a95-b5ec-ca17fc58a6b5",
+                              "key": "diskGroupName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the VxVM disk group"
+                            },
+                            {
+                              "id": "6a7ee44c-2cc6-4d49-8df9-8092908ad555",
+                              "key": "volumeName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the volume"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve details of a specific volume."
+                      },
+                      "response": [
+                        {
+                          "id": "6d2e6633-428b-4f66-9524-e2b36be18fa2",
+                          "name": "Volume details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "diskgroups",
+                                ":diskGroupName",
+                                "volumes",
+                                ":volumeName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "diskGroupName"
+                                },
+                                {
+                                  "key": "volumeName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"diskGroup\": \"<string>\",\n  \"state\": \"DISABLED\",\n  \"size\": \"<string>\",\n  \"layout\": \"concat\",\n  \"plexCount\": \"<integer>\",\n  \"readPolicy\": \"<string>\",\n  \"usageType\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T03:27:26.000Z",
+                          "updatedAt": "2026-07-28T03:27:26.000Z",
+                          "uid": "35240-6d2e6633-428b-4f66-9524-e2b36be18fa2"
+                        },
+                        {
+                          "id": "cd4532b2-715c-41c4-9354-acdd9ca0a4d8",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "diskgroups",
+                                ":diskGroupName",
+                                "volumes",
+                                ":volumeName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "diskGroupName"
+                                },
+                                {
+                                  "key": "volumeName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:27:26.000Z",
+                          "updatedAt": "2026-07-28T03:27:26.000Z",
+                          "uid": "35240-cd4532b2-715c-41c4-9354-acdd9ca0a4d8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-108cad44-f589-4770-9b57-3a5442501aab"
+                    },
+                    {
+                      "name": "Veritas InfoScale Delete Volume",
+                      "id": "b40e5c08-c61d-48c9-ae00-3afaafb75f8f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "diskgroups",
+                            ":diskGroupName",
+                            "volumes",
+                            ":volumeName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5616fa29-05df-474c-ba43-8e4ca3377c38",
+                              "key": "diskGroupName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the VxVM disk group"
+                            },
+                            {
+                              "id": "05469505-511c-44bf-8ec4-b990fca7e760",
+                              "key": "volumeName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the volume"
+                            }
+                          ]
+                        },
+                        "description": "Delete a volume from a disk group."
+                      },
+                      "response": [
+                        {
+                          "id": "4620edca-9dec-406a-9770-7a372cb8b2d0",
+                          "name": "Volume deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes/:volumeName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "diskgroups",
+                                ":diskGroupName",
+                                "volumes",
+                                ":volumeName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "diskGroupName"
+                                },
+                                {
+                                  "key": "volumeName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:27:26.000Z",
+                          "updatedAt": "2026-07-28T03:27:26.000Z",
+                          "uid": "35240-4620edca-9dec-406a-9770-7a372cb8b2d0"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-b40e5c08-c61d-48c9-ae00-3afaafb75f8f"
+                    }
+                  ],
+                  "id": "5cd97b88-82a8-46a4-9cb6-c54160b81f90",
+                  "createdAt": "2026-07-28T03:27:26.000Z",
+                  "updatedAt": "2026-07-28T03:27:26.000Z",
+                  "uid": "35240-5cd97b88-82a8-46a4-9cb6-c54160b81f90"
+                },
+                {
+                  "name": "Veritas InfoScale List Volumes",
+                  "id": "02648600-e7d3-4783-bf48-25c8282f7968",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "diskgroups",
+                        ":diskGroupName",
+                        "volumes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fe42033b-d0c4-4c34-b291-a4a0a0205ea4",
+                          "key": "diskGroupName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the VxVM disk group"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all volumes in a disk group."
+                  },
+                  "response": [
+                    {
+                      "id": "e9f0d82b-6450-4175-9819-9ebcecd20d59",
+                      "name": "List of volumes",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "diskgroups",
+                            ":diskGroupName",
+                            "volumes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "diskGroupName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"volumes\": [\n    {\n      \"name\": \"<string>\",\n      \"diskGroup\": \"<string>\",\n      \"state\": \"DISABLED\",\n      \"size\": \"<string>\",\n      \"layout\": \"raid5\",\n      \"plexCount\": \"<integer>\",\n      \"readPolicy\": \"<string>\",\n      \"usageType\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"diskGroup\": \"<string>\",\n      \"state\": \"DISABLED\",\n      \"size\": \"<string>\",\n      \"layout\": \"stripe\",\n      \"plexCount\": \"<integer>\",\n      \"readPolicy\": \"<string>\",\n      \"usageType\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-e9f0d82b-6450-4175-9819-9ebcecd20d59"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:26.000Z",
+                  "updatedAt": "2026-07-28T03:27:26.000Z",
+                  "uid": "35240-02648600-e7d3-4783-bf48-25c8282f7968"
+                },
+                {
+                  "name": "Veritas InfoScale Create Volume",
+                  "id": "b0762e27-d99f-43ae-ae83-57a7caf49bc9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"size\": \"<string>\",\n  \"layout\": \"mirror\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "diskgroups",
+                        ":diskGroupName",
+                        "volumes"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b59c9346-10be-441f-8728-d5ec3e6f7e1d",
+                          "key": "diskGroupName",
+                          "value": "<string>",
+                          "description": "(Required) The name of the VxVM disk group"
+                        }
+                      ]
+                    },
+                    "description": "Create a new volume in a disk group."
+                  },
+                  "response": [
+                    {
+                      "id": "898b2e10-d653-417c-a45e-9e3704f38f6a",
+                      "name": "Volume created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"size\": \"<string>\",\n  \"layout\": \"mirror\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/diskgroups/:diskGroupName/volumes",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "diskgroups",
+                            ":diskGroupName",
+                            "volumes"
+                          ],
+                          "variable": [
+                            {
+                              "key": "diskGroupName"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"diskGroup\": \"<string>\",\n  \"state\": \"DISABLED\",\n  \"size\": \"<string>\",\n  \"layout\": \"concat\",\n  \"plexCount\": \"<integer>\",\n  \"readPolicy\": \"<string>\",\n  \"usageType\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:27:26.000Z",
+                      "updatedAt": "2026-07-28T03:27:26.000Z",
+                      "uid": "35240-898b2e10-d653-417c-a45e-9e3704f38f6a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:26.000Z",
+                  "updatedAt": "2026-07-28T03:27:26.000Z",
+                  "uid": "35240-b0762e27-d99f-43ae-ae83-57a7caf49bc9"
+                }
+              ],
+              "id": "a7ee30aa-0768-4435-9fe8-e522c23a3bb3",
+              "createdAt": "2026-07-28T03:27:26.000Z",
+              "updatedAt": "2026-07-28T03:27:26.000Z",
+              "uid": "35240-a7ee30aa-0768-4435-9fe8-e522c23a3bb3"
+            }
+          ],
+          "id": "5e5137b8-c347-4cd1-a70d-d4893ea33dfe",
+          "createdAt": "2026-07-28T03:27:26.000Z",
+          "updatedAt": "2026-07-28T03:27:26.000Z",
+          "uid": "35240-5e5137b8-c347-4cd1-a70d-d4893ea33dfe"
+        }
+      ],
+      "id": "ed885e8e-c9e5-4fce-90a7-2345855e7eeb",
+      "createdAt": "2026-07-28T03:27:26.000Z",
+      "updatedAt": "2026-07-28T03:27:26.000Z",
+      "uid": "35240-ed885e8e-c9e5-4fce-90a7-2345855e7eeb"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

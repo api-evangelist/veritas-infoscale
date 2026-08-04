@@ -1,0 +1,1231 @@
+{
+  "info": {
+    "_postman_id": "d73878c6-3f39-4674-82f9-435661f41d93",
+    "name": "Veritas InfoScale REST Alerts Service Groups API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:23.000Z",
+    "updatedAt": "2026-07-28T03:27:23.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d73878c6-3f39-4674-82f9-435661f41d93"
+  },
+  "item": [
+    {
+      "name": "clusters",
+      "item": [
+        {
+          "name": "{clusterId}",
+          "item": [
+            {
+              "name": "servicegroups",
+              "item": [
+                {
+                  "name": "{serviceGroupName}",
+                  "item": [
+                    {
+                      "name": "online",
+                      "item": [
+                        {
+                          "name": "Veritas InfoScale Online Service Group",
+                          "id": "a37702ff-98d4-4f47-bfd6-9f97de862c9a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"system\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/online",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName",
+                                "online"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "12452a5a-ca68-467b-9d0c-21e92f605493",
+                                  "key": "clusterId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the cluster"
+                                },
+                                {
+                                  "id": "a474a762-5bec-4f53-b6dd-bb78965f47a9",
+                                  "key": "serviceGroupName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the service group"
+                                }
+                              ]
+                            },
+                            "description": "Bring a service group online on a specified system."
+                          },
+                          "response": [
+                            {
+                              "id": "f38cef38-4063-42c4-84e7-85b74c45b939",
+                              "name": "Service group brought online",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"system\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/online",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "clusters",
+                                    ":clusterId",
+                                    "servicegroups",
+                                    ":serviceGroupName",
+                                    "online"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "clusterId"
+                                    },
+                                    {
+                                      "key": "serviceGroupName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jobId\": \"<uuid>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:27:24.000Z",
+                              "updatedAt": "2026-07-28T03:27:24.000Z",
+                              "uid": "35240-f38cef38-4063-42c4-84e7-85b74c45b939"
+                            },
+                            {
+                              "id": "2df74407-1ae6-44af-babe-bd75a28d51fa",
+                              "name": "Service group already online or in transition",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"system\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/online",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "clusters",
+                                    ":clusterId",
+                                    "servicegroups",
+                                    ":serviceGroupName",
+                                    "online"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "clusterId"
+                                    },
+                                    {
+                                      "key": "serviceGroupName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:27:24.000Z",
+                              "updatedAt": "2026-07-28T03:27:24.000Z",
+                              "uid": "35240-2df74407-1ae6-44af-babe-bd75a28d51fa"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-a37702ff-98d4-4f47-bfd6-9f97de862c9a"
+                        }
+                      ],
+                      "id": "ce88317c-1a25-48f1-9857-b1833026fda3",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-ce88317c-1a25-48f1-9857-b1833026fda3"
+                    },
+                    {
+                      "name": "offline",
+                      "item": [
+                        {
+                          "name": "Veritas InfoScale Offline Service Group",
+                          "id": "32ffef71-c332-4684-af86-8577bac76c59",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"system\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/offline",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName",
+                                "offline"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "190b2777-7fda-4767-8d23-15751e63768e",
+                                  "key": "clusterId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the cluster"
+                                },
+                                {
+                                  "id": "8a4e6dd3-5c1c-48e8-9ae9-320dc884e854",
+                                  "key": "serviceGroupName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the service group"
+                                }
+                              ]
+                            },
+                            "description": "Take a service group offline on a specified system."
+                          },
+                          "response": [
+                            {
+                              "id": "2097731b-26cf-4a07-b6e4-7bd9a2c9a58f",
+                              "name": "Service group taken offline",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"system\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/offline",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "clusters",
+                                    ":clusterId",
+                                    "servicegroups",
+                                    ":serviceGroupName",
+                                    "offline"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "clusterId"
+                                    },
+                                    {
+                                      "key": "serviceGroupName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jobId\": \"<uuid>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:27:24.000Z",
+                              "updatedAt": "2026-07-28T03:27:24.000Z",
+                              "uid": "35240-2097731b-26cf-4a07-b6e4-7bd9a2c9a58f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-32ffef71-c332-4684-af86-8577bac76c59"
+                        }
+                      ],
+                      "id": "4f8b0488-22a0-4ca6-87c0-89380967eae2",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-4f8b0488-22a0-4ca6-87c0-89380967eae2"
+                    },
+                    {
+                      "name": "switch",
+                      "item": [
+                        {
+                          "name": "Veritas InfoScale Switch Service Group",
+                          "id": "b7af5f31-34ca-4522-95c4-b123c42c505f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"targetSystem\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/switch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName",
+                                "switch"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4f01183b-db0e-447a-a264-0912cee010fb",
+                                  "key": "clusterId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the cluster"
+                                },
+                                {
+                                  "id": "ae16daec-21bd-4058-9ec2-4782a78235af",
+                                  "key": "serviceGroupName",
+                                  "value": "<string>",
+                                  "description": "(Required) The name of the service group"
+                                }
+                              ]
+                            },
+                            "description": "Switch a service group from one system to another."
+                          },
+                          "response": [
+                            {
+                              "id": "78b932b8-98ae-4de1-b899-a04a7aea9014",
+                              "name": "Service group switch initiated",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"targetSystem\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName/switch",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "clusters",
+                                    ":clusterId",
+                                    "servicegroups",
+                                    ":serviceGroupName",
+                                    "switch"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "clusterId"
+                                    },
+                                    {
+                                      "key": "serviceGroupName"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"jobId\": \"<uuid>\",\n  \"status\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T03:27:24.000Z",
+                              "updatedAt": "2026-07-28T03:27:24.000Z",
+                              "uid": "35240-78b932b8-98ae-4de1-b899-a04a7aea9014"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-b7af5f31-34ca-4522-95c4-b123c42c505f"
+                        }
+                      ],
+                      "id": "fcf6f4f0-08ba-440d-9a0a-32cd1d431384",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-fcf6f4f0-08ba-440d-9a0a-32cd1d431384"
+                    },
+                    {
+                      "name": "Veritas InfoScale Get Service Group",
+                      "id": "26fdc583-3ee7-492c-bb7f-145d7d07eb9a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups",
+                            ":serviceGroupName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "e18058e6-ad32-4be0-a54c-a36f47c206b6",
+                              "key": "clusterId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the cluster"
+                            },
+                            {
+                              "id": "2b985793-780e-40b2-b361-00c9de782042",
+                              "key": "serviceGroupName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the service group"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve details of a specific service group."
+                      },
+                      "response": [
+                        {
+                          "id": "38c387f5-fb82-4a11-8c90-9c84870c5881",
+                          "name": "Service group details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "clusterId"
+                                },
+                                {
+                                  "key": "serviceGroupName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"ONLINE\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"currentSystem\": \"<string>\",\n  \"autoStart\": \"<boolean>\",\n  \"parallel\": \"<boolean>\",\n  \"resourceCount\": \"<integer>\",\n  \"groupType\": \"<string>\",\n  \"critical\": \"<boolean>\"\n}",
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-38c387f5-fb82-4a11-8c90-9c84870c5881"
+                        },
+                        {
+                          "id": "fdbf3e2f-efb5-426f-802d-94f871f57f84",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "clusterId"
+                                },
+                                {
+                                  "key": "serviceGroupName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-fdbf3e2f-efb5-426f-802d-94f871f57f84"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-26fdc583-3ee7-492c-bb7f-145d7d07eb9a"
+                    },
+                    {
+                      "name": "Veritas InfoScale Delete Service Group",
+                      "id": "5e118f05-cae0-4d7c-a049-8cc46ebf16d2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups",
+                            ":serviceGroupName"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6d87d3d9-f555-481e-86f4-d582b421fd5b",
+                              "key": "clusterId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the cluster"
+                            },
+                            {
+                              "id": "afad2764-af0a-4854-825f-3759c086e0e5",
+                              "key": "serviceGroupName",
+                              "value": "<string>",
+                              "description": "(Required) The name of the service group"
+                            }
+                          ]
+                        },
+                        "description": "Delete a service group from the cluster."
+                      },
+                      "response": [
+                        {
+                          "id": "61f8cad0-ac68-4883-aba5-04b1cef8ecf2",
+                          "name": "Service group deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "clusterId"
+                                },
+                                {
+                                  "key": "serviceGroupName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-61f8cad0-ac68-4883-aba5-04b1cef8ecf2"
+                        },
+                        {
+                          "id": "061275ee-3f56-44d8-a36e-e323c4954c83",
+                          "name": "Resource not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups/:serviceGroupName",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "clusters",
+                                ":clusterId",
+                                "servicegroups",
+                                ":serviceGroupName"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "clusterId"
+                                },
+                                {
+                                  "key": "serviceGroupName"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T03:27:24.000Z",
+                          "updatedAt": "2026-07-28T03:27:24.000Z",
+                          "uid": "35240-061275ee-3f56-44d8-a36e-e323c4954c83"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-5e118f05-cae0-4d7c-a049-8cc46ebf16d2"
+                    }
+                  ],
+                  "id": "69e4aea1-9cd3-4030-9d76-25e1d098477a",
+                  "createdAt": "2026-07-28T03:27:24.000Z",
+                  "updatedAt": "2026-07-28T03:27:24.000Z",
+                  "uid": "35240-69e4aea1-9cd3-4030-9d76-25e1d098477a"
+                },
+                {
+                  "name": "Veritas InfoScale List Service Groups",
+                  "id": "278aa232-6ad5-4d48-b01e-5f9fa1ed75e7",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId",
+                        "servicegroups"
+                      ],
+                      "variable": [
+                        {
+                          "id": "b5baa614-585e-435b-a216-b6b5759fd6e2",
+                          "key": "clusterId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the cluster"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all service groups in a cluster."
+                  },
+                  "response": [
+                    {
+                      "id": "4989dd73-22f9-48b7-8177-7ef174b31ed2",
+                      "name": "List of service groups",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"serviceGroups\": [\n    {\n      \"name\": \"<string>\",\n      \"state\": \"STOPPING\",\n      \"systemList\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currentSystem\": \"<string>\",\n      \"autoStart\": \"<boolean>\",\n      \"parallel\": \"<boolean>\",\n      \"resourceCount\": \"<integer>\",\n      \"groupType\": \"<string>\",\n      \"critical\": \"<boolean>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"state\": \"STARTING\",\n      \"systemList\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currentSystem\": \"<string>\",\n      \"autoStart\": \"<boolean>\",\n      \"parallel\": \"<boolean>\",\n      \"resourceCount\": \"<integer>\",\n      \"groupType\": \"<string>\",\n      \"critical\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-4989dd73-22f9-48b7-8177-7ef174b31ed2"
+                    },
+                    {
+                      "id": "24b16e13-bf37-4ebd-8624-fd706c7263e7",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-24b16e13-bf37-4ebd-8624-fd706c7263e7"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:24.000Z",
+                  "updatedAt": "2026-07-28T03:27:24.000Z",
+                  "uid": "35240-278aa232-6ad5-4d48-b01e-5f9fa1ed75e7"
+                },
+                {
+                  "name": "Veritas InfoScale Create Service Group",
+                  "id": "14dc0c90-3b27-4b11-93e8-adf141de8e2c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId",
+                        "servicegroups"
+                      ],
+                      "variable": [
+                        {
+                          "id": "086673d9-4a51-43fd-b99c-884127ceb2bd",
+                          "key": "clusterId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the cluster"
+                        }
+                      ]
+                    },
+                    "description": "Create a new service group in a cluster."
+                  },
+                  "response": [
+                    {
+                      "id": "fcd6ea0d-3146-4f3a-8535-4d6a69798fe5",
+                      "name": "Service group created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"state\": \"ONLINE\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"currentSystem\": \"<string>\",\n  \"autoStart\": \"<boolean>\",\n  \"parallel\": \"<boolean>\",\n  \"resourceCount\": \"<integer>\",\n  \"groupType\": \"<string>\",\n  \"critical\": \"<boolean>\"\n}",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-fcd6ea0d-3146-4f3a-8535-4d6a69798fe5"
+                    },
+                    {
+                      "id": "bec97c7f-f7d6-497b-abd6-4062aac91e3d",
+                      "name": "Bad request - invalid parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-bec97c7f-f7d6-497b-abd6-4062aac91e3d"
+                    },
+                    {
+                      "id": "b78e5a32-6c36-444d-8258-806ca1ee1671",
+                      "name": "Unauthorized - authentication required",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/clusters/:clusterId/servicegroups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "clusters",
+                            ":clusterId",
+                            "servicegroups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "clusterId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T03:27:24.000Z",
+                      "updatedAt": "2026-07-28T03:27:24.000Z",
+                      "uid": "35240-b78e5a32-6c36-444d-8258-806ca1ee1671"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:27:24.000Z",
+                  "updatedAt": "2026-07-28T03:27:24.000Z",
+                  "uid": "35240-14dc0c90-3b27-4b11-93e8-adf141de8e2c"
+                }
+              ],
+              "id": "8e81c11b-66c8-4899-bab8-0daa07ecf704",
+              "createdAt": "2026-07-28T03:27:24.000Z",
+              "updatedAt": "2026-07-28T03:27:24.000Z",
+              "uid": "35240-8e81c11b-66c8-4899-bab8-0daa07ecf704"
+            }
+          ],
+          "id": "1142b635-371f-40c2-a4ba-d3df4116b253",
+          "createdAt": "2026-07-28T03:27:24.000Z",
+          "updatedAt": "2026-07-28T03:27:24.000Z",
+          "uid": "35240-1142b635-371f-40c2-a4ba-d3df4116b253"
+        }
+      ],
+      "id": "ec569d6d-e8ba-4b6b-94b5-a9a05f9138c3",
+      "createdAt": "2026-07-28T03:27:24.000Z",
+      "updatedAt": "2026-07-28T03:27:24.000Z",
+      "uid": "35240-ec569d6d-e8ba-4b6b-94b5-a9a05f9138c3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}

@@ -1,0 +1,303 @@
+{
+  "info": {
+    "_postman_id": "ba49b59a-861e-4243-9743-38faea02cbb4",
+    "name": "Veritas InfoScale REST Alerts Clusters API",
+    "description": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:27:03.000Z",
+    "updatedAt": "2026-07-28T03:27:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ba49b59a-861e-4243-9743-38faea02cbb4"
+  },
+  "item": [
+    {
+      "name": "clusters",
+      "item": [
+        {
+          "name": "{clusterId}",
+          "item": [
+            {
+              "name": "Veritas InfoScale Get Cluster",
+              "id": "35d20bcf-5f62-4ddb-a136-d2d80ae3b99c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/clusters/:clusterId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters",
+                    ":clusterId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "8a7f24e0-68de-4851-88eb-b38632d61898",
+                      "key": "clusterId",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the cluster"
+                    }
+                  ]
+                },
+                "description": "Retrieve details of a specific cluster by its identifier."
+              },
+              "response": [
+                {
+                  "id": "e1766edb-63d6-4453-90d2-2cdd60482ff8",
+                  "name": "Cluster details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"clusterId\": \"<string>\",\n  \"clusterName\": \"<string>\",\n  \"state\": \"RUNNING\",\n  \"nodeCount\": \"<integer>\",\n  \"clusterVersion\": \"<string>\",\n  \"fencingMode\": \"customized\",\n  \"uptime\": \"<string>\",\n  \"lastModified\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:27:03.000Z",
+                  "updatedAt": "2026-07-28T03:27:03.000Z",
+                  "uid": "35240-e1766edb-63d6-4453-90d2-2cdd60482ff8"
+                },
+                {
+                  "id": "0177b9d1-0b9b-4266-ba4f-e1294b15a36d",
+                  "name": "Resource not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/clusters/:clusterId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "clusters",
+                        ":clusterId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "clusterId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-07-28T03:27:03.000Z",
+                  "updatedAt": "2026-07-28T03:27:03.000Z",
+                  "uid": "35240-0177b9d1-0b9b-4266-ba4f-e1294b15a36d"
+                }
+              ],
+              "createdAt": "2026-07-28T03:27:03.000Z",
+              "updatedAt": "2026-07-28T03:27:03.000Z",
+              "uid": "35240-35d20bcf-5f62-4ddb-a136-d2d80ae3b99c"
+            }
+          ],
+          "id": "492431a4-5fa4-453b-a831-5bc7cbd98c7e",
+          "createdAt": "2026-07-28T03:27:03.000Z",
+          "updatedAt": "2026-07-28T03:27:03.000Z",
+          "uid": "35240-492431a4-5fa4-453b-a831-5bc7cbd98c7e"
+        },
+        {
+          "name": "Veritas InfoScale List Clusters",
+          "id": "c6360d8f-4247-4f94-9aca-b0b92cb79d17",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/clusters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "clusters"
+              ]
+            },
+            "description": "Retrieve all clusters managed by this InfoScale instance."
+          },
+          "response": [
+            {
+              "id": "c26aed79-33ec-4936-af2b-c922a2416ed1",
+              "name": "List of clusters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"clusters\": [\n    {\n      \"clusterId\": \"<string>\",\n      \"clusterName\": \"<string>\",\n      \"state\": \"PARTIAL\",\n      \"nodeCount\": \"<integer>\",\n      \"clusterVersion\": \"<string>\",\n      \"fencingMode\": \"disabled\",\n      \"uptime\": \"<string>\",\n      \"lastModified\": \"<dateTime>\"\n    },\n    {\n      \"clusterId\": \"<string>\",\n      \"clusterName\": \"<string>\",\n      \"state\": \"OFFLINE\",\n      \"nodeCount\": \"<integer>\",\n      \"clusterVersion\": \"<string>\",\n      \"fencingMode\": \"scsi3\",\n      \"uptime\": \"<string>\",\n      \"lastModified\": \"<dateTime>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T03:27:03.000Z",
+              "updatedAt": "2026-07-28T03:27:03.000Z",
+              "uid": "35240-c26aed79-33ec-4936-af2b-c922a2416ed1"
+            },
+            {
+              "id": "1b580618-9a78-422d-94d6-3b5ecd1b4d5e",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/clusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "clusters"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-07-28T03:27:03.000Z",
+              "updatedAt": "2026-07-28T03:27:03.000Z",
+              "uid": "35240-1b580618-9a78-422d-94d6-3b5ecd1b4d5e"
+            }
+          ],
+          "createdAt": "2026-07-28T03:27:03.000Z",
+          "updatedAt": "2026-07-28T03:27:03.000Z",
+          "uid": "35240-c6360d8f-4247-4f94-9aca-b0b92cb79d17"
+        }
+      ],
+      "id": "aaa19c3f-0f75-4d10-a027-6a602a95dc07",
+      "createdAt": "2026-07-28T03:27:03.000Z",
+      "updatedAt": "2026-07-28T03:27:03.000Z",
+      "uid": "35240-aaa19c3f-0f75-4d10-a027-6a602a95dc07"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "infoscale-server",
+      "value": "localhost"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{infoscale-server}}:14149/api/v1"
+    }
+  ]
+}
