@@ -134,26 +134,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-clusters-api
   name: Veritas InfoScale Clusters API
   description: Cluster discovery and status operations
@@ -202,26 +182,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-disk-groups-api
   name: Veritas InfoScale Disk Groups API
   description: Manage Veritas Volume Manager disk groups
@@ -270,26 +230,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-disks-api
   name: Veritas InfoScale Disks API
   description: Manage physical disks and disk pools
@@ -338,26 +278,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-fencing-api
   name: Veritas InfoScale Fencing API
   description: Manage I/O fencing configuration
@@ -406,26 +326,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-jobs-api
   name: Veritas InfoScale Jobs API
   description: Monitor and manage asynchronous job operations
@@ -474,26 +374,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-resources-api
   name: Veritas InfoScale Resources API
   description: Manage cluster resources within service groups
@@ -542,26 +422,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-service-groups-api
   name: Veritas InfoScale Service Groups API
   description: Manage VCS service groups and their lifecycle
@@ -610,26 +470,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-systems-api
   name: Veritas InfoScale Systems API
   description: Manage cluster nodes and system status
@@ -678,26 +518,6 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 - aid: veritas-infoscale:veritas-infoscale-volumes-api
   name: Veritas InfoScale Volumes API
   description: Manage storage volumes
@@ -746,30 +566,13 @@ apis:
     url: examples/rest-api-system-example.json
   - type: Examples
     url: examples/rest-api-alert-example.json
-  - type: X-NaftikoCapability
-    url: capabilities/rest-alerts.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-clusters.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disk-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-disks.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-fencing.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-jobs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-resources.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-service-groups.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-systems.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/rest-volumes.yaml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: License
+  name: MIT
+  url: https://github.com/VeritasOS/infoscale_ansible/blob/main/LICENSE
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/veritas-infoscale/overview
 - type: AgenticAccess
