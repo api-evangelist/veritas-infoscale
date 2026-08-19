@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Jobs API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "f9e8d7c6-b5a4-3210-fedc-ba9876543210",
+                "type": "path",
+                "description": "The unique identifier of the job"
+              }
+            ]
+          },
+          "docs": "Retrieve the status of an asynchronous job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

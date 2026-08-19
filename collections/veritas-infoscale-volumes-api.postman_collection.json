@@ -1,0 +1,898 @@
+{
+  "item": [
+    {
+      "id": "f3dbbdec-9613-4b32-a0a7-5c78d33fc211",
+      "name": "Volumes",
+      "description": {
+        "content": "Manage storage volumes",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a715261-a596-42c9-bf09-c448a5758278",
+          "name": "Veritas InfoScale List Volumes",
+          "request": {
+            "name": "Veritas InfoScale List Volumes",
+            "description": {
+              "content": "Retrieve all volumes in a disk group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "85316940-5a5e-4f7e-be60-8595d65c64fb",
+              "name": "List of volumes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"volumes\": [\n    {\n      \"name\": \"oravol01\",\n      \"diskGroup\": \"oradg\",\n      \"state\": \"ACTIVE\",\n      \"size\": \"100.00g\",\n      \"layout\": \"mirror\",\n      \"plexCount\": 2,\n      \"readPolicy\": \"round-robin\",\n      \"usageType\": \"fsgen\"\n    },\n    {\n      \"name\": \"oravol01\",\n      \"diskGroup\": \"oradg\",\n      \"state\": \"ACTIVE\",\n      \"size\": \"100.00g\",\n      \"layout\": \"mirror\",\n      \"plexCount\": 2,\n      \"readPolicy\": \"round-robin\",\n      \"usageType\": \"fsgen\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "38622d4f-375e-40f1-9fa7-820d23d42b73",
+          "name": "Veritas InfoScale Create Volume",
+          "request": {
+            "name": "Veritas InfoScale Create Volume",
+            "description": {
+              "content": "Create a new volume in a disk group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"size\": \"<string>\",\n  \"layout\": \"mirror\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a3ee8a9d-0128-4714-853e-8fe4c008f556",
+              "name": "Volume created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"newvol\",\n  \"size\": \"50g\",\n  \"layout\": \"mirror\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"oravol01\",\n  \"diskGroup\": \"oradg\",\n  \"state\": \"ACTIVE\",\n  \"size\": \"100.00g\",\n  \"layout\": \"mirror\",\n  \"plexCount\": 2,\n  \"readPolicy\": \"round-robin\",\n  \"usageType\": \"fsgen\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1fd4356-262a-4bf9-a3fb-125e69b449f8",
+          "name": "Veritas InfoScale Get Volume",
+          "request": {
+            "name": "Veritas InfoScale Get Volume",
+            "description": {
+              "content": "Retrieve details of a specific volume.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes",
+                ":volumeName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volumeName",
+                  "description": "(Required) The name of the volume"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3a41a34-dfa1-457c-a3f0-06ef64f3a86f",
+              "name": "Volume details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes",
+                    ":volumeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volumeName",
+                      "description": "(Required) The name of the volume"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"oravol01\",\n  \"diskGroup\": \"oradg\",\n  \"state\": \"ACTIVE\",\n  \"size\": \"100.00g\",\n  \"layout\": \"mirror\",\n  \"plexCount\": 2,\n  \"readPolicy\": \"round-robin\",\n  \"usageType\": \"fsgen\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc30c891-4790-4c5e-87be-22ee15a7c177",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes",
+                    ":volumeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volumeName",
+                      "description": "(Required) The name of the volume"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ae7580d-711c-4e2a-abac-fd41feb736d7",
+          "name": "Veritas InfoScale Delete Volume",
+          "request": {
+            "name": "Veritas InfoScale Delete Volume",
+            "description": {
+              "content": "Delete a volume from a disk group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes",
+                ":volumeName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volumeName",
+                  "description": "(Required) The name of the volume"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "775ccdef-fcea-4dec-af79-97be21ccd1cf",
+              "name": "Volume deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes",
+                    ":volumeName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volumeName",
+                      "description": "(Required) The name of the volume"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "953b4310-13af-4bf1-85e6-5e8dc54f5fac",
+          "name": "Veritas InfoScale Resize Volume",
+          "request": {
+            "name": "Veritas InfoScale Resize Volume",
+            "description": {
+              "content": "Resize a volume within a disk group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes",
+                ":volumeName",
+                "resize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volumeName",
+                  "description": "(Required) The name of the volume"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"newSize\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "38f8247b-dc9c-439a-a224-64b10b3c2f0c",
+              "name": "Volume resized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes",
+                    ":volumeName",
+                    "resize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volumeName",
+                      "description": "(Required) The name of the volume"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"newSize\": \"200g\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f9e8d7c6-b5a4-3210-fedc-ba9876543210\",\n  \"status\": \"queued\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0dbee502-7a8e-4c80-a8df-765a0cfe5751",
+          "name": "Veritas InfoScale Create Volume Snapshot",
+          "request": {
+            "name": "Veritas InfoScale Create Volume Snapshot",
+            "description": {
+              "content": "Create a snapshot of a volume.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "diskgroups",
+                ":diskGroupName",
+                "volumes",
+                ":volumeName",
+                "snapshot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "diskGroupName",
+                  "description": "(Required) The name of the VxVM disk group"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "volumeName",
+                  "description": "(Required) The name of the volume"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"snapshotName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ce84250-028e-4509-a4bf-9070e572c2e2",
+              "name": "Snapshot created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "diskgroups",
+                    ":diskGroupName",
+                    "volumes",
+                    ":volumeName",
+                    "snapshot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "diskGroupName",
+                      "description": "(Required) The name of the VxVM disk group"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "volumeName",
+                      "description": "(Required) The name of the volume"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"snapshotName\": \"oravol01-snap-20260418\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"oravol01-snap-20260418\",\n  \"sourceVolume\": \"oravol01\",\n  \"diskGroup\": \"oradg\",\n  \"size\": \"100.00g\",\n  \"createdAt\": \"2026-04-18T10:00:00Z\",\n  \"state\": \"ACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "InfoScale server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "infoscale-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{infoscale-server}}:14149/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6ac468c3-38f8-4b43-918d-edd3153f35e3",
+    "name": "Veritas InfoScale REST Alerts Volumes API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+      "type": "text/plain"
+    }
+  }
+}

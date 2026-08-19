@@ -1,0 +1,216 @@
+{
+  "item": [
+    {
+      "id": "cdfcc423-61e6-4bf1-8f2a-b486a29352d9",
+      "name": "Jobs",
+      "description": {
+        "content": "Monitor and manage asynchronous job operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "baa04189-d718-43f9-96ff-d123825b673c",
+          "name": "Veritas InfoScale Get Job",
+          "request": {
+            "name": "Veritas InfoScale Get Job",
+            "description": {
+              "content": "Retrieve the status of an asynchronous job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "jobId",
+                  "description": "(Required) The unique identifier of the job"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a4e69de-51cb-4d76-8c83-9ffb41718dac",
+              "name": "Job status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f9e8d7c6-b5a4-3210-fedc-ba9876543210\",\n  \"status\": \"running\",\n  \"operation\": \"ServiceGroup Online\",\n  \"percentComplete\": 50,\n  \"startedAt\": \"1955-08-05T01:00:19.945Z\",\n  \"completedAt\": \"2008-11-01T03:49:42.636Z\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "067d3e5b-6cd8-475c-aa32-2207546ac667",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "jobId",
+                      "description": "(Required) The unique identifier of the job"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "InfoScale server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "infoscale-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{infoscale-server}}:14149/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4d908cfd-0842-457d-a47a-60e21a2d5099",
+    "name": "Veritas InfoScale REST Alerts Jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+      "type": "text/plain"
+    }
+  }
+}

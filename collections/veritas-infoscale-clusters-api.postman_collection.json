@@ -1,0 +1,358 @@
+{
+  "item": [
+    {
+      "id": "bc722179-4b0d-4b75-ae90-00ec73c7595f",
+      "name": "Clusters",
+      "description": {
+        "content": "Cluster discovery and status operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d12d71b4-f651-4ca5-be88-05ba57e8a6d8",
+          "name": "Veritas InfoScale List Clusters",
+          "request": {
+            "name": "Veritas InfoScale List Clusters",
+            "description": {
+              "content": "Retrieve all clusters managed by this InfoScale instance.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fea1e3dd-4018-4576-8011-283fd80386dc",
+              "name": "List of clusters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusters\": [\n    {\n      \"clusterId\": \"cluster-prod-01\",\n      \"clusterName\": \"Production Oracle Cluster\",\n      \"state\": \"RUNNING\",\n      \"nodeCount\": 4,\n      \"clusterVersion\": \"8.0.0.0\",\n      \"fencingMode\": \"scsi3\",\n      \"uptime\": \"45d 12h 30m\",\n      \"lastModified\": \"2026-04-18T09:30:00Z\"\n    },\n    {\n      \"clusterId\": \"cluster-prod-01\",\n      \"clusterName\": \"Production Oracle Cluster\",\n      \"state\": \"RUNNING\",\n      \"nodeCount\": 4,\n      \"clusterVersion\": \"8.0.0.0\",\n      \"fencingMode\": \"scsi3\",\n      \"uptime\": \"45d 12h 30m\",\n      \"lastModified\": \"2026-04-18T09:30:00Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec1da640-1f75-4e39-aa44-97d532b294a4",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2777d2e4-d9f3-4ee6-9c4d-58cc2259c146",
+          "name": "Veritas InfoScale Get Cluster",
+          "request": {
+            "name": "Veritas InfoScale Get Cluster",
+            "description": {
+              "content": "Retrieve details of a specific cluster by its identifier.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "59676785-2d7b-4cac-8ad1-6a9c795aaf16",
+              "name": "Cluster details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusterId\": \"cluster-prod-01\",\n  \"clusterName\": \"Production Oracle Cluster\",\n  \"state\": \"RUNNING\",\n  \"nodeCount\": 4,\n  \"clusterVersion\": \"8.0.0.0\",\n  \"fencingMode\": \"scsi3\",\n  \"uptime\": \"45d 12h 30m\",\n  \"lastModified\": \"2026-04-18T09:30:00Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e62ff89c-badf-47b9-99a5-a6b2fd321a5c",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "InfoScale server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "infoscale-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{infoscale-server}}:14149/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b2f921a5-81b4-4dd2-afd4-f02b68e72f28",
+    "name": "Veritas InfoScale REST Alerts Clusters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+      "type": "text/plain"
+    }
+  }
+}

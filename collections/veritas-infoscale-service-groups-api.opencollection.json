@@ -1,0 +1,203 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Service Groups API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Service Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Service Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              }
+            ]
+          },
+          "docs": "Retrieve all service groups in a cluster."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Create Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new service group in a cluster."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific service group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Delete Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ]
+          },
+          "docs": "Delete a service group from the cluster."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Online Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/online",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bring a service group online on a specified system."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Offline Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/offline",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Take a service group offline on a specified system."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Switch Service Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/switch",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Switch a service group from one system to another."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

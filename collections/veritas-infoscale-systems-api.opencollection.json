@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Systems API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Systems",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Systems",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/systems",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              }
+            ]
+          },
+          "docs": "Retrieve all systems (nodes) in a cluster."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get System",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/systems/:systemName",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "systemName",
+                "value": "node01",
+                "type": "path",
+                "description": "The hostname of the cluster node"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific cluster system node."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Disks API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Disks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/disks"
+          },
+          "docs": "Retrieve all physical disks visible to VxVM."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Disk",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/disks/:diskName",
+            "params": [
+              {
+                "name": "diskName",
+                "value": "disk_0",
+                "type": "path",
+                "description": "The name of the physical disk"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific physical disk."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

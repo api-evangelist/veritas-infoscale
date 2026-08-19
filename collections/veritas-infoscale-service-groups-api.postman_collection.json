@@ -1,0 +1,1385 @@
+{
+  "item": [
+    {
+      "id": "82c57129-8d04-4e21-9cc3-9b5cadb8aa38",
+      "name": "Service Groups",
+      "description": {
+        "content": "Manage VCS service groups and their lifecycle",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc828000-30e7-459d-83c7-9ba5b03b2e89",
+          "name": "Veritas InfoScale List Service Groups",
+          "request": {
+            "name": "Veritas InfoScale List Service Groups",
+            "description": {
+              "content": "Retrieve all service groups in a cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a2bc0c9-30e8-4181-98eb-554d98d87d61",
+              "name": "List of service groups",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"serviceGroups\": [\n    {\n      \"name\": \"oracle-sg\",\n      \"state\": \"ONLINE\",\n      \"systemList\": [\n        \"node01\",\n        \"node02\"\n      ],\n      \"currentSystem\": \"node01\",\n      \"autoStart\": true,\n      \"parallel\": false,\n      \"resourceCount\": 5,\n      \"groupType\": \"Failover\",\n      \"critical\": true\n    },\n    {\n      \"name\": \"oracle-sg\",\n      \"state\": \"ONLINE\",\n      \"systemList\": [\n        \"node01\",\n        \"node02\"\n      ],\n      \"currentSystem\": \"node01\",\n      \"autoStart\": true,\n      \"parallel\": false,\n      \"resourceCount\": 5,\n      \"groupType\": \"Failover\",\n      \"critical\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "057ffabf-daa4-4f17-a170-0f5772b07ce7",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4bfc4bd-7d8e-43f0-93be-5ca0a13590f6",
+          "name": "Veritas InfoScale Create Service Group",
+          "request": {
+            "name": "Veritas InfoScale Create Service Group",
+            "description": {
+              "content": "Create a new service group in a cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8720452c-62c2-4c0a-a27d-2682a237371d",
+              "name": "Service group created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"app-sg\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"oracle-sg\",\n  \"state\": \"ONLINE\",\n  \"systemList\": [\n    \"node01\",\n    \"node02\"\n  ],\n  \"currentSystem\": \"node01\",\n  \"autoStart\": true,\n  \"parallel\": false,\n  \"resourceCount\": 5,\n  \"groupType\": \"Failover\",\n  \"critical\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "019b6e9d-800a-4979-bd39-498f630934b2",
+              "name": "Bad request - invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"app-sg\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c041b718-fea9-4f03-bb61-642c2e59224f",
+              "name": "Unauthorized - authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"app-sg\",\n  \"systemList\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"autoStart\": true,\n  \"parallel\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "55dc0e9b-6d0c-456b-8114-3c6df0e48e3e",
+          "name": "Veritas InfoScale Get Service Group",
+          "request": {
+            "name": "Veritas InfoScale Get Service Group",
+            "description": {
+              "content": "Retrieve details of a specific service group.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups",
+                ":serviceGroupName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceGroupName",
+                  "description": "(Required) The name of the service group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "022a7300-22ee-47d1-ba08-71e5c4dea4f1",
+              "name": "Service group details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"oracle-sg\",\n  \"state\": \"ONLINE\",\n  \"systemList\": [\n    \"node01\",\n    \"node02\"\n  ],\n  \"currentSystem\": \"node01\",\n  \"autoStart\": true,\n  \"parallel\": false,\n  \"resourceCount\": 5,\n  \"groupType\": \"Failover\",\n  \"critical\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5729c64e-f3cf-4d85-bc4e-6a4cc4cb3039",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "445d2962-028a-4717-9dad-1b778f40cbf6",
+          "name": "Veritas InfoScale Delete Service Group",
+          "request": {
+            "name": "Veritas InfoScale Delete Service Group",
+            "description": {
+              "content": "Delete a service group from the cluster.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups",
+                ":serviceGroupName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceGroupName",
+                  "description": "(Required) The name of the service group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f1982df4-5851-4e5a-9a42-bd5f91b2efba",
+              "name": "Service group deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1471b7fa-8840-4c62-a4a8-d6362c1864ac",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"NotFound\",\n    \"message\": \"The specified cluster was not found.\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47609e43-2374-4198-a01e-ddb0791cdb52",
+          "name": "Veritas InfoScale Online Service Group",
+          "request": {
+            "name": "Veritas InfoScale Online Service Group",
+            "description": {
+              "content": "Bring a service group online on a specified system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups",
+                ":serviceGroupName",
+                "online"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceGroupName",
+                  "description": "(Required) The name of the service group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"system\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbde18e2-567c-40b9-90bd-4ecdcdedf0f9",
+              "name": "Service group brought online",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"system\": \"node01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f9e8d7c6-b5a4-3210-fedc-ba9876543210\",\n  \"status\": \"queued\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cab87001-ff33-4102-ad92-f001bc307612",
+              "name": "Service group already online or in transition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName",
+                    "online"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"system\": \"node01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0524756b-cbd0-49c7-b1d6-bb18bd422efe",
+          "name": "Veritas InfoScale Offline Service Group",
+          "request": {
+            "name": "Veritas InfoScale Offline Service Group",
+            "description": {
+              "content": "Take a service group offline on a specified system.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups",
+                ":serviceGroupName",
+                "offline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceGroupName",
+                  "description": "(Required) The name of the service group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"system\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d81eb0d5-fbfd-48ab-b804-142fe0f9422b",
+              "name": "Service group taken offline",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName",
+                    "offline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"system\": \"node01\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f9e8d7c6-b5a4-3210-fedc-ba9876543210\",\n  \"status\": \"queued\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a81fe2e1-5fa4-41c6-af4b-d1d3dce4bdcc",
+          "name": "Veritas InfoScale Switch Service Group",
+          "request": {
+            "name": "Veritas InfoScale Switch Service Group",
+            "description": {
+              "content": "Switch a service group from one system to another.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "clusters",
+                ":clusterId",
+                "servicegroups",
+                ":serviceGroupName",
+                "switch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterId",
+                  "description": "(Required) The identifier of the cluster"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "serviceGroupName",
+                  "description": "(Required) The name of the service group"
+                },
+                {
+                  "description": "InfoScale server hostname or IP",
+                  "type": "any",
+                  "value": "{{infoscale-server}}",
+                  "key": "infoscale-server"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"targetSystem\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "060182d6-602b-421d-800f-6c0d4d702c2a",
+              "name": "Service group switch initiated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "clusters",
+                    ":clusterId",
+                    "servicegroups",
+                    ":serviceGroupName",
+                    "switch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterId",
+                      "description": "(Required) The identifier of the cluster"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "serviceGroupName",
+                      "description": "(Required) The name of the service group"
+                    },
+                    {
+                      "description": "InfoScale server hostname or IP",
+                      "type": "any",
+                      "value": "{{infoscale-server}}",
+                      "key": "infoscale-server"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"targetSystem\": \"node02\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"jobId\": \"f9e8d7c6-b5a4-3210-fedc-ba9876543210\",\n  \"status\": \"queued\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "InfoScale server hostname or IP",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "localhost",
+      "key": "infoscale-server"
+    },
+    {
+      "type": "string",
+      "value": "https://{{infoscale-server}}:14149/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d5bc3781-346f-47f1-ab93-9bdb53704bae",
+    "name": "Veritas InfoScale REST Alerts Service Groups API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.\n\nContact Support:\n Name: Veritas Support\n Email: support@veritas.com",
+      "type": "text/plain"
+    }
+  }
+}

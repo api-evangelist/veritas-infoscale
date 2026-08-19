@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Disk Groups API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Disk Groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Disk Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups"
+          },
+          "docs": "Retrieve all VxVM disk groups."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Create Disk Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new VxVM disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Disk Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Delete Disk Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              }
+            ]
+          },
+          "docs": "Delete a disk group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

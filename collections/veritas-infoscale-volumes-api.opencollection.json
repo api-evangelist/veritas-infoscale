@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Volumes API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Volumes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Volumes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              }
+            ]
+          },
+          "docs": "Retrieve all volumes in a disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Create Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new volume in a disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes/:volumeName",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              },
+              {
+                "name": "volumeName",
+                "value": "oravol01",
+                "type": "path",
+                "description": "The name of the volume"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific volume."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Delete Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes/:volumeName",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              },
+              {
+                "name": "volumeName",
+                "value": "oravol01",
+                "type": "path",
+                "description": "The name of the volume"
+              }
+            ]
+          },
+          "docs": "Delete a volume from a disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Resize Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes/:volumeName/resize",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              },
+              {
+                "name": "volumeName",
+                "value": "oravol01",
+                "type": "path",
+                "description": "The name of the volume"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resize a volume within a disk group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Create Volume Snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/diskgroups/:diskGroupName/volumes/:volumeName/snapshot",
+            "params": [
+              {
+                "name": "diskGroupName",
+                "value": "oradg",
+                "type": "path",
+                "description": "The name of the VxVM disk group"
+              },
+              {
+                "name": "volumeName",
+                "value": "oravol01",
+                "type": "path",
+                "description": "The name of the volume"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a snapshot of a volume."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

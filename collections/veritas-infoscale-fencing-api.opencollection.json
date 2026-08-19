@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Fencing API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Fencing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Fencing Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/fencing",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              }
+            ]
+          },
+          "docs": "Retrieve the I/O fencing configuration for a cluster."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

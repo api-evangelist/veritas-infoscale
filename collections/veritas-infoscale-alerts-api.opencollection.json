@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/alerts",
+            "params": [
+              {
+                "name": "severity",
+                "value": "",
+                "type": "query",
+                "description": "Filter alerts by severity level"
+              },
+              {
+                "name": "acknowledged",
+                "value": "",
+                "type": "query",
+                "description": "Filter by acknowledgement status"
+              }
+            ]
+          },
+          "docs": "Retrieve all active cluster alerts."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "The unique identifier of the alert"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific alert."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Acknowledge Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/alerts/:alertId/acknowledge",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "The unique identifier of the alert"
+              }
+            ]
+          },
+          "docs": "Acknowledge a cluster alert."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

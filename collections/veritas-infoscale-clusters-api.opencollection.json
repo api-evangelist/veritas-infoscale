@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Clusters API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters"
+          },
+          "docs": "Retrieve all clusters managed by this InfoScale instance."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific cluster by its identifier."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

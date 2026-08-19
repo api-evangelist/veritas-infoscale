@@ -1,0 +1,140 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Veritas InfoScale REST Alerts Resources API",
+    "version": "8.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Veritas InfoScale List Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/resources",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ]
+          },
+          "docs": "Retrieve all resources in a service group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Create Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/resources",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new resource in a service group."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Get Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/resources/:resourceName",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              },
+              {
+                "name": "resourceName",
+                "value": "ora-ip-res",
+                "type": "path",
+                "description": "The name of the resource"
+              }
+            ]
+          },
+          "docs": "Retrieve details of a specific resource."
+        },
+        {
+          "info": {
+            "name": "Veritas InfoScale Delete Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{infoscale-server}:14149/api/v1/clusters/:clusterId/servicegroups/:serviceGroupName/resources/:resourceName",
+            "params": [
+              {
+                "name": "clusterId",
+                "value": "cluster-prod-01",
+                "type": "path",
+                "description": "The identifier of the cluster"
+              },
+              {
+                "name": "serviceGroupName",
+                "value": "oracle-sg",
+                "type": "path",
+                "description": "The name of the service group"
+              },
+              {
+                "name": "resourceName",
+                "value": "ora-ip-res",
+                "type": "path",
+                "description": "The name of the resource"
+              }
+            ]
+          },
+          "docs": "Delete a resource from a service group."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
