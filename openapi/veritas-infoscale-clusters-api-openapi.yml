@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Veritas InfoScale REST Alerts Clusters API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
@@ -66,19 +66,15 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
   schemas:
     Error:
       type: object
@@ -94,13 +90,6 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-    ClusterCollection:
-      type: object
-      properties:
-        clusters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cluster'
     Cluster:
       type: object
       properties:
@@ -146,15 +135,26 @@ components:
           format: date-time
           description: Last configuration change timestamp
           example: '2026-04-18T09:30:00Z'
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
+    ClusterCollection:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cluster'
+  responses:
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

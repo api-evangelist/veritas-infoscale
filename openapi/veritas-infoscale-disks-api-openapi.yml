@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Veritas InfoScale REST Alerts Disks API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
@@ -64,35 +64,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    diskName:
+      name: diskName
+      in: path
+      required: true
+      description: The name of the physical disk
+      schema:
+        type: string
+      example: disk_0
   schemas:
-    DiskCollection:
-      type: object
-      properties:
-        disks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Disk'
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
     Disk:
       type: object
       properties:
@@ -128,15 +109,34 @@ components:
           - SSD
           - NVMe
           example: SSD
-  parameters:
-    diskName:
-      name: diskName
-      in: path
-      required: true
-      description: The name of the physical disk
-      schema:
-        type: string
-      example: disk_0
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

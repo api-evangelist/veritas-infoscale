@@ -27,6 +27,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "veritas-infoscale-alerts-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-clusters-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-disk-groups-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-disks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-fencing-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-jobs-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-resources-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-service-groups-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-systems-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "veritas-infoscale-volumes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

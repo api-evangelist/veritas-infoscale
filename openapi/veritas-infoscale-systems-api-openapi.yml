@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Veritas InfoScale REST Alerts Systems API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
@@ -68,14 +68,6 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
-    systemName:
-      name: systemName
-      in: path
-      required: true
-      description: The hostname of the cluster node
-      schema:
-        type: string
-      example: node01
     clusterId:
       name: clusterId
       in: path
@@ -84,28 +76,22 @@ components:
       schema:
         type: string
       example: cluster-prod-01
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    systemName:
+      name: systemName
+      in: path
+      required: true
+      description: The hostname of the cluster node
+      schema:
+        type: string
+      example: node01
   schemas:
-    Error:
+    SystemCollection:
       type: object
       properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/System'
     System:
       type: object
       properties:
@@ -148,13 +134,27 @@ components:
           type: string
           description: Hardware architecture
           example: x86_64
-    SystemCollection:
+    Error:
       type: object
       properties:
-        systems:
-          type: array
-          items:
-            $ref: '#/components/schemas/System'
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

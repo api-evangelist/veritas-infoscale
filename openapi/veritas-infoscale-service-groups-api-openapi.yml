@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Veritas InfoScale REST Alerts Service Groups API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
@@ -192,18 +192,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    JobReference:
-      type: object
-      properties:
-        jobId:
-          type: string
-          format: uuid
-          description: Reference to the created job
-          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
-        status:
-          type: string
-          description: Initial job status
-          example: queued
     ServiceGroupCreate:
       type: object
       required:
@@ -236,6 +224,25 @@ components:
           type: string
           description: System to switch the group to
           example: node02
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
+    ServiceGroupAction:
+      type: object
+      properties:
+        system:
+          type: string
+          description: Target system for the action
+          example: node01
     Error:
       type: object
       properties:
@@ -250,6 +257,13 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
+    ServiceGroupCollection:
+      type: object
+      properties:
+        serviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceGroup'
     ServiceGroup:
       type: object
       properties:
@@ -300,39 +314,6 @@ components:
           type: boolean
           description: Whether this is a critical service group
           example: true
-    ServiceGroupAction:
-      type: object
-      properties:
-        system:
-          type: string
-          description: Target system for the action
-          example: node01
-    ServiceGroupCollection:
-      type: object
-      properties:
-        serviceGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceGroup'
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    BadRequest:
-      description: Bad request - invalid parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Unauthorized - authentication required
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     clusterId:
       name: clusterId
@@ -350,6 +331,25 @@ components:
       schema:
         type: string
       example: oracle-sg
+  responses:
+    BadRequest:
+      description: Bad request - invalid parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Unauthorized - authentication required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
