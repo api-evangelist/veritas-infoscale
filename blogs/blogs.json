@@ -3,9 +3,12 @@
   "feeds": [
     {
       "source": "https://www.veritas.com/support/training",
-      "error": "HTTPError"
+      "feed_url": "https://www.veritas.com/support/training",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-09-13T13:00:00Z",
+  "fetched": "2026-09-19T20:17:39Z",
   "post_count": 0
 }
