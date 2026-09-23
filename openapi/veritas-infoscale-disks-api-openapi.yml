@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Veritas InfoScale REST Alerts Disks API
+  title: Veritas InfoScale REST Disks API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
   version: '8.0'
   contact:
@@ -64,15 +64,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    diskName:
-      name: diskName
-      in: path
-      required: true
-      description: The name of the physical disk
-      schema:
-        type: string
-      example: disk_0
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     Disk:
       type: object
@@ -109,13 +107,6 @@ components:
           - SSD
           - NVMe
           example: SSD
-    DiskCollection:
-      type: object
-      properties:
-        disks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Disk'
     Error:
       type: object
       properties:
@@ -130,13 +121,22 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
+  parameters:
+    diskName:
+      name: diskName
+      in: path
+      required: true
+      description: The name of the physical disk
+      schema:
+        type: string
+      example: disk_0
   securitySchemes:
     bearerAuth:
       type: http

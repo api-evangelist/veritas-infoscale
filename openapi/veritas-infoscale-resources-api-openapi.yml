@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Veritas InfoScale REST Alerts Resources API
+  title: Veritas InfoScale REST Resources API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
   version: '8.0'
   contact:
@@ -110,25 +110,32 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+    resourceName:
+      name: resourceName
+      in: path
+      required: true
+      description: The name of the resource
+      schema:
+        type: string
+      example: ora-ip-res
+    serviceGroupName:
+      name: serviceGroupName
+      in: path
+      required: true
+      description: The name of the service group
+      schema:
+        type: string
+      example: oracle-sg
   schemas:
-    ResourceCreate:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Resource name
-          example: new-ip-res
-        type:
-          type: string
-          description: Resource type
-          example: IP
-        attributes:
-          type: object
-          description: Resource attributes
-          additionalProperties: true
     ResourceCollection:
       type: object
       properties:
@@ -136,20 +143,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Resource'
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
     Resource:
       type: object
       properties:
@@ -190,31 +183,38 @@ components:
           type: object
           description: Resource-type-specific attributes
           additionalProperties: true
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
-    resourceName:
-      name: resourceName
-      in: path
-      required: true
-      description: The name of the resource
-      schema:
-        type: string
-      example: ora-ip-res
-    serviceGroupName:
-      name: serviceGroupName
-      in: path
-      required: true
-      description: The name of the service group
-      schema:
-        type: string
-      example: oracle-sg
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    ResourceCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: new-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        attributes:
+          type: object
+          description: Resource attributes
+          additionalProperties: true
   responses:
     NotFound:
       description: Resource not found

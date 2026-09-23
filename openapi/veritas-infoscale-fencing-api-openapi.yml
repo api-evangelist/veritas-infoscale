@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Veritas InfoScale REST Alerts Fencing API
+  title: Veritas InfoScale REST Fencing API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
   version: '8.0'
   contact:

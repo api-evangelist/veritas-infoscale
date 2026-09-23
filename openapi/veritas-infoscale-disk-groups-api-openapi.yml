@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Veritas InfoScale REST Alerts Disk Groups API
+  title: Veritas InfoScale REST Disk Groups API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
   version: '8.0'
   contact:
@@ -100,15 +100,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    diskGroupName:
-      name: diskGroupName
-      in: path
-      required: true
-      description: The name of the VxVM disk group
-      schema:
-        type: string
-      example: oradg
   schemas:
     DiskGroupCreate:
       type: object
@@ -193,6 +184,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DiskGroup'
+  parameters:
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
   responses:
     NotFound:
       description: Resource not found

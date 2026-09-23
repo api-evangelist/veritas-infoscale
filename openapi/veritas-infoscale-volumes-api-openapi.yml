@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Veritas InfoScale REST Alerts Volumes API
+  title: Veritas InfoScale REST Volumes API
   description: REST API for managing InfoScale clusters, storage resources, service groups, and high availability configurations. Provides operations for cluster monitoring, storage volume management, service group administration, fencing configuration, and disaster recovery operations.
   version: '8.0'
   contact:
@@ -158,6 +158,44 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
+    Snapshot:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Snapshot name
+          example: oravol01-snap-20260418
+        sourceVolume:
+          type: string
+          description: Source volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Disk group containing the snapshot
+          example: oradg
+        size:
+          type: string
+          description: Snapshot size
+          example: 100.00g
+        createdAt:
+          type: string
+          format: date-time
+          description: Snapshot creation time
+          example: '2026-04-18T10:00:00Z'
+        state:
+          type: string
+          description: Snapshot state
+          enum:
+          - ACTIVE
+          - DETACHED
+          example: ACTIVE
     Volume:
       type: object
       properties:
@@ -214,65 +252,6 @@ components:
           type: string
           description: Initial job status
           example: queued
-    SnapshotCreate:
-      type: object
-      properties:
-        snapshotName:
-          type: string
-          description: Name for the snapshot
-          example: oravol01-snap-20260418
-    Snapshot:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Snapshot name
-          example: oravol01-snap-20260418
-        sourceVolume:
-          type: string
-          description: Source volume name
-          example: oravol01
-        diskGroup:
-          type: string
-          description: Disk group containing the snapshot
-          example: oradg
-        size:
-          type: string
-          description: Snapshot size
-          example: 100.00g
-        createdAt:
-          type: string
-          format: date-time
-          description: Snapshot creation time
-          example: '2026-04-18T10:00:00Z'
-        state:
-          type: string
-          description: Snapshot state
-          enum:
-          - ACTIVE
-          - DETACHED
-          example: ACTIVE
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
-    VolumeCollection:
-      type: object
-      properties:
-        volumes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Volume'
     VolumeCreate:
       type: object
       required:
@@ -291,6 +270,27 @@ components:
           type: string
           description: Layout type
           default: mirror
+    SnapshotCreate:
+      type: object
+      properties:
+        snapshotName:
+          type: string
+          description: Name for the snapshot
+          example: oravol01-snap-20260418
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
     VolumeResize:
       type: object
       required:
@@ -301,14 +301,6 @@ components:
           description: New volume size
           example: 200g
   parameters:
-    diskGroupName:
-      name: diskGroupName
-      in: path
-      required: true
-      description: The name of the VxVM disk group
-      schema:
-        type: string
-      example: oradg
     volumeName:
       name: volumeName
       in: path
@@ -317,6 +309,14 @@ components:
       schema:
         type: string
       example: oravol01
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
   responses:
     NotFound:
       description: Resource not found
