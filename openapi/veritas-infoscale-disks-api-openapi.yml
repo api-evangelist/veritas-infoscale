@@ -72,6 +72,27 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
     Disk:
       type: object
       properties:
@@ -107,27 +128,6 @@ components:
           - SSD
           - NVMe
           example: SSD
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
-    DiskCollection:
-      type: object
-      properties:
-        disks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Disk'
   parameters:
     diskName:
       name: diskName

@@ -47,31 +47,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    jobId:
-      name: jobId
-      in: path
-      required: true
-      description: The unique identifier of the job
-      schema:
-        type: string
-        format: uuid
-      example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
     Job:
       type: object
       properties:
@@ -108,6 +84,20 @@ components:
         message:
           type: string
           description: Job status message
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
   responses:
     NotFound:
       description: Resource not found
@@ -115,6 +105,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      required: true
+      description: The unique identifier of the job
+      schema:
+        type: string
+        format: uuid
+      example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
   securitySchemes:
     bearerAuth:
       type: http

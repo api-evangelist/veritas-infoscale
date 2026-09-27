@@ -67,30 +67,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
-    systemName:
-      name: systemName
-      in: path
-      required: true
-      description: The hostname of the cluster node
-      schema:
-        type: string
-      example: node01
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
     SystemCollection:
       type: object
@@ -99,6 +75,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/System'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
     System:
       type: object
       properties:
@@ -141,20 +131,30 @@ components:
           type: string
           description: Hardware architecture
           example: x86_64
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    systemName:
+      name: systemName
+      in: path
+      required: true
+      description: The hostname of the cluster node
+      schema:
+        type: string
+      example: node01
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
   securitySchemes:
     bearerAuth:
       type: http

@@ -66,15 +66,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
   responses:
     NotFound:
       description: Resource not found
@@ -89,27 +80,6 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
-    ClusterCollection:
-      type: object
-      properties:
-        clusters:
-          type: array
-          items:
-            $ref: '#/components/schemas/Cluster'
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
     Cluster:
       type: object
       properties:
@@ -155,6 +125,36 @@ components:
           format: date-time
           description: Last configuration change timestamp
           example: '2026-04-18T09:30:00Z'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    ClusterCollection:
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Cluster'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
   securitySchemes:
     bearerAuth:
       type: http

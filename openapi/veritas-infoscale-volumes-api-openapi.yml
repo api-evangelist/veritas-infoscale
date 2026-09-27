@@ -157,14 +157,41 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    VolumeCollection:
+    VolumeCreate:
       type: object
+      required:
+      - name
+      - size
       properties:
-        volumes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Volume'
+        name:
+          type: string
+          description: Volume name
+          example: newvol
+        size:
+          type: string
+          description: Volume size
+          example: 50g
+        layout:
+          type: string
+          description: Layout type
+          default: mirror
+    VolumeResize:
+      type: object
+      required:
+      - newSize
+      properties:
+        newSize:
+          type: string
+          description: New volume size
+          example: 200g
     Snapshot:
       type: object
       properties:
@@ -196,6 +223,27 @@ components:
           - ACTIVE
           - DETACHED
           example: ACTIVE
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
     Volume:
       type: object
       properties:
@@ -240,6 +288,13 @@ components:
           type: string
           description: Volume usage type
           example: fsgen
+    SnapshotCreate:
+      type: object
+      properties:
+        snapshotName:
+          type: string
+          description: Name for the snapshot
+          example: oravol01-snap-20260418
     JobReference:
       type: object
       properties:
@@ -252,54 +307,6 @@ components:
           type: string
           description: Initial job status
           example: queued
-    VolumeCreate:
-      type: object
-      required:
-      - name
-      - size
-      properties:
-        name:
-          type: string
-          description: Volume name
-          example: newvol
-        size:
-          type: string
-          description: Volume size
-          example: 50g
-        layout:
-          type: string
-          description: Layout type
-          default: mirror
-    SnapshotCreate:
-      type: object
-      properties:
-        snapshotName:
-          type: string
-          description: Name for the snapshot
-          example: oravol01-snap-20260418
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
-    VolumeResize:
-      type: object
-      required:
-      - newSize
-      properties:
-        newSize:
-          type: string
-          description: New volume size
-          example: 200g
   parameters:
     volumeName:
       name: volumeName
@@ -317,13 +324,6 @@ components:
       schema:
         type: string
       example: oradg
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http

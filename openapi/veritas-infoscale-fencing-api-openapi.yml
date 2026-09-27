@@ -45,15 +45,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
   schemas:
     FencingConfig:
       type: object
@@ -79,6 +70,15 @@ components:
           type: string
           description: Preferred fencing policy
           example: System
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
   securitySchemes:
     bearerAuth:
       type: http
