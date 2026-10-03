@@ -48,6 +48,20 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
     Job:
       type: object
       properties:
@@ -84,20 +98,6 @@ components:
         message:
           type: string
           description: Job status message
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
   responses:
     NotFound:
       description: Resource not found

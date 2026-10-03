@@ -71,6 +71,15 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    diskName:
+      name: diskName
+      in: path
+      required: true
+      description: The name of the physical disk
+      schema:
+        type: string
+      example: disk_0
   schemas:
     Error:
       type: object
@@ -86,13 +95,6 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-    DiskCollection:
-      type: object
-      properties:
-        disks:
-          type: array
-          items:
-            $ref: '#/components/schemas/Disk'
     Disk:
       type: object
       properties:
@@ -128,15 +130,13 @@ components:
           - SSD
           - NVMe
           example: SSD
-  parameters:
-    diskName:
-      name: diskName
-      in: path
-      required: true
-      description: The name of the physical disk
-      schema:
-        type: string
-      example: disk_0
+    DiskCollection:
+      type: object
+      properties:
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Disk'
   securitySchemes:
     bearerAuth:
       type: http

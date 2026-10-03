@@ -100,53 +100,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
-    DiskGroupCollection:
-      type: object
-      properties:
-        diskGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/DiskGroup'
-    DiskGroupCreate:
-      type: object
-      required:
-      - name
-      - disks
-      properties:
-        name:
-          type: string
-          description: Disk group name
-          example: newdg
-        disks:
-          type: array
-          items:
-            type: string
-          description: Disks to include
-          example:
-          - disk_0
-          - disk_1
     DiskGroup:
       type: object
       properties:
@@ -191,6 +145,52 @@ components:
           type: string
           description: Disk group version
           example: '200'
+    DiskGroupCreate:
+      type: object
+      required:
+      - name
+      - disks
+      properties:
+        name:
+          type: string
+          description: Disk group name
+          example: newdg
+        disks:
+          type: array
+          items:
+            type: string
+          description: Disks to include
+          example:
+          - disk_0
+          - disk_1
+    DiskGroupCollection:
+      type: object
+      properties:
+        diskGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/DiskGroup'
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     diskGroupName:
       name: diskGroupName

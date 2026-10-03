@@ -111,6 +111,14 @@ paths:
         dispatcher: FALLBACK
 components:
   parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
     resourceName:
       name: resourceName
       in: path
@@ -127,14 +135,6 @@ components:
       schema:
         type: string
       example: oracle-sg
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
   responses:
     NotFound:
       description: Resource not found
@@ -143,6 +143,45 @@ components:
           schema:
             $ref: '#/components/schemas/Error'
   schemas:
+    ResourceCreate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        name:
+          type: string
+          description: Resource name
+          example: new-ip-res
+        type:
+          type: string
+          description: Resource type
+          example: IP
+        attributes:
+          type: object
+          description: Resource attributes
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+              description: Error code
+              example: NotFound
+            message:
+              type: string
+              description: Error message
+              example: The specified cluster was not found.
+    ResourceCollection:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
     Resource:
       type: object
       properties:
@@ -182,45 +221,6 @@ components:
         attributes:
           type: object
           description: Resource-type-specific attributes
-          additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-              description: Error code
-              example: NotFound
-            message:
-              type: string
-              description: Error message
-              example: The specified cluster was not found.
-    ResourceCollection:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
-    ResourceCreate:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        name:
-          type: string
-          description: Resource name
-          example: new-ip-res
-        type:
-          type: string
-          description: Resource type
-          example: IP
-        attributes:
-          type: object
-          description: Resource attributes
           additionalProperties: true
   securitySchemes:
     bearerAuth:
