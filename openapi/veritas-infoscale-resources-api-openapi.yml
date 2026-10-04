@@ -110,6 +110,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     clusterId:
       name: clusterId
@@ -119,14 +126,6 @@ components:
       schema:
         type: string
       example: cluster-prod-01
-    resourceName:
-      name: resourceName
-      in: path
-      required: true
-      description: The name of the resource
-      schema:
-        type: string
-      example: ora-ip-res
     serviceGroupName:
       name: serviceGroupName
       in: path
@@ -135,13 +134,14 @@ components:
       schema:
         type: string
       example: oracle-sg
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    resourceName:
+      name: resourceName
+      in: path
+      required: true
+      description: The name of the resource
+      schema:
+        type: string
+      example: ora-ip-res
   schemas:
     ResourceCreate:
       type: object
@@ -161,6 +161,13 @@ components:
           type: object
           description: Resource attributes
           additionalProperties: true
+    ResourceCollection:
+      type: object
+      properties:
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
     Error:
       type: object
       properties:
@@ -175,13 +182,6 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-    ResourceCollection:
-      type: object
-      properties:
-        resources:
-          type: array
-          items:
-            $ref: '#/components/schemas/Resource'
     Resource:
       type: object
       properties:

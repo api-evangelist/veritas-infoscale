@@ -157,7 +157,30 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
+    VolumeResize:
+      type: object
+      required:
+      - newSize
+      properties:
+        newSize:
+          type: string
+          description: New volume size
+          example: 200g
     Snapshot:
       type: object
       properties:
@@ -189,18 +212,6 @@ components:
           - ACTIVE
           - DETACHED
           example: ACTIVE
-    JobReference:
-      type: object
-      properties:
-        jobId:
-          type: string
-          format: uuid
-          description: Reference to the created job
-          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
-        status:
-          type: string
-          description: Initial job status
-          example: queued
     Volume:
       type: object
       properties:
@@ -245,31 +256,6 @@ components:
           type: string
           description: Volume usage type
           example: fsgen
-    VolumeCollection:
-      type: object
-      properties:
-        volumes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Volume'
-    VolumeCreate:
-      type: object
-      required:
-      - name
-      - size
-      properties:
-        name:
-          type: string
-          description: Volume name
-          example: newvol
-        size:
-          type: string
-          description: Volume size
-          example: 50g
-        layout:
-          type: string
-          description: Layout type
-          default: mirror
     SnapshotCreate:
       type: object
       properties:
@@ -291,24 +277,37 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-    VolumeResize:
+    VolumeCreate:
       type: object
       required:
-      - newSize
+      - name
+      - size
       properties:
-        newSize:
+        name:
           type: string
-          description: New volume size
-          example: 200g
+          description: Volume name
+          example: newvol
+        size:
+          type: string
+          description: Volume size
+          example: 50g
+        layout:
+          type: string
+          description: Layout type
+          default: mirror
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
   parameters:
-    volumeName:
-      name: volumeName
-      in: path
-      required: true
-      description: The name of the volume
-      schema:
-        type: string
-      example: oravol01
     diskGroupName:
       name: diskGroupName
       in: path
@@ -317,13 +316,14 @@ components:
       schema:
         type: string
       example: oradg
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+    volumeName:
+      name: volumeName
+      in: path
+      required: true
+      description: The name of the volume
+      schema:
+        type: string
+      example: oravol01
   securitySchemes:
     bearerAuth:
       type: http

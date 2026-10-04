@@ -191,36 +191,37 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    clusterId:
-      name: clusterId
-      in: path
-      required: true
-      description: The identifier of the cluster
-      schema:
-        type: string
-      example: cluster-prod-01
-    serviceGroupName:
-      name: serviceGroupName
-      in: path
-      required: true
-      description: The name of the service group
-      schema:
-        type: string
-      example: oracle-sg
   schemas:
-    JobReference:
+    ServiceGroupAction:
       type: object
       properties:
-        jobId:
+        system:
           type: string
-          format: uuid
-          description: Reference to the created job
-          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
-        status:
+          description: Target system for the action
+          example: node01
+    ServiceGroupCreate:
+      type: object
+      required:
+      - name
+      - systemList
+      properties:
+        name:
           type: string
-          description: Initial job status
-          example: queued
+          description: Service group name
+          example: app-sg
+        systemList:
+          type: array
+          items:
+            type: string
+          description: Systems for the group
+        autoStart:
+          type: boolean
+          description: Auto-start on cluster start
+          default: true
+        parallel:
+          type: boolean
+          description: Allow parallel execution
+          default: false
     ServiceGroup:
       type: object
       properties:
@@ -271,52 +272,6 @@ components:
           type: boolean
           description: Whether this is a critical service group
           example: true
-    ServiceGroupAction:
-      type: object
-      properties:
-        system:
-          type: string
-          description: Target system for the action
-          example: node01
-    ServiceGroupSwitch:
-      type: object
-      required:
-      - targetSystem
-      properties:
-        targetSystem:
-          type: string
-          description: System to switch the group to
-          example: node02
-    ServiceGroupCreate:
-      type: object
-      required:
-      - name
-      - systemList
-      properties:
-        name:
-          type: string
-          description: Service group name
-          example: app-sg
-        systemList:
-          type: array
-          items:
-            type: string
-          description: Systems for the group
-        autoStart:
-          type: boolean
-          description: Auto-start on cluster start
-          default: true
-        parallel:
-          type: boolean
-          description: Allow parallel execution
-          default: false
-    ServiceGroupCollection:
-      type: object
-      properties:
-        serviceGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceGroup'
     Error:
       type: object
       properties:
@@ -331,7 +286,41 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
+    ServiceGroupCollection:
+      type: object
+      properties:
+        serviceGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceGroup'
+    ServiceGroupSwitch:
+      type: object
+      required:
+      - targetSystem
+      properties:
+        targetSystem:
+          type: string
+          description: System to switch the group to
+          example: node02
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
   responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Unauthorized - authentication required
       content:
@@ -344,12 +333,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    clusterId:
+      name: clusterId
+      in: path
+      required: true
+      description: The identifier of the cluster
+      schema:
+        type: string
+      example: cluster-prod-01
+    serviceGroupName:
+      name: serviceGroupName
+      in: path
+      required: true
+      description: The name of the service group
+      schema:
+        type: string
+      example: oracle-sg
   securitySchemes:
     bearerAuth:
       type: http

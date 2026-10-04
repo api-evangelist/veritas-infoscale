@@ -67,6 +67,13 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     clusterId:
       name: clusterId
@@ -127,6 +134,13 @@ components:
           type: string
           description: Hardware architecture
           example: x86_64
+    SystemCollection:
+      type: object
+      properties:
+        systems:
+          type: array
+          items:
+            $ref: '#/components/schemas/System'
     Error:
       type: object
       properties:
@@ -141,20 +155,6 @@ components:
               type: string
               description: Error message
               example: The specified cluster was not found.
-    SystemCollection:
-      type: object
-      properties:
-        systems:
-          type: array
-          items:
-            $ref: '#/components/schemas/System'
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
