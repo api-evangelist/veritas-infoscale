@@ -157,61 +157,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   schemas:
-    VolumeCollection:
-      type: object
-      properties:
-        volumes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Volume'
-    VolumeResize:
-      type: object
-      required:
-      - newSize
-      properties:
-        newSize:
-          type: string
-          description: New volume size
-          example: 200g
-    Snapshot:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Snapshot name
-          example: oravol01-snap-20260418
-        sourceVolume:
-          type: string
-          description: Source volume name
-          example: oravol01
-        diskGroup:
-          type: string
-          description: Disk group containing the snapshot
-          example: oradg
-        size:
-          type: string
-          description: Snapshot size
-          example: 100.00g
-        createdAt:
-          type: string
-          format: date-time
-          description: Snapshot creation time
-          example: '2026-04-18T10:00:00Z'
-        state:
-          type: string
-          description: Snapshot state
-          enum:
-          - ACTIVE
-          - DETACHED
-          example: ACTIVE
     Volume:
       type: object
       properties:
@@ -263,6 +209,25 @@ components:
           type: string
           description: Name for the snapshot
           example: oravol01-snap-20260418
+    VolumeCollection:
+      type: object
+      properties:
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Volume'
+    JobReference:
+      type: object
+      properties:
+        jobId:
+          type: string
+          format: uuid
+          description: Reference to the created job
+          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
+        status:
+          type: string
+          description: Initial job status
+          example: queued
     Error:
       type: object
       properties:
@@ -295,27 +260,47 @@ components:
           type: string
           description: Layout type
           default: mirror
-    JobReference:
+    VolumeResize:
+      type: object
+      required:
+      - newSize
+      properties:
+        newSize:
+          type: string
+          description: New volume size
+          example: 200g
+    Snapshot:
       type: object
       properties:
-        jobId:
+        name:
           type: string
-          format: uuid
-          description: Reference to the created job
-          example: f9e8d7c6-b5a4-3210-fedc-ba9876543210
-        status:
+          description: Snapshot name
+          example: oravol01-snap-20260418
+        sourceVolume:
           type: string
-          description: Initial job status
-          example: queued
+          description: Source volume name
+          example: oravol01
+        diskGroup:
+          type: string
+          description: Disk group containing the snapshot
+          example: oradg
+        size:
+          type: string
+          description: Snapshot size
+          example: 100.00g
+        createdAt:
+          type: string
+          format: date-time
+          description: Snapshot creation time
+          example: '2026-04-18T10:00:00Z'
+        state:
+          type: string
+          description: Snapshot state
+          enum:
+          - ACTIVE
+          - DETACHED
+          example: ACTIVE
   parameters:
-    diskGroupName:
-      name: diskGroupName
-      in: path
-      required: true
-      description: The name of the VxVM disk group
-      schema:
-        type: string
-      example: oradg
     volumeName:
       name: volumeName
       in: path
@@ -324,6 +309,21 @@ components:
       schema:
         type: string
       example: oravol01
+    diskGroupName:
+      name: diskGroupName
+      in: path
+      required: true
+      description: The name of the VxVM disk group
+      schema:
+        type: string
+      example: oradg
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     bearerAuth:
       type: http
